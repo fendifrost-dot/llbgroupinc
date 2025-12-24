@@ -4,59 +4,54 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-const services = [
+const engagementAreas = [
   {
-    title: "Leadership Wellness Strategy",
+    title: "Leadership & Executive Performance Strategy",
     description:
-      "Executive-level consulting to integrate wellness practices into leadership development programs and succession planning.",
+      "Advisory services supporting executive teams with performance systems that enhance decision-making capacity, stress resilience, and leadership continuity.",
     outcomes: [
-      "Enhanced decision-making capacity",
-      "Improved stress resilience",
-      "Sustainable performance patterns",
+      "Improved executive clarity and decision quality",
+      "Reduced burnout and performance volatility",
+      "Stronger leadership alignment and succession readiness",
     ],
   },
   {
-    title: "Organizational Wellness Architecture",
+    title: "Organizational Wellness Infrastructure",
     description:
-      "Design and implementation of enterprise-wide wellness infrastructure aligned with business objectives.",
+      "Design and implementation of wellness frameworks embedded into organizational culture, operations, and long-term strategy.",
     outcomes: [
-      "Reduced healthcare costs",
-      "Improved retention metrics",
-      "Enhanced productivity indicators",
+      "Sustainable workforce performance",
+      "Improved organizational resilience",
+      "Alignment between well-being and operational goals",
     ],
   },
   {
-    title: "Institutional Program Development",
+    title: "Culture, Capacity & Resilience Programs",
     description:
-      "Custom program design for healthcare systems, academic institutions, and government agencies.",
+      "Consulting engagements focused on strengthening internal systems that support adaptability, engagement, and long-term execution.",
     outcomes: [
-      "Scalable delivery models",
-      "Compliance-ready frameworks",
-      "Measurable outcome tracking",
+      "Increased team capacity and retention",
+      "Reduced organizational friction and fatigue",
+      "More consistent performance under pressure",
     ],
   },
 ];
 
-const approach = [
+const process = [
   {
-    phase: "Discovery",
+    phase: "Assessment & Alignment",
     description:
-      "Deep organizational assessment including stakeholder interviews, data analysis, and cultural evaluation.",
+      "We begin with structured discovery to understand leadership dynamics, organizational stressors, and performance constraints.",
   },
   {
-    phase: "Strategy",
+    phase: "Strategy & Framework Design",
     description:
-      "Development of tailored recommendations with clear implementation roadmap and success metrics.",
+      "We develop tailored frameworks aligned to leadership goals, culture, and operational realities.",
   },
   {
-    phase: "Implementation",
+    phase: "Implementation & Integration",
     description:
-      "Hands-on support during rollout including training, change management, and stakeholder communication.",
-  },
-  {
-    phase: "Optimization",
-    description:
-      "Ongoing measurement, refinement, and capacity building for sustained organizational adoption.",
+      "We support execution through advisory sessions, leadership workshops, and ongoing consultation designed for long-term adoption.",
   },
 ];
 
@@ -64,36 +59,33 @@ const Consulting = () => {
   return (
     <Layout>
       <PageHeader
-        overline="Consulting Services"
-        title="Strategic Wellness Advisory"
-        description="LLB Group provides strategic consulting services for organizations seeking to integrate wellness infrastructure into their operations at scale."
+        overline="Consulting"
+        title="Strategic Wellness & Human Performance Consulting"
+        description="LLB Group, Inc. provides strategic consulting services to organizations seeking to integrate wellness, performance, and resilience into leadership development and operational systems. Our engagements are designed to align human performance with organizational outcomes—at scale."
       />
 
-      {/* Services Section */}
+      {/* Engagement Areas Section */}
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Service Areas
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
-              What We Solve
+              Consulting Engagement Areas
             </h2>
           </div>
 
           <div className="space-y-8">
-            {services.map((service) => (
+            {engagementAreas.map((area) => (
               <div
-                key={service.title}
+                key={area.title}
                 className="p-8 lg:p-12 bg-card border border-border rounded-sm"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
                     <h3 className="font-serif text-2xl font-medium text-foreground mb-4">
-                      {service.title}
+                      {area.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      {service.description}
+                      {area.description}
                     </p>
                   </div>
                   <div>
@@ -101,7 +93,7 @@ const Consulting = () => {
                       Key Outcomes
                     </p>
                     <ul className="space-y-2">
-                      {service.outcomes.map((outcome) => (
+                      {area.outcomes.map((outcome) => (
                         <li
                           key={outcome}
                           className="text-sm text-muted-foreground flex items-start gap-2"
@@ -119,29 +111,26 @@ const Consulting = () => {
         </div>
       </section>
 
-      {/* Approach Section */}
+      {/* Process Section */}
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Our Approach
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
-              A Structured Engagement Model
+              How Our Consulting Engagements Work
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {approach.map((step, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {process.map((step, index) => (
               <div key={step.phase} className="relative">
-                <div className="p-6 bg-background border border-border rounded-sm h-full">
+                <div className="p-8 bg-background border border-border rounded-sm h-full">
                   <span className="text-4xl font-serif text-primary/30 font-medium">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-4 font-serif text-xl font-medium text-foreground">
                     {step.phase}
                   </h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                  <p className="mt-3 text-muted-foreground leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -151,23 +140,49 @@ const Consulting = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Engagement Structure Section */}
       <section className="py-20 lg:py-28">
+        <div className="section-container">
+          <div className="max-w-3xl">
+            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              Engagement Structure
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              LLB Group consulting engagements are structured as advisory relationships, 
+              workshops, or retained strategic partnerships depending on organizational 
+              needs and scope. All engagements are customized and designed for measurable, 
+              sustainable impact.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Pricing is engagement-based and determined following an initial consultation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-              Ready to Discuss Your Organization's Needs?
+              Engage LLB Group
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              Schedule a consultation to explore how LLB Group can support your 
-              wellness strategy and leadership development objectives.
+            <p className="text-muted-foreground leading-relaxed mb-10">
+              LLB Group works with organizations, institutions, and leadership teams 
+              committed to integrating performance, resilience, and well-being into 
+              long-term strategy.
             </p>
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/book">
-                Schedule Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button variant="hero" size="xl" asChild>
+                <Link to="/book">
+                  Engage LLB
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="hero-outline" size="xl" asChild>
+                <Link to="/book">Request a Consultation</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
