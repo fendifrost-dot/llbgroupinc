@@ -3,24 +3,21 @@ import { ArrowUpRight } from "lucide-react";
 
 const pillars = [
   {
-    number: "01",
     title: "Consulting",
     description:
-      "Strategic advisory services for organizations seeking to integrate wellness infrastructure into their operations. We design frameworks that scale.",
+      "We advise organizations on wellness strategy, leadership performance, and sustainable culture systems that support long-term execution.",
     link: "/consulting",
   },
   {
-    number: "02",
     title: "Education",
     description:
-      "Structured learning programs, certifications, and digital curricula designed to build internal capacity for sustainable performance practices.",
+      "We develop and deliver structured education, courses, and frameworks designed to scale knowledge, performance, and resilience.",
     link: "/education",
   },
   {
-    number: "03",
     title: "Products & Experiences",
     description:
-      "Curated wellness products, live events, and immersive experiences that extend our methodology beyond traditional consulting engagements.",
+      "We support our consulting and education work through curated products, events, and media that reinforce sustainable balance in practice.",
     link: "/shop",
   },
 ];
@@ -31,13 +28,8 @@ export function PillarsSection() {
       <div className="section-container">
         {/* Section Header */}
         <div className="max-w-2xl mb-16 lg:mb-20">
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-            Our Approach
-          </p>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-foreground">
-            Three Pillars of
-            <br />
-            Sustainable Performance
+            What LLB Group Does
           </h2>
         </div>
 
@@ -45,18 +37,13 @@ export function PillarsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {pillars.map((pillar, index) => (
             <Link
-              key={pillar.number}
+              key={pillar.title}
               to={pillar.link}
               className="group relative p-8 lg:p-10 bg-background border border-border rounded-sm hover:border-primary/30 transition-all duration-500"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Number */}
-              <span className="text-xs text-muted-foreground tracking-widest">
-                {pillar.number}
-              </span>
-              
               {/* Title */}
-              <h3 className="mt-6 font-serif text-2xl lg:text-3xl font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+              <h3 className="font-serif text-2xl lg:text-3xl font-medium text-foreground group-hover:text-primary transition-colors duration-300">
                 {pillar.title}
               </h3>
               
