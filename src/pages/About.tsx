@@ -1,26 +1,26 @@
 import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 
-const values = [
+const operatingPrinciples = [
   {
-    title: "Evidence-Based Practice",
+    title: "Framework-Driven Delivery",
     description:
-      "Every recommendation is grounded in research and validated through measurable outcomes.",
+      "All engagements are structured around repeatable methodologies designed for measurable outcomes and institutional adoption.",
   },
   {
-    title: "Scalable Systems",
+    title: "Scalable Infrastructure",
     description:
-      "We design frameworks that grow with your organization, not solutions that create dependency.",
+      "We design systems that grow with your organization—building capacity, not dependency.",
   },
   {
-    title: "Institutional Integrity",
+    title: "Multi-Channel Distribution",
     description:
-      "We maintain the highest standards of professional conduct and confidentiality.",
+      "Our work spans consulting, education, and media—allowing impact to reach organizations, communities, and individuals at scale.",
   },
   {
-    title: "Sustainable Impact",
+    title: "Long-Term Alignment",
     description:
-      "Our goal is lasting organizational change, not temporary interventions.",
+      "We prioritize sustainable outcomes over short-term interventions, partnering for lasting organizational change.",
   },
 ];
 
@@ -28,28 +28,29 @@ const About = () => {
   return (
     <Layout>
       <PageHeader
-        overline="About LLB Group"
-        title="Building the Infrastructure for Human Performance"
-        description="LLB Group is a wellness consulting, education, and media company dedicated to helping organizations build sustainable systems for leadership effectiveness and human performance."
+        overline="About"
+        title="LLB Group, Inc."
+        description="LLB Group is a wellness consulting, education, and media company focused on sustainable human performance at organizational scale."
       />
 
-      {/* Mission Section */}
+      {/* Overview Section */}
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
               <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-                Our Mission
+                What We Do
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                We partner with organizations to design, implement, and scale wellness 
-                infrastructure that drives measurable improvements in leadership capacity, 
-                organizational resilience, and sustained performance.
+                LLB Group, Inc. operates at the intersection of wellness strategy, leadership 
+                development, and human performance. We partner with organizations to design, 
+                implement, and scale infrastructure that drives measurable gains in 
+                leadership effectiveness, workforce resilience, and long-term execution.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Unlike traditional wellness providers focused on individual interventions, 
-                LLB Group takes an institutional approach—building systems that create 
-                lasting change across entire organizations.
+                Our work is delivered through three integrated channels: strategic consulting 
+                for institutions, structured education programs, and supporting products and 
+                experiences—each reinforcing the others to create sustainable adoption.
               </p>
             </div>
             <div className="bg-card border border-border rounded-sm p-8 lg:p-12">
@@ -62,40 +63,82 @@ const About = () => {
                 Chicago, IL 60602
               </address>
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-                Founded
+                Legal Entity
               </p>
-              <p className="text-foreground">2009</p>
+              <p className="text-foreground">LLB Group, Inc.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Why We Exist Section */}
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
-          <div className="max-w-2xl mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Our Values
+          <div className="max-w-3xl">
+            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              Why LLB Group Exists
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Organizations face increasing pressure to sustain performance while 
+              preserving the well-being of their leadership and workforce. Traditional 
+              approaches to wellness remain fragmented—isolated initiatives that fail 
+              to integrate with operational strategy or scale across the enterprise.
             </p>
+            <p className="text-muted-foreground leading-relaxed">
+              LLB Group was founded to address this gap: building the infrastructure, 
+              frameworks, and education systems that allow wellness and performance to 
+              operate as a unified, scalable function within institutions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Operating Principles Section */}
+      <section className="py-20 lg:py-28">
+        <div className="section-container">
+          <div className="max-w-2xl mb-16">
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
-              Principles That Guide Our Work
+              How We Operate
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {values.map((value) => (
+            {operatingPrinciples.map((principle) => (
               <div
-                key={value.title}
-                className="p-8 bg-background border border-border rounded-sm"
+                key={principle.title}
+                className="p-8 bg-card border border-border rounded-sm"
               >
                 <h3 className="font-serif text-xl font-medium text-foreground mb-3">
-                  {value.title}
+                  {principle.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {value.description}
+                  {principle.description}
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Vision Section */}
+      <section className="py-20 lg:py-28 bg-card">
+        <div className="section-container">
+          <div className="max-w-3xl">
+            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              Long-Term Vision
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              LLB Group is building toward a future where wellness infrastructure 
+              is a standard component of organizational strategy—integrated into 
+              leadership development, operational planning, and institutional 
+              governance.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Through our consulting, education, and product ecosystem, we aim 
+              to establish repeatable frameworks and scalable intellectual property 
+              that can be adopted, licensed, and distributed across industries, 
+              institutions, and markets.
+            </p>
           </div>
         </div>
       </section>
@@ -104,22 +147,23 @@ const About = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Leadership
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
-              Executive Team
+              Leadership
             </h2>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              LLB Group is led by a team with experience spanning executive advisory, 
+              organizational development, and wellness strategy.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 bg-card border border-border rounded-sm">
               <div className="w-16 h-16 bg-secondary rounded-full mb-6" />
               <h3 className="font-serif text-xl font-medium text-foreground mb-1">
-                Founder & CEO
+                Founder & Chief Executive
               </h3>
               <p className="text-sm text-muted-foreground">
-                Strategic leadership and vision
+                Strategic direction and institutional partnerships
               </p>
             </div>
             <div className="p-8 bg-card border border-border rounded-sm">
@@ -128,16 +172,16 @@ const About = () => {
                 Chief Strategy Officer
               </h3>
               <p className="text-sm text-muted-foreground">
-                Enterprise partnerships and growth
+                Enterprise development and operational growth
               </p>
             </div>
             <div className="p-8 bg-card border border-border rounded-sm">
               <div className="w-16 h-16 bg-secondary rounded-full mb-6" />
               <h3 className="font-serif text-xl font-medium text-foreground mb-1">
-                Director of Programs
+                Director of Education
               </h3>
               <p className="text-sm text-muted-foreground">
-                Education and curriculum development
+                Curriculum development and program delivery
               </p>
             </div>
           </div>

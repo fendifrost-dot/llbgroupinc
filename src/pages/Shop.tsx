@@ -1,22 +1,18 @@
 import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { Button } from "@/components/ui/button";
 
 const categories = [
   {
     name: "Supplements",
-    description: "Research-backed formulations for performance and recovery.",
-    count: "Coming Soon",
+    description: "Performance and recovery formulations supporting consulting and education work.",
   },
   {
     name: "Wellness Products",
-    description: "Curated tools for daily practice and sustainable habits.",
-    count: "Coming Soon",
+    description: "Curated tools for daily practice and sustainable habit integration.",
   },
   {
     name: "Merchandise",
-    description: "Premium apparel and accessories.",
-    count: "Coming Soon",
+    description: "Professional apparel and accessories.",
   },
 ];
 
@@ -26,27 +22,32 @@ const Shop = () => {
       <PageHeader
         overline="Shop"
         title="Products & Merchandise"
-        description="Curated wellness products, supplements, and merchandise from LLB Group."
+        description="Supporting products designed to reinforce LLB Group's consulting and education methodology in practice."
       />
 
       {/* Categories */}
       <section className="py-20 lg:py-28">
         <div className="section-container">
+          <div className="max-w-2xl mb-12">
+            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+              Product Categories
+            </h2>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {categories.map((category) => (
               <div
                 key={category.name}
-                className="p-8 bg-card border border-border rounded-sm text-center"
+                className="p-8 bg-card border border-border rounded-sm"
               >
-                <div className="w-16 h-16 bg-secondary rounded-sm mx-auto mb-6" />
-                <h3 className="font-serif text-xl font-medium text-foreground mb-2">
+                <h3 className="font-serif text-xl font-medium text-foreground mb-3">
                   {category.name}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {category.description}
                 </p>
                 <span className="inline-block px-4 py-2 border border-border rounded-sm text-xs text-muted-foreground">
-                  {category.count}
+                  Coming Soon
                 </span>
               </div>
             ))}
@@ -58,20 +59,14 @@ const Shop = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Coming Soon
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-              Our Shop is Launching Soon
+              Product Availability
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              We're carefully curating our product offerings to ensure they meet 
-              the same standards of quality and evidence-based practice that define 
-              all LLB Group services.
+            <p className="text-muted-foreground leading-relaxed">
+              LLB Group products are in development and will be available for 
+              purchase in a future release. Product offerings are designed to 
+              support—not replace—our consulting and education work.
             </p>
-            <Button variant="hero-outline" disabled>
-              Notify Me When Available
-            </Button>
           </div>
         </div>
       </section>
