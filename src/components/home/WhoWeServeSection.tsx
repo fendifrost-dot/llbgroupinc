@@ -1,11 +1,11 @@
 const audiences = [
   {
     title: "Organizations",
-    description: "Enterprise teams seeking sustainable performance and leadership alignment.",
+    description: "Enterprise teams seeking sustainable performance, leadership alignment, and cultural resilience.",
   },
   {
     title: "Institutions",
-    description: "Public and private entities focused on long-term resilience and workforce well-being.",
+    description: "Public and private entities focused on long-term workforce well-being and operational sustainability.",
   },
   {
     title: "Communities",
