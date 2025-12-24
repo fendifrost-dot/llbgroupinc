@@ -1,8 +1,11 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { PillarsSection } from "@/components/home/PillarsSection";
-import { MethodologySection } from "@/components/home/MethodologySection";
-import { CredibilitySection } from "@/components/home/CredibilitySection";
+import { ValueCreationSection } from "@/components/home/ValueCreationSection";
+import { WhoWeServeSection } from "@/components/home/WhoWeServeSection";
+import { ExecutionSection } from "@/components/home/ExecutionSection";
+import { ServicesFocusSection } from "@/components/home/ServicesFocusSection";
+import { BeyondConsultingSection } from "@/components/home/BeyondConsultingSection";
 import { CTASection } from "@/components/home/CTASection";
 
 const Index = () => {
@@ -10,8 +13,11 @@ const Index = () => {
     <Layout>
       <HeroSection />
       <PillarsSection />
-      <MethodologySection />
-      <CredibilitySection />
+      <ValueCreationSection />
+      <WhoWeServeSection />
+      <ExecutionSection />
+      <ServicesFocusSection />
+      <BeyondConsultingSection />
       <CTASection />
     </Layout>
   );

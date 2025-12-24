@@ -12,21 +12,21 @@ export function CTASection() {
           
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-foreground mb-6">
-              Ready to Build Sustainable Performance Infrastructure?
+              Partner With LLB Group
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto">
-              Schedule a consultation to discuss how LLB Group can support your 
-              organization's wellness strategy and leadership development objectives.
+              LLB Group works with organizations, institutions, and leaders committed to 
+              building sustainable performance without short-term tradeoffs.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button variant="hero" size="xl" asChild>
                 <Link to="/book">
-                  Schedule Consultation
+                  Engage LLB
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/solutions">View All Solutions</Link>
+                <Link to="/book">Book a Conversation</Link>
               </Button>
             </div>
           </div>

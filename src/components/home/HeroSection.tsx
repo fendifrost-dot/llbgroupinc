@@ -24,15 +24,15 @@ export function HeroSection() {
           
           {/* Subheadline */}
           <p className="fade-in-up stagger-2 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-12">
-            LLB Group partners with organizations to design and implement wellness 
-            infrastructure that drives measurable outcomes in leadership effectiveness, 
-            organizational resilience, and sustained human performance.
+            LLB Group, Inc. partners with organizations to design and implement wellness 
+            infrastructure that drives measurable gains in leadership effectiveness, 
+            organizational resilience, and long-term human performance.
           </p>
           
           {/* CTA Buttons */}
           <div className="fade-in-up stagger-3 flex flex-col sm:flex-row gap-4">
             <Button variant="hero" size="xl" asChild>
-              <Link to="/consulting">
+              <Link to="/solutions">
                 View Solutions
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -42,26 +42,6 @@ export function HeroSection() {
                 Engage LLB
               </Link>
             </Button>
-          </div>
-        </div>
-        
-        {/* Stats Row */}
-        <div className="fade-in-up stagger-4 mt-20 lg:mt-32 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 pt-12 border-t border-border/50">
-          <div>
-            <p className="font-serif text-3xl lg:text-4xl font-medium text-foreground">15+</p>
-            <p className="mt-2 text-sm text-muted-foreground">Years of Practice</p>
-          </div>
-          <div>
-            <p className="font-serif text-3xl lg:text-4xl font-medium text-foreground">200+</p>
-            <p className="mt-2 text-sm text-muted-foreground">Organizations Served</p>
-          </div>
-          <div>
-            <p className="font-serif text-3xl lg:text-4xl font-medium text-foreground">50K+</p>
-            <p className="mt-2 text-sm text-muted-foreground">Leaders Trained</p>
-          </div>
-          <div>
-            <p className="font-serif text-3xl lg:text-4xl font-medium text-foreground">12</p>
-            <p className="mt-2 text-sm text-muted-foreground">Countries Reached</p>
           </div>
         </div>
       </div>
