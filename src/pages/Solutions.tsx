@@ -2,59 +2,50 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const solutions = [
   {
-    category: "Enterprise",
-    items: [
-      {
-        title: "Executive Wellness Programs",
-        description:
-          "Comprehensive wellness programs designed specifically for C-suite and senior leadership teams.",
-        audience: "Fortune 500, Private Equity Portfolio Companies",
-      },
-      {
-        title: "Organizational Resilience Framework",
-        description:
-          "System-wide approach to building adaptive capacity and stress resilience across all levels.",
-        audience: "Large Enterprises, Government Agencies",
-      },
-    ],
+    title: "Executive Performance Framework",
+    description:
+      "A structured methodology for aligning leadership wellness with organizational strategy. Designed for executive teams and boards seeking sustainable performance infrastructure.",
+    delivery: "Consulting + Education",
+    link: "/consulting",
   },
   {
-    category: "Healthcare & Academia",
-    items: [
-      {
-        title: "Provider Wellness Initiative",
-        description:
-          "Specialized programs addressing burnout and sustainable practice in healthcare settings.",
-        audience: "Health Systems, Medical Groups, Academic Medical Centers",
-      },
-      {
-        title: "Institutional Curriculum Integration",
-        description:
-          "Wellness and performance curriculum designed for academic institutions and professional schools.",
-        audience: "Universities, Professional Development Programs",
-      },
-    ],
+    title: "Organizational Resilience Program",
+    description:
+      "A modular program addressing workforce capacity, cultural alignment, and long-term operational sustainability. Scalable across enterprise, institutional, and community contexts.",
+    delivery: "Consulting + Education",
+    link: "/consulting",
   },
   {
-    category: "Emerging Platforms",
-    items: [
-      {
-        title: "Startup Founder Support",
-        description:
-          "Performance optimization for founders and early-stage leadership teams.",
-        audience: "Venture-Backed Companies, Accelerators",
-      },
-      {
-        title: "Sports Performance Consulting",
-        description:
-          "Holistic performance frameworks for professional and collegiate athletic organizations.",
-        audience: "Professional Teams, Athletic Departments",
-      },
-    ],
+    title: "Wellness Strategy Certification",
+    description:
+      "A structured learning program for HR leaders, wellness professionals, and organizational consultants. Designed for internal deployment or professional development.",
+    delivery: "Education",
+    link: "/education",
+  },
+  {
+    title: "Leadership Development Curriculum",
+    description:
+      "A licensable curriculum package for institutions seeking to integrate wellness and performance into existing leadership development pipelines.",
+    delivery: "Education + Licensing",
+    link: "/education",
+  },
+  {
+    title: "Institutional Speaking & Workshops",
+    description:
+      "Executive talks, workshops, and facilitated sessions for conferences, off-sites, and internal leadership events. Topics span leadership, resilience, and organizational wellness.",
+    delivery: "Events",
+    link: "/events",
+  },
+  {
+    title: "Supporting Products & Experiences",
+    description:
+      "Curated supplements, wellness tools, and experiential offerings designed to reinforce consulting and education work in daily practice.",
+    delivery: "Products",
+    link: "/shop",
   },
 ];
 
@@ -63,41 +54,39 @@ const Solutions = () => {
     <Layout>
       <PageHeader
         overline="Solutions"
-        title="Tailored for Your Sector"
-        description="LLB Group delivers specialized solutions designed to meet the unique demands of different industries and organizational contexts."
+        title="Packaged Frameworks & Programs"
+        description="Structured, repeatable solutions designed to integrate wellness and performance into organizational systems. Each offering ladders into LLB Group's consulting, education, or product channels."
       />
 
       {/* Solutions Grid */}
       <section className="py-20 lg:py-28">
         <div className="section-container">
-          {solutions.map((category) => (
-            <div key={category.category} className="mb-16 last:mb-0">
-              <p className="text-xs tracking-[0.3em] uppercase text-primary mb-8">
-                {category.category}
-              </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {category.items.map((item) => (
-                  <div
-                    key={item.title}
-                    className="group p-8 bg-card border border-border rounded-sm hover:border-primary/30 transition-colors"
-                  >
-                    <h3 className="font-serif text-xl lg:text-2xl font-medium text-foreground mb-3">
-                      {item.title}
+          <div className="space-y-6">
+            {solutions.map((solution) => (
+              <Link
+                key={solution.title}
+                to={solution.link}
+                className="group block p-8 lg:p-10 bg-card border border-border rounded-sm hover:border-primary/30 transition-colors"
+              >
+                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+                  <div className="max-w-2xl">
+                    <h3 className="font-serif text-xl lg:text-2xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">
+                      {solution.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      {item.description}
+                    <p className="text-muted-foreground leading-relaxed">
+                      {solution.description}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs text-muted-foreground">
-                        {item.audience}
-                      </p>
-                      <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                  <div className="flex items-center gap-4 lg:flex-shrink-0">
+                    <span className="px-4 py-2 bg-secondary text-xs text-muted-foreground rounded-sm">
+                      {solution.delivery}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -105,18 +94,19 @@ const Solutions = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Custom Engagements
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-              Need Something Different?
+              Custom Engagements
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              We design custom solutions for organizations with unique requirements. 
-              Contact us to discuss your specific needs and objectives.
+              For organizations with unique requirements or multi-channel needs, 
+              LLB Group designs custom engagement structures tailored to scope, 
+              timeline, and strategic objectives.
             </p>
             <Button variant="hero" asChild>
-              <Link to="/book">Discuss Custom Solutions</Link>
+              <Link to="/book">
+                Discuss Custom Solutions
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

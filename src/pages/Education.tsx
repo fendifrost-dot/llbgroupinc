@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const programs = [
   {
@@ -12,14 +13,14 @@ const programs = [
         duration: "12 weeks",
         format: "Hybrid",
         description:
-          "Comprehensive certification for HR leaders and wellness professionals seeking to design and implement organizational wellness programs.",
+          "Comprehensive certification for HR leaders, organizational consultants, and wellness professionals. Designed for practitioners seeking to implement structured wellness frameworks within institutions.",
       },
       {
         title: "Leadership Performance Practitioner",
         duration: "8 weeks",
         format: "Online",
         description:
-          "Advanced training for coaches and consultants working with executive clients on sustainable performance practices.",
+          "Advanced training for professionals advising executive clients on sustainable performance practices. Focused on methodology, assessment, and long-term integration.",
       },
     ],
   },
@@ -27,18 +28,18 @@ const programs = [
     type: "Executive Education",
     items: [
       {
-        title: "C-Suite Wellness Intensive",
+        title: "Executive Resilience Intensive",
         duration: "3 days",
         format: "In-Person",
         description:
-          "Immersive program for senior executives focused on personal performance optimization and organizational wellness leadership.",
+          "Immersive program for senior executives focused on performance sustainability, decision-making capacity, and leadership longevity within high-pressure environments.",
       },
       {
         title: "Board Wellness Governance",
         duration: "1 day",
         format: "Virtual",
         description:
-          "Specialized session for board members on wellness oversight, liability, and strategic governance.",
+          "Specialized session for board members addressing wellness oversight, organizational liability, and strategic governance of workforce well-being.",
       },
     ],
   },
@@ -50,14 +51,14 @@ const programs = [
         duration: "Self-paced",
         format: "On-Demand",
         description:
-          "Introductory course covering core concepts, frameworks, and implementation basics for organizational wellness.",
+          "Introductory program covering core frameworks, implementation principles, and assessment methodologies for organizational wellness strategy.",
       },
       {
-        title: "Stress Resilience for Leaders",
+        title: "Leadership Under Pressure",
         duration: "Self-paced",
         format: "On-Demand",
         description:
-          "Evidence-based techniques for building personal resilience and managing high-pressure environments.",
+          "Structured learning on executive resilience, stress management systems, and sustainable performance practices for leaders and their teams.",
       },
     ],
   },
@@ -68,8 +69,8 @@ const Education = () => {
     <Layout>
       <PageHeader
         overline="Education"
-        title="Structured Learning Programs"
-        description="LLB Group offers certifications, executive education, and digital curricula designed to build internal capacity for sustainable performance practices."
+        title="Structured Learning & Scalable Curriculum"
+        description="LLB Group develops certifications, executive programs, and digital learning assets designed for institutional adoption, licensing, and long-term organizational deployment."
       />
 
       {/* Programs */}
@@ -77,20 +78,18 @@ const Education = () => {
         <div className="section-container">
           {programs.map((category) => (
             <div key={category.type} className="mb-16 last:mb-0">
-              <p className="text-xs tracking-[0.3em] uppercase text-primary mb-8">
+              <h2 className="font-serif text-2xl lg:text-3xl font-medium text-foreground mb-8">
                 {category.type}
-              </p>
+              </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {category.items.map((item) => (
                   <div
                     key={item.title}
                     className="p-8 bg-card border border-border rounded-sm"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <h3 className="font-serif text-xl font-medium text-foreground">
-                        {item.title}
-                      </h3>
-                    </div>
+                    <h3 className="font-serif text-xl font-medium text-foreground mb-4">
+                      {item.title}
+                    </h3>
                     <p className="text-muted-foreground leading-relaxed mb-6">
                       {item.description}
                     </p>
@@ -113,21 +112,26 @@ const Education = () => {
       {/* Licensing */}
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-                Institutional Licensing
-              </p>
               <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-                Scale Our Curriculum at Your Organization
+                Institutional Licensing
               </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                LLB Group curricula are designed for institutional deployment. 
+                Organizations can license our education programs for internal 
+                use—building in-house capacity without developing proprietary content.
+              </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                License LLB Group curricula for internal deployment. Ideal for 
-                large enterprises, universities, and healthcare systems seeking 
-                to build in-house wellness education capacity.
+                Licensing is available to enterprises, universities, healthcare 
+                systems, and professional development organizations seeking 
+                scalable, structured learning assets.
               </p>
               <Button variant="hero-outline" asChild>
-                <Link to="/book">Discuss Licensing</Link>
+                <Link to="/book">
+                  Discuss Licensing
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
             <div className="p-8 bg-background border border-border rounded-sm">
@@ -145,11 +149,11 @@ const Education = () => {
                 </li>
                 <li className="flex items-start gap-3 text-muted-foreground">
                   <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                  Ongoing content updates and support
+                  Ongoing content updates and advisory support
                 </li>
                 <li className="flex items-start gap-3 text-muted-foreground">
                   <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                  Custom branding options
+                  Optional custom branding and co-development
                 </li>
               </ul>
             </div>
@@ -162,14 +166,17 @@ const Education = () => {
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-              Ready to Build Internal Capacity?
+              Program Inquiries
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Contact us to learn more about our education programs and find 
-              the right fit for your organization or professional development goals.
+              Contact us for program details, enrollment timelines, or to discuss 
+              institutional deployment and licensing opportunities.
             </p>
             <Button variant="hero" asChild>
-              <Link to="/book">Request Program Information</Link>
+              <Link to="/book">
+                Request Program Information
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

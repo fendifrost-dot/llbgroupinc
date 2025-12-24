@@ -2,23 +2,24 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const upcomingEvents = [
   {
     date: "2025-02-15",
-    title: "Leadership Wellness Summit",
+    title: "Leadership Resilience Forum",
     location: "Chicago, IL",
-    type: "Conference Keynote",
+    type: "Executive Keynote",
   },
   {
     date: "2025-03-08",
-    title: "Healthcare Executive Forum",
+    title: "Healthcare Leadership Conference",
     location: "Boston, MA",
     type: "Panel Discussion",
   },
   {
     date: "2025-04-22",
-    title: "Corporate Wellness Conference",
+    title: "Institutional Wellness Summit",
     location: "San Francisco, CA",
     type: "Workshop",
   },
@@ -26,24 +27,42 @@ const upcomingEvents = [
 
 const speakingTopics = [
   {
-    title: "The Business Case for Wellness Infrastructure",
+    title: "Building Wellness Infrastructure at Scale",
     description:
-      "How to build the financial and operational case for enterprise wellness investment.",
+      "Strategic frameworks for integrating wellness into organizational operations and leadership systems.",
   },
   {
-    title: "Leadership Under Pressure",
+    title: "Executive Performance & Resilience",
     description:
-      "Sustainable performance strategies for executives navigating high-stakes environments.",
+      "Sustainable approaches to leadership effectiveness in high-pressure institutional environments.",
   },
   {
-    title: "Scaling Wellness Programs",
+    title: "Organizational Capacity & Long-Term Execution",
     description:
-      "Frameworks for taking wellness initiatives from pilot to enterprise-wide adoption.",
+      "Designing systems that support workforce adaptability, retention, and sustained performance.",
   },
   {
-    title: "The Future of Workplace Wellness",
+    title: "The Business Case for Human Performance",
     description:
-      "Emerging trends and evidence-based predictions for organizational health.",
+      "Aligning wellness investment with operational outcomes, governance, and institutional strategy.",
+  },
+];
+
+const engagementTypes = [
+  {
+    title: "Executive Keynotes",
+    description:
+      "Strategic presentations for leadership audiences at conferences, summits, and institutional events.",
+  },
+  {
+    title: "Workshops & Facilitation",
+    description:
+      "Interactive sessions for executive teams, boards, or organizational leadership groups.",
+  },
+  {
+    title: "Panel Participation",
+    description:
+      "Expert contribution to industry panels and executive roundtables.",
   },
 ];
 
@@ -52,48 +71,31 @@ const Events = () => {
     <Layout>
       <PageHeader
         overline="Events & Speaking"
-        title="Keynotes, Workshops & Appearances"
-        description="LLB Group leadership speaks at corporate events, industry conferences, and academic institutions on topics related to wellness strategy and human performance."
+        title="Executive Talks & Institutional Engagements"
+        description="LLB Group delivers keynotes, workshops, and facilitated sessions for organizations seeking thought leadership on wellness strategy and human performance."
       />
 
-      {/* Upcoming Events */}
+      {/* Engagement Types */}
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Calendar
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
-              Upcoming Appearances
+              Engagement Types
             </h2>
           </div>
 
-          <div className="space-y-4">
-            {upcomingEvents.map((event) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {engagementTypes.map((type) => (
               <div
-                key={event.date}
-                className="p-6 lg:p-8 bg-card border border-border rounded-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+                key={type.title}
+                className="p-8 bg-card border border-border rounded-sm"
               >
-                <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
-                  <div className="text-sm text-primary font-medium">
-                    {new Date(event.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl font-medium text-foreground">
-                      {event.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {event.location} · {event.type}
-                    </p>
-                  </div>
-                </div>
-                <span className="px-4 py-2 border border-border rounded-sm text-xs text-muted-foreground">
-                  Booked
-                </span>
+                <h3 className="font-serif text-xl font-medium text-foreground mb-3">
+                  {type.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {type.description}
+                </p>
               </div>
             ))}
           </div>
@@ -104,9 +106,6 @@ const Events = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Topics
-            </p>
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
               Speaking Topics
             </h2>
@@ -118,7 +117,7 @@ const Events = () => {
                 key={topic.title}
                 className="p-6 bg-background border border-border rounded-sm"
               >
-                <h3 className="font-serif text-xl font-medium text-foreground mb-3">
+                <h3 className="font-serif text-lg font-medium text-foreground mb-3">
                   {topic.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -130,22 +129,67 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Booking Inquiry */}
+      {/* Upcoming Events */}
       <section className="py-20 lg:py-28">
         <div className="section-container">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Book a Speaker
+          <div className="max-w-2xl mb-12">
+            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+              Scheduled Appearances
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              Confirmed engagements for the current period.
             </p>
+          </div>
+
+          <div className="space-y-4">
+            {upcomingEvents.map((event) => (
+              <div
+                key={event.date}
+                className="p-6 lg:p-8 bg-card border border-border rounded-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+              >
+                <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
+                  <div className="text-sm text-primary font-medium w-24">
+                    {new Date(event.date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-lg font-medium text-foreground">
+                      {event.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {event.location} · {event.type}
+                    </p>
+                  </div>
+                </div>
+                <span className="px-4 py-2 border border-border rounded-sm text-xs text-muted-foreground">
+                  Confirmed
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Booking Inquiry */}
+      <section className="py-20 lg:py-28 bg-card">
+        <div className="section-container">
+          <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
-              Interested in Booking LLB for Your Event?
+              Booking Inquiries
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              We accept a limited number of speaking engagements each year. 
-              Submit an inquiry to check availability and discuss your event.
+              LLB Group accepts a limited number of speaking engagements annually. 
+              Submit an inquiry to discuss availability, format, and alignment with 
+              your event objectives.
             </p>
             <Button variant="hero" asChild>
-              <Link to="/book">Submit Speaking Inquiry</Link>
+              <Link to="/book">
+                Submit Speaking Inquiry
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

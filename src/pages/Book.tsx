@@ -10,8 +10,7 @@ const inquiryTypes = [
   "Consulting Engagement",
   "Speaking Inquiry",
   "Education Program",
-  "Partnership Opportunity",
-  "Media Inquiry",
+  "Partnership",
   "Other",
 ];
 
@@ -20,19 +19,17 @@ const Book = () => {
     name: "",
     email: "",
     organization: "",
-    title: "",
     inquiryType: "",
     message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you for your inquiry. We'll be in touch within 2 business days.");
+    toast.success("Thank you for your inquiry. We will respond within 2 business days.");
     setFormData({
       name: "",
       email: "",
       organization: "",
-      title: "",
       inquiryType: "",
       message: "",
     });
@@ -43,7 +40,7 @@ const Book = () => {
       <PageHeader
         overline="Contact"
         title="Engage LLB Group"
-        description="Schedule a consultation or submit an inquiry. Our team typically responds within 2 business days."
+        description="Submit an inquiry for consulting, speaking, education, or partnership discussions."
       />
 
       <section className="py-20 lg:py-28">
@@ -82,31 +79,17 @@ const Book = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm text-foreground mb-2">
-                      Organization
-                    </label>
-                    <Input
-                      value={formData.organization}
-                      onChange={(e) =>
-                        setFormData({ ...formData, organization: e.target.value })
-                      }
-                      className="bg-card border-border"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm text-foreground mb-2">
-                      Title
-                    </label>
-                    <Input
-                      value={formData.title}
-                      onChange={(e) =>
-                        setFormData({ ...formData, title: e.target.value })
-                      }
-                      className="bg-card border-border"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm text-foreground mb-2">
+                    Organization
+                  </label>
+                  <Input
+                    value={formData.organization}
+                    onChange={(e) =>
+                      setFormData({ ...formData, organization: e.target.value })
+                    }
+                    className="bg-card border-border"
+                  />
                 </div>
 
                 <div>
@@ -139,12 +122,12 @@ const Book = () => {
                   </label>
                   <Textarea
                     required
-                    rows={6}
+                    rows={5}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    placeholder="Please describe your objectives and how we can help..."
+                    placeholder="Please describe your inquiry and objectives."
                     className="bg-card border-border resize-none"
                   />
                 </div>
@@ -185,9 +168,8 @@ const Book = () => {
 
               <div className="p-6 bg-card border border-border rounded-sm">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  For urgent matters or to schedule a call directly, please 
-                  indicate your preferred availability in your message and a 
-                  member of our team will reach out to confirm.
+                  Response time is typically within 2 business days. For time-sensitive 
+                  matters, please indicate urgency in your message.
                 </p>
               </div>
             </div>
