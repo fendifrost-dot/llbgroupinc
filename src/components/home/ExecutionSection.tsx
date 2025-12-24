@@ -1,8 +1,8 @@
 const metrics = [
   { label: "Programs Delivered" },
   { label: "Engagements Supported" },
+  { label: "Educational Initiatives" },
   { label: "Communities Reached" },
-  { label: "Educational Resources Developed" },
 ];
 
 export function ExecutionSection() {

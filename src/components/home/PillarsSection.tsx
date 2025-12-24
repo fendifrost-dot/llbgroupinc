@@ -5,13 +5,13 @@ const pillars = [
   {
     title: "Consulting",
     description:
-      "We advise organizations on wellness strategy, leadership performance, and sustainable culture systems that support long-term execution.",
+      "We advise organizations on wellness strategy, leadership performance, and cultural systems that support long-term execution and resilience.",
     link: "/consulting",
   },
   {
     title: "Education",
     description:
-      "We develop and deliver structured education, courses, and frameworks designed to scale knowledge, performance, and resilience.",
+      "We develop structured courses, workshops, and learning frameworks designed to scale knowledge, alignment, and performance.",
     link: "/education",
   },
   {
@@ -27,10 +27,14 @@ export function PillarsSection() {
     <section className="py-20 lg:py-32 bg-card">
       <div className="section-container">
         {/* Section Header */}
-        <div className="max-w-2xl mb-16 lg:mb-20">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-foreground">
+        <div className="max-w-3xl mb-16 lg:mb-20">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-foreground mb-6">
             What LLB Group Does
           </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            LLB Group operates as a wellness consulting, education, and media platform 
+            focused on sustainable human performance.
+          </p>
         </div>
 
         {/* Pillars Grid */}
