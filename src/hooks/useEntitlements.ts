@@ -63,9 +63,16 @@ export function useToggleProgress() {
     mutationFn: async ({ moduleId, completed }: { moduleId: string; completed: boolean }) => {
       if (!supabase || !user) throw new Error("Not signed in");
       if (completed) {
+        // ignoreDuplicates => ON CONFLICT DO NOTHING, which needs only INSERT.
+        // A DO UPDATE upsert would require an UPDATE grant and an UPDATE
+        // policy that progress deliberately does not have — and re-marking a
+        // module complete is a no-op anyway.
         const { error } = await supabase
           .from("progress")
-          .upsert({ user_id: user.id, module_id: moduleId }, { onConflict: "user_id,module_id" });
+          .upsert(
+            { user_id: user.id, module_id: moduleId },
+            { onConflict: "user_id,module_id", ignoreDuplicates: true },
+          );
         if (error) throw error;
       } else {
         const { error } = await supabase
@@ -86,16 +93,14 @@ interface MediaRequest {
   courseSlug?: string;
 }
 
-/** Ask the edge function for a signed URL. Returns null if the asset is not uploaded yet. */
+/**
+ * Ask the edge function for a signed URL. Returns null when the asset simply
+ * is not uploaded yet — the function answers 200 with a null url for that, so
+ * it stays distinguishable from a 401/403, which still throws.
+ */
 export async function requestMediaUrl(request: MediaRequest): Promise<string | null> {
-  try {
-    const result = await callFunction<{ url: string }>("get-media-url", { ...request });
-    return result?.url ?? null;
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "";
-    if (message.includes("not available yet")) return null;
-    throw error;
-  }
+  const result = await callFunction<{ url: string | null }>("get-media-url", { ...request });
+  return result?.url ?? null;
 }
 
 export function useMediaUrl(request: MediaRequest | null) {

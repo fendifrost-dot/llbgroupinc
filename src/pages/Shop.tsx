@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/course/CourseCard";
 import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
 import { EnrollButton } from "@/components/course/EnrollButton";
@@ -72,12 +74,11 @@ const Shop = () => {
                 <span className="text-sm text-foreground">
                   {formatPrice(priceFor(BUNDLE.productSlug, BUNDLE.priceCents))}
                 </span>
-                <EnrollButton
-                  productSlug={BUNDLE.productSlug}
-                  productId={products?.find((p) => p.slug === BUNDLE.productSlug)?.id}
-                  label="View Bundle"
-                  variant="hero-outline"
-                />
+                {/* Navigates to the sales page — the bundle has one. The
+                    e-book below does not, so it buys directly. */}
+                <Button variant="hero-outline" asChild>
+                  <Link to={`/courses/${BUNDLE.slug}`}>View Bundle</Link>
+                </Button>
               </div>
             </div>
 

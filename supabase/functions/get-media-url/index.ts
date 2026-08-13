@@ -97,7 +97,10 @@ Deno.serve(async (req) => {
       storedPath = kind === "video" ? module.video_path : module.audio_path;
     }
 
-    if (!storedPath) return json({ error: "Asset not available yet", code: "no_asset" }, 404);
+    // A missing asset is a 200 with a null url, not an error: the caller has
+    // to tell "you are not allowed" (403) apart from "it is not uploaded yet",
+    // and functions.invoke collapses every non-2xx into one opaque error.
+    if (!storedPath) return json({ url: null, code: "no_asset" });
 
     const parts = splitPath(storedPath);
     if (!parts) throw new Error(`malformed storage path: ${storedPath}`);
@@ -110,7 +113,7 @@ Deno.serve(async (req) => {
     // Say so plainly rather than surfacing a storage error.
     if (signError || !signed) {
       console.warn(`[get-media-url] no object at ${storedPath}`, signError);
-      return json({ error: "Asset not available yet", code: "no_asset" }, 404);
+      return json({ url: null, code: "no_asset" });
     }
 
     return json({ url: signed.signedUrl, expiresIn: SIGNED_URL_TTL_SECONDS });

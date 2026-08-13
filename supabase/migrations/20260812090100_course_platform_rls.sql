@@ -54,8 +54,11 @@ grant select (id, user_id, product_id, status, amount_cents, currency, created_a
   on public.purchases to authenticated;
 grant select (id, user_id, product_id, source_purchase, created_at)
   on public.entitlements to authenticated;
-grant select, insert, delete (user_id, module_id, completed_at)
+-- DELETE takes no column list in Postgres, so it is granted separately.
+grant select (user_id, module_id, completed_at),
+      insert (user_id, module_id, completed_at)
   on public.progress to authenticated;
+grant delete on public.progress to authenticated;
 grant select (id, full_name, created_at) on public.profiles to authenticated;
 grant update (full_name) on public.profiles to authenticated;
 

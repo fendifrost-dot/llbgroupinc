@@ -15,3 +15,11 @@ $$;
 
 revoke all on function public.user_id_for_email(text) from public, anon, authenticated;
 grant execute on function public.user_id_for_email(text) to service_role;
+
+-- Same reasoning for the entitlement helpers: `authenticated` needs EXECUTE
+-- because the progress INSERT policy calls has_course_access() as the invoking
+-- role, but anon has no business probing who owns what.
+revoke all on function public.has_entitlement(uuid, uuid) from public, anon;
+revoke all on function public.has_course_access(uuid, uuid) from public, anon;
+grant execute on function public.has_entitlement(uuid, uuid) to authenticated, service_role;
+grant execute on function public.has_course_access(uuid, uuid) to authenticated, service_role;
