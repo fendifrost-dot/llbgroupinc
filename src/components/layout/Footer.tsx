@@ -9,6 +9,7 @@ const footerLinks = {
   ],
   programs: [
     { name: "Education", href: "/education" },
+    { name: "Self-Paced Programs", href: "/courses" },
     { name: "Events & Speaking", href: "/events" },
     { name: "Shop", href: "/shop" },
   ],
@@ -107,6 +108,10 @@ export function Footer() {
             © {new Date().getFullYear()} LLB Group, Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
+            {/* Student access lives here, not in the corporate header nav. */}
+            <Link to="/signin" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              Student Sign In
+            </Link>
             <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
             </Link>

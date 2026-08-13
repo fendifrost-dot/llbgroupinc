@@ -3,6 +3,8 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { CourseCard } from "@/components/course/CourseCard";
+import { COURSES } from "@/content/catalog";
 
 const programs = [
   {
@@ -106,6 +108,46 @@ const Education = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Self-Paced Programs — additive integration point for the course
+          storefront. The institutional copy above and the licensing section
+          below are unchanged. */}
+      <section className="py-20 lg:py-28 bg-card border-y border-border">
+        <div className="section-container">
+          <div className="max-w-2xl mb-12">
+            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+              Self-Paced Programs
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              Selected curriculum is adapted for individual practitioners as
+              structured, self-paced programs — six modules of video and audio
+              instruction with a companion workbook.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {COURSES.map((course) => (
+              <CourseCard
+                key={course.slug}
+                to={`/courses/${course.slug}`}
+                title={course.title}
+                subtitle={course.subtitle}
+                priceCents={course.priceCents}
+                tags={["6 Modules", "Self-paced"]}
+              />
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <Button variant="hero-outline" asChild>
+              <Link to="/courses">
+                View All Programs
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
