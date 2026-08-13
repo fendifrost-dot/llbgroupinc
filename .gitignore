@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local environment (Lovable injects these at build time in the cloud)
+.env
+.env.local
+.env.*.local
