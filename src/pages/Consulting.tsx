@@ -68,7 +68,7 @@ const Consulting = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Consulting Engagement Areas
             </h2>
           </div>
@@ -81,7 +81,7 @@ const Consulting = () => {
               >
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
-                    <h3 className="font-serif text-2xl font-medium text-foreground mb-4">
+                    <h3 className="font-serif text-2xl font-bold text-foreground mb-4">
                       {area.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -115,7 +115,7 @@ const Consulting = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               How Our Consulting Engagements Work
             </h2>
           </div>
@@ -127,7 +127,7 @@ const Consulting = () => {
                   <span className="text-4xl font-serif text-primary/30 font-medium">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-4 font-serif text-xl font-medium text-foreground">
+                  <h3 className="mt-4 font-serif text-xl font-bold text-foreground">
                     {step.phase}
                   </h3>
                   <p className="mt-3 text-muted-foreground leading-relaxed">
@@ -144,7 +144,7 @@ const Consulting = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-3xl">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Engagement Structure
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
@@ -164,7 +164,7 @@ const Consulting = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Engage LLB Group
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-10">

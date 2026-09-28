@@ -22,7 +22,7 @@ const Courses = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Individual Programs
             </h2>
           </div>
@@ -51,7 +51,7 @@ const Courses = () => {
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Complete Curriculum
               </p>
-              <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
                 {BUNDLE.title}
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
@@ -68,7 +68,7 @@ const Courses = () => {
             </div>
 
             <div className="p-8 bg-background border border-border rounded-sm">
-              <h3 className="font-serif text-xl font-medium text-foreground mb-2">
+              <h3 className="font-serif text-xl font-bold text-foreground mb-2">
                 {EBOOK.title}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">{EBOOK.subtitle}</p>

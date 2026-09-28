@@ -38,7 +38,7 @@ const About = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
                 What We Do
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
@@ -75,7 +75,7 @@ const About = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-3xl">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Why LLB Group Exists
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
@@ -97,7 +97,7 @@ const About = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               How We Operate
             </h2>
           </div>
@@ -108,7 +108,7 @@ const About = () => {
                 key={principle.title}
                 className="p-8 bg-card border border-border rounded-sm"
               >
-                <h3 className="font-serif text-xl font-medium text-foreground mb-3">
+                <h3 className="font-serif text-xl font-bold text-foreground mb-3">
                   {principle.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -124,7 +124,7 @@ const About = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-3xl">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Long-Term Vision
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
@@ -147,7 +147,7 @@ const About = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-16">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Leadership
             </h2>
             <p className="text-muted-foreground leading-relaxed mt-4">
@@ -159,7 +159,7 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 bg-card border border-border rounded-sm">
               <div className="w-16 h-16 bg-secondary rounded-full mb-6" />
-              <h3 className="font-serif text-xl font-medium text-foreground mb-1">
+              <h3 className="font-serif text-xl font-bold text-foreground mb-1">
                 Founder & Chief Executive
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -168,7 +168,7 @@ const About = () => {
             </div>
             <div className="p-8 bg-card border border-border rounded-sm">
               <div className="w-16 h-16 bg-secondary rounded-full mb-6" />
-              <h3 className="font-serif text-xl font-medium text-foreground mb-1">
+              <h3 className="font-serif text-xl font-bold text-foreground mb-1">
                 Chief Strategy Officer
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -177,7 +177,7 @@ const About = () => {
             </div>
             <div className="p-8 bg-card border border-border rounded-sm">
               <div className="w-16 h-16 bg-secondary rounded-full mb-6" />
-              <h3 className="font-serif text-xl font-medium text-foreground mb-1">
+              <h3 className="font-serif text-xl font-bold text-foreground mb-1">
                 Director of Education
               </h3>
               <p className="text-sm text-muted-foreground">

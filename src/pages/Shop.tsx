@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,12 @@ const Shop = () => {
   const priceFor = (slug: string, fallback: number) =>
     products?.find((product) => product.slug === slug)?.price_cents ?? fallback;
   const ebookProduct = products?.find((product) => product.slug === EBOOK.productSlug);
+  const { hash } = useLocation();
+
+  // The header's E-Book link lands here as /shop#ebook.
+  useEffect(() => {
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
+  }, [hash]);
 
   return (
     <Layout>
@@ -31,7 +38,7 @@ const Shop = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Self-Paced Programs
             </h2>
             <p className="text-muted-foreground leading-relaxed mt-4">
@@ -64,7 +71,7 @@ const Shop = () => {
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Complete Curriculum
               </p>
-              <h3 className="font-serif text-2xl font-medium text-foreground mb-3">
+              <h3 className="font-serif text-2xl font-bold text-foreground mb-3">
                 {BUNDLE.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-8">
@@ -82,11 +89,11 @@ const Shop = () => {
               </div>
             </div>
 
-            <div className="p-8 bg-background border border-border rounded-sm flex flex-col">
+            <div id="ebook" className="scroll-mt-24 p-8 bg-background border border-border rounded-sm flex flex-col">
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Publication
               </p>
-              <h3 className="font-serif text-2xl font-medium text-foreground mb-1">
+              <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
                 {EBOOK.title}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">{EBOOK.subtitle}</p>
@@ -117,7 +124,7 @@ const Shop = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Institutional Deployment
             </h2>
             <p className="text-muted-foreground leading-relaxed">

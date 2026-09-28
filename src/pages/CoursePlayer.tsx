@@ -95,7 +95,7 @@ const CoursePlayer = () => {
       <Layout>
         <section className="py-32">
           <div className="section-container max-w-xl">
-            <h1 className="font-serif text-3xl font-medium text-foreground mb-4">
+            <h1 className="font-serif text-3xl font-bold text-foreground mb-4">
               Program Not Found
             </h1>
             <Button variant="hero-outline" asChild>
@@ -113,7 +113,7 @@ const CoursePlayer = () => {
         <section className="py-32">
           <div className="section-container max-w-xl">
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">Enrollment Required</p>
-            <h1 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-4">
               {course.title}
             </h1>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -152,7 +152,7 @@ const CoursePlayer = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-12">
             {/* Module rail (desktop) */}
             <aside className="hidden lg:block">
-              <h2 className="text-xs font-medium tracking-widest uppercase text-foreground mb-4">
+              <h2 className="text-xs font-bold tracking-widest uppercase text-foreground mb-4">
                 {course.title}
               </h2>
               <nav aria-label="Modules">
@@ -252,7 +252,7 @@ const CoursePlayer = () => {
                       Module {String(activeIndex + 1).padStart(2, "0")} ·{" "}
                       {formatDuration(activeModule.duration_seconds)}
                     </p>
-                    <h1 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-4">
+                    <h1 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-4">
                       {activeModule.title}
                     </h1>
                     {activeModule.summary && (

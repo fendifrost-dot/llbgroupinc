@@ -14,7 +14,7 @@ export function PageHeader({ overline, title, description }: PageHeaderProps) {
               {overline}
             </p>
           )}
-          <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-foreground">
+          <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-foreground">
             {title}
           </h1>
           {description && (

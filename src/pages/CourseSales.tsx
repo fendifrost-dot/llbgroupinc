@@ -58,7 +58,7 @@ const CourseSales = () => {
             <p className="fade-in-up text-xs tracking-[0.3em] uppercase text-primary mb-4">
               {eyebrow}
             </p>
-            <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-foreground">
+            <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-foreground">
               {title}
             </h1>
             <p className="fade-in-up stagger-2 mt-6 text-lg text-muted-foreground leading-relaxed">
@@ -126,7 +126,7 @@ const CourseSales = () => {
           <div className="section-container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
               <div>
-                <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+                <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
                   What You'll Learn
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
@@ -151,7 +151,7 @@ const CourseSales = () => {
       <section id="curriculum" className="py-20 lg:py-28 scroll-mt-24">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Curriculum
             </h2>
             <p className="text-muted-foreground leading-relaxed mt-4">
@@ -217,7 +217,7 @@ const CourseSales = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
                 What's Included
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -254,7 +254,7 @@ const CourseSales = () => {
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
               Instructor
             </p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-2">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-2">
               {INSTRUCTOR.name}
             </h2>
             <p className="text-sm text-muted-foreground mb-6">{INSTRUCTOR.role}</p>
@@ -269,7 +269,7 @@ const CourseSales = () => {
           <div className="section-container">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
               <div className="max-w-2xl">
-                <h2 className="font-serif text-2xl lg:text-3xl font-medium text-foreground mb-3">
+                <h2 className="font-serif text-2xl lg:text-3xl font-bold text-foreground mb-3">
                   {BUNDLE.title}
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
@@ -293,7 +293,7 @@ const CourseSales = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-8">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-8">
                 Common Questions
               </h2>
               <Accordion type="single" collapsible>
@@ -316,7 +316,7 @@ const CourseSales = () => {
 
             <div className="space-y-8">
               <div className="p-8 bg-card border border-border rounded-sm">
-                <h3 className="font-serif text-xl font-medium text-foreground mb-3">
+                <h3 className="font-serif text-xl font-bold text-foreground mb-3">
                   Enroll in {title}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6">

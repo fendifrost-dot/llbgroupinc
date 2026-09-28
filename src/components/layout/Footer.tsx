@@ -46,7 +46,7 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="text-xs font-medium tracking-widest uppercase text-foreground mb-4">
+            <h4 className="text-xs font-bold tracking-widest uppercase text-foreground mb-4">
               Company
             </h4>
             <ul className="space-y-3">
@@ -65,7 +65,7 @@ export function Footer() {
 
           {/* Programs Links */}
           <div>
-            <h4 className="text-xs font-medium tracking-widest uppercase text-foreground mb-4">
+            <h4 className="text-xs font-bold tracking-widest uppercase text-foreground mb-4">
               Programs
             </h4>
             <ul className="space-y-3">
@@ -84,7 +84,7 @@ export function Footer() {
 
           {/* Connect Links */}
           <div>
-            <h4 className="text-xs font-medium tracking-widest uppercase text-foreground mb-4">
+            <h4 className="text-xs font-bold tracking-widest uppercase text-foreground mb-4">
               Connect
             </h4>
             <ul className="space-y-3">

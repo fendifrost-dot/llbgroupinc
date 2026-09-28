@@ -64,7 +64,7 @@ const SignIn = () => {
               </p>
             ) : magicSent ? (
               <div className="p-8 bg-card border border-border rounded-sm">
-                <h2 className="font-serif text-xl font-medium text-foreground mb-3">
+                <h2 className="font-serif text-xl font-bold text-foreground mb-3">
                   Check Your Email
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">

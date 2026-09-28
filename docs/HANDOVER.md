@@ -120,12 +120,12 @@ block steps 3 and 8 above and the lead capture follow-up.
 
 ## 6. Open items on our side
 
-- **Rebrand not yet on `main`.** The rebrand (antique brass accent `#B58A4A`
-  on `#0b0b0b`, Cinzel 700 headings, and a header nav that leads with
-  Courses and E-Book) was done on a separate machine and hasn't reached
-  GitHub. The live site currently shows the previous look: a teal accent,
-  Playfair/DM Sans fonts, and a nav that starts with About. It will appear
-  once those commits are pushed.
+- **Live-site check pending.** Before publishing, the brand refresh and all
+  nine key routes were checked in a local browser against the production
+  build. Every route renders, headings compute to Cinzel 700, the background
+  is `#0b0b0b`, the nav leads with Courses and E-Book, Enroll shows
+  "enrollment is not open yet", and the console is clean. The same check on
+  the live Lovable URL still has to be run from a machine that can reach it.
 - **Lovable security scan.** Lovable flags the scan as stale on the current
   commit, and it has to be re-run from the Lovable dashboard. For now, a
   dependency audit (`npm audit --omit=dev`) reports 12 known

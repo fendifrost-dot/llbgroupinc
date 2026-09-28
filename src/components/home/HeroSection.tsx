@@ -16,7 +16,7 @@ export function HeroSection() {
           </p>
           
           {/* Main Headline */}
-          <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight text-foreground mb-8">
+          <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-foreground mb-8">
             Building Sustainable
             <br />
             <span className="text-gradient">Performance at Scale</span>

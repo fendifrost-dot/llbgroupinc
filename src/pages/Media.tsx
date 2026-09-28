@@ -53,7 +53,7 @@ const Media = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Press Coverage
             </h2>
           </div>
@@ -72,7 +72,7 @@ const Media = () => {
                     <p className="text-xs text-muted-foreground mb-1">
                       {item.outlet}
                     </p>
-                    <h3 className="font-serif text-lg font-medium text-foreground">
+                    <h3 className="font-serif text-lg font-bold text-foreground">
                       {item.title}
                     </h3>
                   </div>
@@ -88,7 +88,7 @@ const Media = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
               Podcast Appearances
             </h2>
           </div>
@@ -102,7 +102,7 @@ const Media = () => {
                 <p className="text-xs text-muted-foreground mb-2">
                   {podcast.show}
                 </p>
-                <h3 className="font-serif text-lg font-medium text-foreground mb-4">
+                <h3 className="font-serif text-lg font-bold text-foreground mb-4">
                   {podcast.episode}
                 </h3>
                 <p className="text-sm text-muted-foreground">{podcast.date}</p>
@@ -117,7 +117,7 @@ const Media = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
                 Articles & Publications
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
@@ -129,7 +129,7 @@ const Media = () => {
               </p>
             </div>
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
                 Video & Presentations
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
@@ -148,7 +148,7 @@ const Media = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Media Inquiries
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">

@@ -54,7 +54,7 @@ const CheckoutSuccess = () => {
               </>
             ) : (
               <>
-                <h2 className="font-serif text-2xl font-medium text-foreground mb-4">
+                <h2 className="font-serif text-2xl font-bold text-foreground mb-4">
                   Check Your Email
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navigation = [
+  { name: "Courses", href: "/courses" },
+  { name: "E-Book", href: "/shop#ebook" },
   { name: "About", href: "/about" },
   { name: "Consulting", href: "/consulting" },
   { name: "Solutions", href: "/solutions" },
@@ -32,14 +34,14 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
               className={cn(
                 "text-sm tracking-wide transition-colors duration-200 link-underline",
-                location.pathname === item.href
+                location.pathname + location.hash === item.href
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
@@ -77,7 +79,7 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
                   "block text-lg py-2 transition-colors",
-                  location.pathname === item.href
+                  location.pathname + location.hash === item.href
                     ? "text-foreground"
                     : "text-muted-foreground"
                 )}

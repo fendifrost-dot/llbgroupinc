@@ -21,7 +21,7 @@ export function WhoWeServeSection() {
   return (
     <section className="py-20 lg:py-32 bg-card">
       <div className="section-container">
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-foreground mb-16 lg:mb-20">
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-16 lg:mb-20">
           Who We Partner With
         </h2>
         
@@ -31,7 +31,7 @@ export function WhoWeServeSection() {
               key={index}
               className="p-8 bg-background border border-border rounded-sm"
             >
-              <h3 className="font-serif text-xl font-medium text-foreground mb-4">
+              <h3 className="font-serif text-xl font-bold text-foreground mb-4">
                 {audience.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed">

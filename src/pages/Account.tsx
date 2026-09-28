@@ -47,7 +47,7 @@ const Account = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
-              <h2 className="font-serif text-2xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-2xl font-bold text-foreground mb-6">
                 Set a Password
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">
@@ -89,7 +89,7 @@ const Account = () => {
             </div>
 
             <div>
-              <h2 className="font-serif text-2xl font-medium text-foreground mb-6">
+              <h2 className="font-serif text-2xl font-bold text-foreground mb-6">
                 Your Enrollments
               </h2>
               {owned.length === 0 ? (

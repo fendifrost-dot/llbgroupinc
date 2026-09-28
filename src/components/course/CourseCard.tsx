@@ -31,7 +31,7 @@ export function CourseCard({
       to={to}
       className="group flex flex-col p-8 bg-card border border-border rounded-sm transition-colors duration-300 hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
     >
-      <h3 className="font-serif text-xl font-medium text-foreground mb-2">{title}</h3>
+      <h3 className="font-serif text-xl font-bold text-foreground mb-2">{title}</h3>
       {subtitle && (
         <p className="text-sm text-muted-foreground mb-4">{subtitle}</p>
       )}

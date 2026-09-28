@@ -70,7 +70,7 @@ const Solutions = () => {
               >
                 <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
                   <div className="max-w-2xl">
-                    <h3 className="font-serif text-xl lg:text-2xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="font-serif text-xl lg:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                       {solution.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -94,7 +94,7 @@ const Solutions = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-medium text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Custom Engagements
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">

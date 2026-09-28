@@ -27,7 +27,7 @@ export function BeyondConsultingSection() {
   return (
     <section className="py-20 lg:py-32">
       <div className="section-container">
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-foreground mb-16 lg:mb-20">
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-16 lg:mb-20">
           Beyond Consulting
         </h2>
         
@@ -37,7 +37,7 @@ export function BeyondConsultingSection() {
               key={index}
               className="p-8 lg:p-10 bg-card border border-border rounded-sm flex flex-col"
             >
-              <h3 className="font-serif text-xl lg:text-2xl font-medium text-foreground mb-4">
+              <h3 className="font-serif text-xl lg:text-2xl font-bold text-foreground mb-4">
                 {area.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8 flex-grow">
