@@ -38,7 +38,7 @@ do nothing.
 | Type | Host | Value |
 |---|---|---|
 | A | `learn` | `185.158.133.1` |
-| TXT | `_lovable.learn` | `lovable_verify=2477e53fa4d7b56f70119ea179e234c56d5d426fae9f39d2aeb31996afafa991` |
+| TXT | `_lovable.learn` | `lovable_verify=76b5454c769c4a57e57de9eed838563df72f27fd2f9ccec565ee0341aa4acabf` |
 
 **Why `_lovable.learn` and not `_lovable`:** Lovable's domain guidance puts
 the TXT record at `_lovable` for a root domain and at `_lovable.<subdomain>`
@@ -47,12 +47,22 @@ for a subdomain (for example `_lovable.blog`). Here the subdomain is
 domain view. Squarespace adds the root domain to the end of every host
 automatically, so type `_lovable.learn` only, not the full domain.
 
-**How sure we are:** this comes from Lovable's own documentation as
-summarised in search results. We couldn't open the page itself from the
-build environment to quote it word for word. If Lovable still says
-"unverified" 24 hours after the records are added, **also** add a TXT
-record with host `_lovable` and the same value. An extra TXT record does
-no harm, so this covers both readings.
+**How sure we are: confirmed.** These exact values were read on 28 September
+directly out of the `learn.livinglifebalancedllb.com` entry in Lovable's own
+domains panel. Lovable's documentation agrees on the host: "The verification
+`TXT` record uses the host `_lovable` for a root domain or `_lovable.<prefix>`
+for a subdomain."
+
+**Do not substitute the other token.** The same panel shows a different
+verification token, `lovable_verify=2477e53f...`, against host `_lovable`.
+That one belongs to the old, offline `livinlifebalanced.com` entry. Every
+domain gets its own token, so the root domain's value will never verify here
+no matter which host it is filed under.
+
+**Current DNS state (29 September): none of these records exist yet.**
+`learn.livinglifebalancedllb.com` (A), `_lovable.learn.livinglifebalancedllb.com`
+(TXT) and `_lovable.livinglifebalancedllb.com` (TXT) all return NXDOMAIN.
+Nameservers are `nsd1-4.squarespacedns.com`, so the records go in Squarespace.
 
 Once the records are in: Lovable → Project → Settings → Domains →
 `learn.livinglifebalancedllb.com` → Verify.
