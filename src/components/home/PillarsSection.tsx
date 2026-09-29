@@ -21,7 +21,7 @@ const pillars = [
   {
     title: "Media",
     description:
-      "Insightful content and thought leadership shaping the future of human performance—reinforced by products and experiences.",
+      "Insightful content and thought leadership shaping the future of human performance, reinforced by products and experiences.",
     link: "/media",
     cta: "Discover media",
     icon: PlayCircle,

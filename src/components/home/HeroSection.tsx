@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, TrendingUp } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -62,7 +62,7 @@ export function HeroSection() {
             <div className="relative aspect-[4/3] lg:aspect-[5/4] overflow-hidden rounded-sm border border-border/60 shadow-[0_20px_60px_-20px_hsl(332_26%_11%_/_0.25)]">
               <img
                 src="/images/hero-leaders.jpg"
-                alt="Leaders representing sustainable performance and organizational wellness"
+                alt="Three professionals looking ahead in warm light"
                 className="h-full w-full object-cover object-[center_20%]"
                 width={1600}
                 height={1000}
@@ -73,17 +73,15 @@ export function HeroSection() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
             </div>
 
-            {/* Floating proof metric */}
-            <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 fade-in-up stagger-4 glass-chip px-4 py-3 sm:px-5 sm:py-4 min-w-[140px]">
+            {/* Floating focus chip. Deliberately not a statistic: no outcome figure
+                is shown until LLB has measured data to substantiate it. */}
+            <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 fade-in-up stagger-4 glass-chip px-4 py-3 sm:px-5 sm:py-4">
               <div className="flex items-center gap-2 text-[10px] sm:text-xs tracking-[0.15em] uppercase text-muted-foreground mb-1">
-                <TrendingUp className="h-3.5 w-3.5 text-primary" />
-                Resilience
+                <Sparkles className="h-3.5 w-3.5 text-primary" />
+                Our Focus
               </div>
-              <div className="flex items-baseline gap-2">
-                <span className="font-serif text-2xl sm:text-3xl font-semibold text-foreground tabular-nums">
-                  +24%
-                </span>
-                <span className="text-[10px] sm:text-xs text-muted-foreground">vs. baseline</span>
+              <div className="font-serif text-lg sm:text-xl font-semibold text-foreground tracking-[0.04em] uppercase">
+                Sustainable Performance
               </div>
             </div>
           </div>
