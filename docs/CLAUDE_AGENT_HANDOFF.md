@@ -118,7 +118,7 @@ says student accounts are being prepared.
    the 2 to 5 second mark, 1920x1080 JPG) at
    `public/media/trailers/LLB_C1_TRAILER_v4-poster.jpg`. Don't use a
    generated or stock poster.
-4. **Copy cleanup (optional).** About 48 em dashes remain in
+4. **Copy cleanup (optional).** About 29 em dashes remain in
    `src/content` and `src/pages`. An earlier request asked for dashes to be
    removed from the copy. Rewrite each sentence rather than swapping in a
    hyphen.
