@@ -20,6 +20,7 @@ import {
   findCourseContent,
   formatDuration,
   formatPrice,
+  PRICES_APPROVED,
 } from "@/content/catalog";
 import { useCourse, useCurriculum, useProduct } from "@/hooks/useCatalog";
 import { publicStorageUrl } from "@/integrations/supabase/client";
@@ -63,7 +64,7 @@ const CourseSales = () => {
       {/* 1. Hero */}
       <section className="py-20 lg:py-28 bg-card border-b border-border">
         <div className="section-container">
-          <div className={hasCover ? "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center" : undefined}>
+          <div className={hasCover ? "grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-center" : undefined}>
           <div className="max-w-3xl">
             <p className="fade-in-up text-xs tracking-[0.3em] uppercase text-primary mb-4">
               {eyebrow}
@@ -79,14 +80,16 @@ const CourseSales = () => {
             </p>
 
             <div className="fade-in-up stagger-3 mt-10 flex flex-col sm:flex-row sm:items-center gap-6">
-              <p className="font-serif text-3xl font-medium text-foreground">
-                {formatPrice(priceCents)}
-                {isBundle && BUNDLE.savingsCents > 0 && (
-                  <span className="ml-3 align-middle text-sm font-sans text-muted-foreground">
-                    Save {formatPrice(BUNDLE.savingsCents)}
-                  </span>
-                )}
-              </p>
+              {PRICES_APPROVED && (
+                <p className="font-serif text-3xl font-medium text-foreground">
+                  {formatPrice(priceCents)}
+                  {isBundle && BUNDLE.savingsCents > 0 && (
+                    <span className="ml-3 align-middle text-sm font-sans text-muted-foreground">
+                      Save {formatPrice(BUNDLE.savingsCents)}
+                    </span>
+                  )}
+                </p>
+              )}
               <div className="flex flex-col sm:flex-row gap-4">
                 <EnrollButton
                   productSlug={productSlug}
@@ -100,7 +103,13 @@ const CourseSales = () => {
             </div>
           </div>
           {hasCover && (
-            <div className="fade-in-up stagger-2 aspect-[16/10] overflow-hidden border border-border">
+            <div
+              className={
+                isBundle
+                  ? "fade-in-up stagger-2 aspect-video overflow-hidden border border-border"
+                  : "fade-in-up stagger-2 aspect-[2/3] w-full max-w-sm justify-self-center overflow-hidden border border-border shadow-[0_20px_60px_-20px_hsl(332_26%_11%_/_0.35)]"
+              }
+            >
               <img
                 src={cover}
                 alt={`${title} program cover`}
@@ -246,7 +255,7 @@ const CourseSales = () => {
               <OptionalImage
                 src={isBundle ? EBOOK_MOCKUP : courseWorkbook(slug ?? "")}
                 alt={isBundle ? "Living Life Balanced e-book cover" : `Pages from the ${title} workbook`}
-                className={isBundle ? "mt-10 aspect-square max-w-sm bg-secondary border border-border" : "mt-10 aspect-[16/10] border border-border"}
+                className={isBundle ? "mt-10 aspect-[2/3] max-w-xs border border-border" : "mt-10 aspect-[16/10] border border-border"}
                 imgClassName={isBundle ? "object-contain" : undefined}
               />
             </div>
@@ -297,8 +306,9 @@ const CourseSales = () => {
                   {BUNDLE.title}
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  All three programs plus the e-book for {formatPrice(BUNDLE.priceCents)} —
-                  {" "}{formatPrice(BUNDLE.savingsCents)} less than buying separately.
+                  {PRICES_APPROVED
+                    ? `All three programs plus the e-book for ${formatPrice(BUNDLE.priceCents)}, ${formatPrice(BUNDLE.savingsCents)} less than buying separately.`
+                    : "All three programs plus the e-book, for less than buying them separately."}
                 </p>
               </div>
               <Button variant="hero-outline" className="shrink-0" asChild>
@@ -344,7 +354,9 @@ const CourseSales = () => {
                   Enroll in {title}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  One-time payment of {formatPrice(priceCents)}. Lifetime access.
+                  {PRICES_APPROVED
+                    ? `One-time payment of ${formatPrice(priceCents)}. Lifetime access.`
+                    : "One-time payment. Lifetime access."}
                 </p>
                 <EnrollButton
                   productSlug={productSlug}

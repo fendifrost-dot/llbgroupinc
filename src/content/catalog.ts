@@ -184,6 +184,13 @@ export function findCourseContent(slug: string): CatalogEntry | undefined {
   return COURSES.find((course) => course.slug === slug);
 }
 
+/**
+ * The prices in this file and in the seed migration are placeholders that
+ * have not been approved. Until Alonzo signs them off, no price is shown
+ * anywhere on the site. Flip this to true once final prices are confirmed.
+ */
+export const PRICES_APPROVED = false;
+
 export function formatPrice(cents: number): string {
   return `$${(cents / 100).toFixed(cents % 100 === 0 ? 0 : 2)}`;
 }

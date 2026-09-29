@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { formatPrice } from "@/content/catalog";
+import { PRICES_APPROVED, formatPrice } from "@/content/catalog";
 import { OptionalImage } from "@/components/shared/OptionalImage";
 
 interface CourseCardProps {
@@ -13,6 +13,8 @@ interface CourseCardProps {
   cta?: string;
   /** Cover image path; the card shows it once the file exists. */
   image?: string;
+  /** Aspect class for the cover; course covers are portrait, the bundle is 16:9. */
+  imageAspect?: string;
 }
 
 /**
@@ -29,6 +31,7 @@ export function CourseCard({
   tags = [],
   cta = "View Program",
   image,
+  imageAspect = "aspect-[2/3]",
 }: CourseCardProps) {
   return (
     <Link
@@ -39,7 +42,7 @@ export function CourseCard({
         <OptionalImage
           src={image}
           alt={`${title} program cover`}
-          className="-mx-8 -mt-8 mb-6 aspect-[16/10] border-b border-border"
+          className={`-mx-8 -mt-8 mb-6 ${imageAspect} border-b border-border`}
           imgClassName="transition-transform duration-700 group-hover:scale-[1.03]"
         />
       )}
@@ -62,7 +65,7 @@ export function CourseCard({
       )}
 
       <div className="mt-auto pt-6 border-t border-border flex items-center justify-between">
-        <span className="text-sm text-foreground">{formatPrice(priceCents)}</span>
+        <span className="text-sm text-foreground">{PRICES_APPROVED ? formatPrice(priceCents) : ""}</span>
         <span className="inline-flex items-center text-xs tracking-widest uppercase text-primary">
           {cta}
           <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

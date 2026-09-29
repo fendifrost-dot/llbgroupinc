@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/course/CourseCard";
 import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
 import { EnrollButton } from "@/components/course/EnrollButton";
-import { BUNDLE, COURSES, EBOOK, formatPrice } from "@/content/catalog";
+import { BUNDLE, COURSES, EBOOK, PRICES_APPROVED, formatPrice } from "@/content/catalog";
 import { useProducts } from "@/hooks/useCatalog";
 import { EBOOK_MOCKUP, courseCover } from "@/content/media";
 import { OptionalImage } from "@/components/shared/OptionalImage";
@@ -92,7 +92,7 @@ const Shop = () => {
               <OptionalImage
                 src={courseCover(BUNDLE.slug)}
                 alt={`${BUNDLE.title} cover`}
-                className="-mx-8 -mt-8 mb-6 aspect-[16/10] border-b border-border"
+                className="-mx-8 -mt-8 mb-6 aspect-video border-b border-border"
               />
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Complete Curriculum
@@ -105,7 +105,7 @@ const Shop = () => {
               </p>
               <div className="mt-auto pt-6 border-t border-border flex items-center justify-between gap-4">
                 <span className="text-sm text-foreground">
-                  {formatPrice(priceFor(BUNDLE.productSlug, BUNDLE.priceCents))}
+                  {PRICES_APPROVED && formatPrice(priceFor(BUNDLE.productSlug, BUNDLE.priceCents))}
                 </span>
                 {/* Navigates to the sales page — the bundle has one. The
                     e-book below does not, so it buys directly. */}
@@ -119,7 +119,7 @@ const Shop = () => {
               <OptionalImage
                 src={EBOOK_MOCKUP}
                 alt={`${EBOOK.title} e-book cover`}
-                className="-mx-8 -mt-8 mb-6 aspect-[16/10] border-b border-border bg-secondary"
+                className="-mx-8 -mt-8 mb-6 aspect-video border-b border-border bg-[hsl(var(--band))]"
                 imgClassName="object-contain"
               />
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
@@ -134,7 +134,7 @@ const Shop = () => {
               </p>
               <div className="mt-auto pt-6 border-t border-border flex items-center justify-between gap-4">
                 <span className="text-sm text-foreground">
-                  {formatPrice(priceFor(EBOOK.productSlug, EBOOK.priceCents))}
+                  {PRICES_APPROVED && formatPrice(priceFor(EBOOK.productSlug, EBOOK.priceCents))}
                 </span>
                 <EnrollButton
                   productSlug={EBOOK.productSlug}

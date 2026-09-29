@@ -1,38 +1,65 @@
-# LLB Course Platform — Handover
+# LLB Learn Platform — Handover
 
 For Ken and Shawnie. This is the one document to work from. Status as of
-28 Sep 2026.
+29 Sep 2026.
+
+**Scope.** This project is the learn platform only: the programs, the
+e-book, student accounts and checkout, intended for
+`learn.livinglifebalancedllb.com`. LLB Group's own site (speaking,
+consulting, coaching, story, booking) is Ken's at livinglifebalancedllb.com.
+This project doesn't duplicate it; it links to it.
+
+**What is handed over:** the Lovable project
+(`lovable.dev/projects/e4112375-5da8-4110-ab30-5a884d7e48a2`) and the GitHub
+repo (`fendifrost-dot/llbgroupinc`, branch `main`). Domains, DNS and the
+switch-over are yours; §2 has everything needed for them.
 
 ---
 
-## 1. Delivered and live
+## 1. What's in the project
 
-The course platform is merged into `main` and published by Lovable
-(Lovable's sync commit `cb7b126`, "Synced and published to main").
-Live preview: https://llbgroupinc.lovable.app
+Preview: https://llbgroupinc.lovable.app
 
 The design matches livinglifebalancedllb.com: a warm ivory background
-(`#E8DDCF`), blackened plum text (`#24151C`), and antique brass buttons
+(`#E8DDCF`), blackened plum text (`#24151C`) and antique brass buttons
 (`#B58A4A`). Headings are Cinzel 600 in uppercase and body text is
-Montserrat. A dark plum band is used for page headers and the footer.
+Montserrat, so `learn.` reads as part of the same brand.
 
-| Area | What's there |
+| Area | Pages |
 |---|---|
-| Corporate site | `/`, `/about`, `/consulting`, `/solutions`, `/events`, `/education`, `/media`, `/shop`, `/book` |
-| Course storefront | `/courses` (catalog) and `/courses/<slug>` (one sales page per course) |
+| Landing page | `/`: the three programs, the bundle and the e-book |
+| Course storefront | `/courses` (catalog) and `/courses/<slug>`, one sales page each for Balanced Living Blueprint, Justice Advocacy, Faith Over Fear and the Complete Bundle |
+| Shop | `/shop`: all programs, the bundle and the e-book (`/shop#ebook`) |
 | Student area | `/signin`, `/account`, `/learn`, `/learn/<course>` (gated player) |
 | Checkout pages | `/checkout/success`, `/checkout/cancelled` |
-| Legal | `/privacy`, `/terms` (marked "pending legal review", see §4) |
+| Legal | `/privacy`, `/terms` (marked "pending legal review", see §5) |
 | Backend code | Database schema, row-level security, private storage buckets and catalog seed (`supabase/migrations/`), plus four edge functions: checkout, Stripe webhook, signed media URLs, lead magnet (`supabase/functions/`) |
 
-The backend isn't switched on yet (see §4). Until it is, the site runs in a
-safe mode: all pages render, sales pages show the course catalog, the Enroll
-button shows "enrollment is not open yet", and `/learn` says student
-accounts are being prepared. Nothing errors.
+**Links to the main site.** The header's "LLB Group" link and the footer
+point to livinglifebalancedllb.com. Every "Contact" and "Book a
+Consultation" link points to livinglifebalancedllb.com/book, so enquiries
+reach Ken's booking form and GoHighLevel. This project has no booking form
+of its own.
+
+**Removed on 29 Sep.** An earlier corporate site in this Lovable project
+duplicated Ken's pages (`/about`, `/consulting`, `/solutions`,
+`/education`, `/media`, `/events`, `/book`). Those pages have been deleted.
+They now return "page not found".
+
+**Imagery.** Final covers for the three programs, the bundle graphic and
+the e-book art are in `public/images/courses/` and `public/images/ebook/`.
+
+**Prices are hidden.** No price appears anywhere on the site until the
+figures are approved (§5). One setting turns them on: `PRICES_APPROVED` in
+`src/content/catalog.ts`.
+
+The backend isn't switched on yet (§4). Until it is, every page still
+renders. The Enroll button shows "enrollment is not open yet", and `/learn`
+says student accounts are being prepared.
 
 ---
 
-## 2. DNS for `learn.livinglifebalancedllb.com`
+## 2. Pointing `learn.livinglifebalancedllb.com` at this project (for Ken)
 
 **The domain is `livinglifebalancedllb.com`, with a "d" in "balanced".**
 Earlier emails spelled it `livinglifebalancellb.com`, which doesn't exist.
@@ -72,6 +99,21 @@ Nameservers are `nsd1-4.squarespacedns.com`, so the records go in Squarespace.
 
 Once the records are in: Lovable → Project → Settings → Domains →
 `learn.livinglifebalancedllb.com` → Verify.
+
+**Nothing in the code has to change for the switch.** Checkout, sign-in and
+email links all build their return address from whatever domain the site is
+served on. No `lovable.app` address is hard-coded. Two backend settings do
+have to include the new address, once the backend is on:
+
+1. **`SITE_URL`** (edge function secret) = `https://learn.livinglifebalancedllb.com`.
+   The welcome email's set-password link uses it.
+2. **Supabase Auth → URL Configuration.** Add
+   `https://learn.livinglifebalancedllb.com` to the allowed redirect URLs,
+   or sign-in links will bounce.
+
+**Linking from the main site.** Use plain links to pages on the subdomain,
+for example `learn.livinglifebalancedllb.com/courses` for "Courses" in the
+main site's navigation. Nothing needs to be embedded.
 
 ---
 
@@ -131,12 +173,13 @@ Also needed before taking real payments:
 
 ## 5. Blocked on the client
 
-Nothing in this section can move until the client decides. These three
+Nothing in this section can move until the client decides. The first three
 block steps 3 and 8 above and the lead capture follow-up.
 
 1. **Approved pricing.** The prices in the catalog are placeholders: $127
    per course, $267 for the bundle, $19 for the e-book. They are **not
-   approved**. Alonzo needs to confirm or replace every figure.
+   approved** and are hidden on the site until they are. Alonzo needs to
+   confirm or replace every figure.
 2. **Stripe account holder.** Decide whose Stripe account the money goes to:
    LLB Group, Inc. or another holder. Live keys, live products and the live
    webhook all come from that account.
@@ -144,20 +187,24 @@ block steps 3 and 8 above and the lead capture follow-up.
    Until this is decided, leads from the chapter-one download form are
    stored in the database and exported by hand. No CRM connection has been
    built.
+4. **Which legal pages govern the learn platform.** Either keep this
+   project's `/privacy` and `/terms`, limited to accounts, purchases and
+   course access, or link to the main site's pages instead.
+5. **Where the e-book sells.** The 31 Aug plan puts e-books on Shopify.
+   This project can also sell it through Stripe. Pick one; the other path
+   comes out.
 
 ---
 
 ## 6. Open items on our side
 
-- **Live-site check pending.** All 20 routes were checked in a local
-  browser against the production build, and every one renders with no
-  console errors. The body is `rgb(232, 221, 207)` with `rgb(36, 21, 28)`
-  text. h1 is Cinzel 600, uppercase, 2.88px letter-spacing. The primary
-  buttons are brass `rgb(181, 138, 74)` with plum text. The E-Book link
-  lands on the e-book card, and Enroll says "Enrollment is not open yet.
-  Please check back shortly." The same check on the live URL has to be run
-  after **Publish → Publish changes** in Lovable, because syncing from
-  GitHub doesn't publish.
+- **Verified 29 Sep on the production build**, in a local browser:
+  - all 14 remaining routes render with no console errors;
+  - every image loads and every internal link points to a page that exists;
+  - no price shows anywhere;
+  - the removed pages return "page not found";
+  - Contact and Book links go to livinglifebalancedllb.com/book;
+  - no horizontal scroll at 390px mobile width.
 - **Lovable security scan.** Lovable flags the scan as stale on the current
   commit, and it has to be re-run from the Lovable dashboard. For now, a
   dependency audit (`npm audit --omit=dev`) reports 12 known

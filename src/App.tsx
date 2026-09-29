@@ -6,14 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { RequireAuth } from "@/components/auth/RequireAuth";
 import Index from "./pages/Index";
-import About from "./pages/About";
-import Consulting from "./pages/Consulting";
-import Solutions from "./pages/Solutions";
-import Events from "./pages/Events";
-import Education from "./pages/Education";
-import Media from "./pages/Media";
 import Shop from "./pages/Shop";
-import Book from "./pages/Book";
 import Courses from "./pages/Courses";
 import CourseSales from "./pages/CourseSales";
 import SignIn from "./pages/SignIn";
@@ -36,17 +29,9 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            {/* Learn platform: storefront, public */}
             <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/consulting" element={<Consulting />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/media" element={<Media />} />
             <Route path="/shop" element={<Shop />} />
-            <Route path="/book" element={<Book />} />
-
-            {/* Course storefront — public */}
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:slug" element={<CourseSales />} />
             <Route path="/checkout/success" element={<CheckoutSuccess />} />

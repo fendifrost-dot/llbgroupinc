@@ -2,9 +2,10 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CourseCard } from "@/components/course/CourseCard";
 import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
-import { BUNDLE, COURSES, EBOOK, formatPrice } from "@/content/catalog";
+import { BUNDLE, COURSES, EBOOK, PRICES_APPROVED, formatPrice } from "@/content/catalog";
+import { OptionalImage } from "@/components/shared/OptionalImage";
 import { useProducts } from "@/hooks/useCatalog";
-import { courseCover } from "@/content/media";
+import { EBOOK_MOCKUP, courseCover } from "@/content/media";
 
 const Courses = () => {
   const { data: products } = useProducts();
@@ -62,6 +63,7 @@ const Courses = () => {
               <CourseCard
                 to={`/courses/${BUNDLE.slug}`}
                 image={courseCover(BUNDLE.slug)}
+                imageAspect="aspect-video"
                 title={BUNDLE.title}
                 subtitle={BUNDLE.subtitle}
                 priceCents={priceFor(BUNDLE.productSlug, BUNDLE.priceCents)}
@@ -71,6 +73,12 @@ const Courses = () => {
             </div>
 
             <div className="p-8 bg-background border border-border rounded-sm">
+              <OptionalImage
+                src={EBOOK_MOCKUP}
+                alt={`${EBOOK.title} e-book cover`}
+                className="-mx-8 -mt-8 mb-6 aspect-video border-b border-border bg-[hsl(var(--band))]"
+                imgClassName="object-contain"
+              />
               <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
                 {EBOOK.title}
               </h3>
@@ -78,9 +86,11 @@ const Courses = () => {
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                 {EBOOK.description}
               </p>
-              <p className="text-sm text-foreground mb-8">
-                {formatPrice(priceFor(EBOOK.productSlug, EBOOK.priceCents))}
-              </p>
+              {PRICES_APPROVED && (
+                <p className="text-sm text-foreground mb-8">
+                  {formatPrice(priceFor(EBOOK.productSlug, EBOOK.priceCents))}
+                </p>
+              )}
               <LeadMagnetForm source="courses-catalog" />
             </div>
           </div>

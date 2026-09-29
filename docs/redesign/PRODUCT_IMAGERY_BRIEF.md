@@ -1,5 +1,12 @@
 # Product imagery brief
 
+> **Status 29 Sep 2026: final covers delivered.** They're live at
+> `public/images/courses/{balanced-living-blueprint,justice-advocacy,faith-based-transformation}.jpg`
+> (portrait 2:3), `public/images/courses/llb-complete.jpg` (16:9) and
+> `public/images/ebook/living-life-balanced.jpg` (portrait 2:3). The
+> sizes in the table below are superseded. The workbook spreads and the
+> trailer poster are still open.
+
 The site already has a slot for each image below. A slot stays hidden until
 its file exists at the exact path, then the image appears on the next
 publish. No code change is needed, so **only add image files**.

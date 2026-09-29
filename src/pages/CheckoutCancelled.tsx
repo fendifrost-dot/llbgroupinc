@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
+import { MAIN_SITE_BOOK } from "@/content/site";
 
 const CheckoutCancelled = () => (
   <Layout>
@@ -24,7 +25,7 @@ const CheckoutCancelled = () => (
               <Link to="/courses">Browse Programs</Link>
             </Button>
             <Button variant="hero-outline" asChild>
-              <Link to="/book">Contact Us</Link>
+              <a href={MAIN_SITE_BOOK}>Contact Us</a>
             </Button>
           </div>
         </div>
