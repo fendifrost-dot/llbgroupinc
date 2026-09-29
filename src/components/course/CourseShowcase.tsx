@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react";
+import { useImageAvailable } from "@/hooks/useImageAvailable";
 import { BookOpen, Headphones, Infinity as InfinityIcon, PlayCircle } from "lucide-react";
 
 interface ShowcaseModule {
@@ -13,6 +14,8 @@ interface CourseShowcaseProps {
   modules: ShowcaseModule[];
   /** Trailer URL, if one exists. A missing or unplayable file falls back quietly. */
   trailerSrc?: string | null;
+  /** Still shown before the trailer plays; used only if the file exists. */
+  posterSrc?: string | null;
   cta?: ReactNode;
 }
 
@@ -29,15 +32,17 @@ const FEATURES = [
  * available it plays above the program overview; if the file is missing or
  * can't be played, the video is dropped and only the overview shows.
  */
-export function CourseShowcase({ title, subtitle, modules, trailerSrc, cta }: CourseShowcaseProps) {
+export function CourseShowcase({ title, subtitle, modules, trailerSrc, posterSrc, cta }: CourseShowcaseProps) {
   const [trailerFailed, setTrailerFailed] = useState(false);
   const showTrailer = Boolean(trailerSrc) && !trailerFailed;
+  const hasPoster = useImageAvailable(showTrailer ? posterSrc : null);
 
   return (
     <div className="space-y-8">
       {showTrailer && (
         <video
           src={trailerSrc!}
+          poster={hasPoster ? posterSrc! : undefined}
           controls
           preload="metadata"
           playsInline

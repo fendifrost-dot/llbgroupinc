@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/content/catalog";
+import { OptionalImage } from "@/components/shared/OptionalImage";
 
 interface CourseCardProps {
   to: string;
@@ -10,6 +11,8 @@ interface CourseCardProps {
   priceCents: number;
   tags?: string[];
   cta?: string;
+  /** Cover image path; the card shows it once the file exists. */
+  image?: string;
 }
 
 /**
@@ -25,12 +28,21 @@ export function CourseCard({
   priceCents,
   tags = [],
   cta = "View Program",
+  image,
 }: CourseCardProps) {
   return (
     <Link
       to={to}
       className="group flex flex-col p-8 bg-card border border-border rounded-sm transition-colors duration-300 hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
     >
+      {image && (
+        <OptionalImage
+          src={image}
+          alt={`${title} program cover`}
+          className="-mx-8 -mt-8 mb-6 aspect-[16/10] border-b border-border"
+          imgClassName="transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      )}
       <h3 className="font-serif text-xl font-semibold text-foreground mb-2">{title}</h3>
       {subtitle && (
         <p className="text-sm text-muted-foreground mb-4">{subtitle}</p>

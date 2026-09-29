@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { CourseCard } from "@/components/course/CourseCard";
 import { COURSES } from "@/content/catalog";
+import { courseCover } from "@/content/media";
 
 const programs = [
   {
@@ -132,6 +133,7 @@ const Education = () => {
               <CourseCard
                 key={course.slug}
                 to={`/courses/${course.slug}`}
+                image={courseCover(course.slug)}
                 title={course.title}
                 subtitle={course.subtitle}
                 priceCents={course.priceCents}

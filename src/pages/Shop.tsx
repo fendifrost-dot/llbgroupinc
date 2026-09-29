@@ -8,6 +8,8 @@ import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
 import { EnrollButton } from "@/components/course/EnrollButton";
 import { BUNDLE, COURSES, EBOOK, formatPrice } from "@/content/catalog";
 import { useProducts } from "@/hooks/useCatalog";
+import { EBOOK_MOCKUP, courseCover } from "@/content/media";
+import { OptionalImage } from "@/components/shared/OptionalImage";
 
 /**
  * Handoff §4.8: the five real products replace the placeholder categories, but
@@ -70,6 +72,7 @@ const Shop = () => {
               <CourseCard
                 key={course.slug}
                 to={`/courses/${course.slug}`}
+                image={courseCover(course.slug)}
                 title={course.title}
                 subtitle={course.subtitle}
                 description={course.description}
@@ -86,6 +89,11 @@ const Shop = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="p-8 bg-background border border-border rounded-sm flex flex-col">
+              <OptionalImage
+                src={courseCover(BUNDLE.slug)}
+                alt={`${BUNDLE.title} cover`}
+                className="-mx-8 -mt-8 mb-6 aspect-[16/10] border-b border-border"
+              />
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Complete Curriculum
               </p>
@@ -108,6 +116,12 @@ const Shop = () => {
             </div>
 
             <div id="ebook" className="scroll-mt-24 p-8 bg-background border border-border rounded-sm flex flex-col">
+              <OptionalImage
+                src={EBOOK_MOCKUP}
+                alt={`${EBOOK.title} e-book cover`}
+                className="-mx-8 -mt-8 mb-6 aspect-[16/10] border-b border-border bg-secondary"
+                imgClassName="object-contain"
+              />
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Publication
               </p>

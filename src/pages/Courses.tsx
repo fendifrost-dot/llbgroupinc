@@ -4,6 +4,7 @@ import { CourseCard } from "@/components/course/CourseCard";
 import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
 import { BUNDLE, COURSES, EBOOK, formatPrice } from "@/content/catalog";
 import { useProducts } from "@/hooks/useCatalog";
+import { courseCover } from "@/content/media";
 
 const Courses = () => {
   const { data: products } = useProducts();
@@ -32,6 +33,7 @@ const Courses = () => {
               <CourseCard
                 key={course.slug}
                 to={`/courses/${course.slug}`}
+                image={courseCover(course.slug)}
                 title={course.title}
                 subtitle={course.subtitle}
                 description={course.description}
@@ -59,6 +61,7 @@ const Courses = () => {
               </p>
               <CourseCard
                 to={`/courses/${BUNDLE.slug}`}
+                image={courseCover(BUNDLE.slug)}
                 title={BUNDLE.title}
                 subtitle={BUNDLE.subtitle}
                 priceCents={priceFor(BUNDLE.productSlug, BUNDLE.priceCents)}

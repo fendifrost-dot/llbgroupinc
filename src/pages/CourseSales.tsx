@@ -23,6 +23,9 @@ import {
 } from "@/content/catalog";
 import { useCourse, useCurriculum, useProduct } from "@/hooks/useCatalog";
 import { publicStorageUrl } from "@/integrations/supabase/client";
+import { EBOOK_MOCKUP, courseCover, courseWorkbook, trailerPoster } from "@/content/media";
+import { OptionalImage } from "@/components/shared/OptionalImage";
+import { useImageAvailable } from "@/hooks/useImageAvailable";
 
 /**
  * One template, four instances: three courses and the bundle.
@@ -37,6 +40,9 @@ const CourseSales = () => {
   const { data: course } = useCourse(isBundle ? undefined : slug);
   const { data: product } = useProduct(isBundle ? BUNDLE.productSlug : content?.productSlug);
   const curriculum = useCurriculum(content, course?.id);
+
+  const cover = courseCover(slug ?? "");
+  const hasCover = useImageAvailable(slug ? cover : null);
 
   if (!content && !isBundle) return <Navigate to="/courses" replace />;
 
@@ -57,6 +63,7 @@ const CourseSales = () => {
       {/* 1. Hero */}
       <section className="py-20 lg:py-28 bg-card border-b border-border">
         <div className="section-container">
+          <div className={hasCover ? "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center" : undefined}>
           <div className="max-w-3xl">
             <p className="fade-in-up text-xs tracking-[0.3em] uppercase text-primary mb-4">
               {eyebrow}
@@ -92,6 +99,17 @@ const CourseSales = () => {
               </div>
             </div>
           </div>
+          {hasCover && (
+            <div className="fade-in-up stagger-2 aspect-[16/10] overflow-hidden border border-border">
+              <img
+                src={cover}
+                alt={`${title} program cover`}
+                className="h-full w-full object-cover"
+                fetchPriority="high"
+              />
+            </div>
+          )}
+          </div>
         </div>
       </section>
 
@@ -105,6 +123,7 @@ const CourseSales = () => {
                 subtitle={subtitle}
                 modules={curriculum}
                 trailerSrc={trailerUrl}
+                posterSrc={trailerUrl ? trailerPoster(trailerUrl) : null}
                 cta={
                   <EnrollButton
                     productSlug={productSlug}
@@ -165,6 +184,7 @@ const CourseSales = () => {
                 <CourseCard
                   key={included.slug}
                   to={`/courses/${included.slug}`}
+                  image={courseCover(included.slug)}
                   title={included.title}
                   subtitle={included.subtitle}
                   description={included.description}
@@ -223,6 +243,12 @@ const CourseSales = () => {
                   ? "Everything in all three programs, plus the e-book."
                   : "Enrollment is a one-time payment. There is no subscription and no renewal."}
               </p>
+              <OptionalImage
+                src={isBundle ? EBOOK_MOCKUP : courseWorkbook(slug ?? "")}
+                alt={isBundle ? "Living Life Balanced e-book cover" : `Pages from the ${title} workbook`}
+                className={isBundle ? "mt-10 aspect-square max-w-sm bg-secondary border border-border" : "mt-10 aspect-[16/10] border border-border"}
+                imgClassName={isBundle ? "object-contain" : undefined}
+              />
             </div>
             <ul className="space-y-3">
               {(isBundle
