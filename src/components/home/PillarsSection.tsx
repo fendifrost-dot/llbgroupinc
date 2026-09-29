@@ -1,68 +1,81 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, BookOpen, PlayCircle, Sparkles } from "lucide-react";
 
 const pillars = [
   {
     title: "Consulting",
     description:
-      "We advise organizations on wellness strategy, leadership performance, and cultural systems that support long-term execution and resilience.",
+      "Custom wellness strategy and organizational performance solutions designed for your mission and metrics.",
     link: "/consulting",
+    cta: "Learn more",
+    icon: Sparkles,
   },
   {
     title: "Education",
     description:
-      "We develop structured courses, workshops, and learning frameworks designed to scale knowledge, alignment, and performance.",
+      "World-class learning experiences that build capability and elevate leadership at every level.",
     link: "/education",
+    cta: "Explore programs",
+    icon: BookOpen,
   },
   {
-    title: "Products & Experiences",
+    title: "Media",
     description:
-      "We support our consulting and education work through curated products, events, and media that reinforce sustainable balance in practice.",
-    link: "/shop",
+      "Insightful content and thought leadership shaping the future of human performance—reinforced by products and experiences.",
+    link: "/media",
+    cta: "Discover media",
+    icon: PlayCircle,
   },
 ];
 
 export function PillarsSection() {
   return (
-    <section className="py-20 lg:py-32 bg-card">
+    <section className="py-16 lg:py-24 border-t border-border/40">
       <div className="section-container">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 lg:mb-20">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-foreground mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-14">
+          <p className="text-[11px] sm:text-xs tracking-[0.35em] uppercase text-primary mb-4">
+            Three pillars. One outcome.
+          </p>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight text-foreground mb-4">
             What LLB Group Does
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            LLB Group operates as a wellness consulting, education, and media platform 
-            focused on sustainable human performance.
+          <p className="text-muted-foreground leading-relaxed">
+            LLB Group operates as a wellness consulting, education, and media platform focused on
+            sustainable human performance.
           </p>
         </div>
 
-        {/* Pillars Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          {pillars.map((pillar, index) => (
-            <Link
-              key={pillar.title}
-              to={pillar.link}
-              className="group relative p-8 lg:p-10 bg-background border border-border rounded-sm hover:border-primary/30 transition-all duration-500"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Title */}
-              <h3 className="font-serif text-2xl lg:text-3xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                {pillar.title}
-              </h3>
-              
-              {/* Description */}
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                {pillar.description}
-              </p>
-              
-              {/* Arrow */}
-              <div className="mt-8 flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                <span>Learn more</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </div>
-            </Link>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {pillars.map((pillar, index) => {
+            const Icon = pillar.icon;
+            return (
+              <Link
+                key={pillar.title}
+                to={pillar.link}
+                className="group relative flex flex-col p-8 lg:p-10 bg-card border border-border rounded-sm hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_12px_40px_-16px_hsl(332_26%_11%_/_0.15)] transition-all duration-500"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 bg-primary/5 text-primary">
+                  <Icon className="h-5 w-5" strokeWidth={1.5} />
+                </div>
+
+                <h3 className="font-serif text-xl lg:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                  {pillar.title}
+                </h3>
+
+                <p className="mt-3 flex-1 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  {pillar.description}
+                </p>
+
+                <div className="mt-8 flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-primary">
+                  <span>{pillar.cta}</span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

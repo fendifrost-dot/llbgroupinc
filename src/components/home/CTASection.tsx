@@ -4,31 +4,31 @@ import { ArrowRight } from "lucide-react";
 
 export function CTASection() {
   return (
-    <section className="py-20 lg:py-32">
+    <section className="py-16 lg:py-24">
       <div className="section-container">
-        <div className="relative p-12 lg:p-20 bg-card border border-border rounded-sm">
-          {/* Subtle accent line */}
-          <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-foreground mb-6">
+        <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 p-10 lg:p-14 bg-card border border-border rounded-sm">
+          <div className="absolute top-0 left-10 right-10 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+
+          <div className="max-w-xl">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight text-foreground mb-3">
               Partner With LLB Group
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto">
-              LLB Group works with organizations, institutions, and leaders committed to 
-              building sustainable performance without short-term tradeoffs.
+            <p className="text-muted-foreground leading-relaxed">
+              Let's build strategies and capabilities that unlock potential and drive
+              lasting results.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/book">
-                  Engage LLB
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/book">Book a Conversation</Link>
-              </Button>
-            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/solutions">
+                View Solutions
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button variant="hero-outline" size="xl" asChild>
+              <Link to="/book">Book a Conversation</Link>
+            </Button>
           </div>
         </div>
       </div>
