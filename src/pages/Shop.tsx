@@ -10,6 +10,7 @@ import { BUNDLE, COURSES, EBOOK, PRICES_APPROVED, formatPrice } from "@/content/
 import { useProducts } from "@/hooks/useCatalog";
 import { EBOOK_MOCKUP, courseCover } from "@/content/media";
 import { OptionalImage } from "@/components/shared/OptionalImage";
+import { MAIN_SITE_BOOK } from "@/content/site";
 
 /**
  * Handoff §4.8: the five real products replace the placeholder categories, but
@@ -160,10 +161,13 @@ const Shop = () => {
               Institutional Deployment
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              These programs are designed to support—not replace—LLB Group's
-              consulting and education work. Organizations seeking to license
-              this curriculum for internal use should begin with the Education
-              page's licensing enquiry.
+              These programs support LLB Group's consulting and education work
+              rather than replace it. Organizations seeking to license this
+              curriculum for internal use can start that conversation on the{" "}
+              <a href={MAIN_SITE_BOOK} className="text-foreground underline underline-offset-4">
+                LLB Group site
+              </a>
+              .
             </p>
           </div>
         </div>

@@ -18,7 +18,7 @@ interface CourseCardProps {
 }
 
 /**
- * Catalog card. Deliberately the same shape as the Education page's existing
+ * Catalog card. Deliberately the same shape as the original site's
  * program cards (p-8, bg-card, border-border, rounded-sm, serif title) so the
  * storefront reads as native to the approved baseline.
  */

@@ -49,9 +49,15 @@ They now return "page not found".
 **Imagery.** Final covers for the three programs, the bundle graphic and
 the e-book art are in `public/images/courses/` and `public/images/ebook/`.
 
-**Prices are hidden.** No price appears anywhere on the site until the
-figures are approved (§5). One setting turns them on: `PRICES_APPROVED` in
-`src/content/catalog.ts`.
+**Prices are hidden and checkout is blocked.** No price appears anywhere on
+the site until the figures are approved (§5), and the Enroll and Buy buttons
+say "Enrollment is not open yet." There are two settings, and both must be
+turned on after sign-off:
+1. `PRICES_APPROVED` in `src/content/catalog.ts`, which shows prices and
+   opens checkout on the site.
+2. The `PRICES_APPROVED` edge function secret, set to `true`. Until it is,
+   `create-checkout` refuses to charge anyone on a live Stripe key. Test
+   keys still work for the acceptance tests.
 
 The backend isn't switched on yet (§4). Until it is, every page still
 renders. The Enroll button shows "enrollment is not open yet", and `/learn`
@@ -187,10 +193,14 @@ block steps 3 and 8 above and the lead capture follow-up.
    Until this is decided, leads from the chapter-one download form are
    stored in the database and exported by hand. No CRM connection has been
    built.
-4. **Which legal pages govern the learn platform.** Either keep this
+4. **A support email address.** Buyers who don't receive their sign-in
+   email are currently pointed to livinglifebalancedllb.com/book. The code
+   previously named info@llbgroup.com, which isn't a verified LLB address.
+   Provide the right inbox and it goes on the checkout pages.
+5. **Which legal pages govern the learn platform.** Either keep this
    project's `/privacy` and `/terms`, limited to accounts, purchases and
    course access, or link to the main site's pages instead.
-5. **Where the e-book sells.** The 31 Aug plan puts e-books on Shopify.
+6. **Where the e-book sells.** The 31 Aug plan puts e-books on Shopify.
    This project can also sell it through Stripe. Pick one; the other path
    comes out.
 
@@ -198,7 +208,13 @@ block steps 3 and 8 above and the lead capture follow-up.
 
 ## 6. Open items on our side
 
-- **Verified 29 Sep on the production build**, in a local browser:
+- **The published site is out of date.** llbgroupinc.lovable.app still
+  serves an older build that includes the removed corporate pages and the
+  old `/book` form, which never sent enquiries anywhere. Only **Publish →
+  Publish changes** in Lovable replaces it. Nothing pushed to GitHub reaches
+  the live URL until someone publishes.
+- **Checked 29 Sep on a local production build**, not on the published
+  site:
   - all 14 remaining routes render with no console errors;
   - every image loads and every internal link points to a page that exists;
   - no price shows anywhere;

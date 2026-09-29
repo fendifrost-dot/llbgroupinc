@@ -27,6 +27,17 @@ Deno.serve(async (req) => {
     );
   }
 
+  // The prices in the products table are placeholders until Alonzo approves
+  // them. Test-mode keys can still run checkout end to end; a live key
+  // refuses to charge anyone until the PRICES_APPROVED secret is set to
+  // "true" after sign-off.
+  if (stripeKey.startsWith("sk_live_") && Deno.env.get("PRICES_APPROVED") !== "true") {
+    return json(
+      { error: "Enrollment is not open yet.", code: "prices_not_approved" },
+      503,
+    );
+  }
+
   try {
     const { productSlug, successUrl, cancelUrl } = await req.json();
     if (typeof productSlug !== "string" || !productSlug) {

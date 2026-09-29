@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { callFunction, isBackendConfigured } from "@/integrations/supabase/client";
+import { PRICES_APPROVED } from "@/content/catalog";
 
 /**
  * Starts a Stripe Checkout session and hands the browser to Stripe.
@@ -13,7 +14,9 @@ export function useCheckout() {
   const [pendingSlug, setPendingSlug] = useState<string | null>(null);
 
   async function startCheckout(productSlug: string) {
-    if (!isBackendConfigured) {
+    // Unapproved prices never reach checkout. create-checkout enforces the
+    // same rule server-side for live Stripe keys.
+    if (!isBackendConfigured || !PRICES_APPROVED) {
       toast.error("Enrollment is not open yet. Please check back shortly.");
       return;
     }
@@ -30,7 +33,7 @@ export function useCheckout() {
     } catch (error) {
       console.error("checkout failed", error);
       toast.error(
-        "We could not open checkout. Please try again, or contact info@llbgroup.com.",
+        "We could not open checkout. Please try again, or reach us through livinglifebalancedllb.com/book.",
       );
       setPendingSlug(null);
     }

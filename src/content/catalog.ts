@@ -83,7 +83,7 @@ export const COURSES: CatalogEntry[] = [
       { question: "Is this a substitute for therapy or medical care?", answer: "No. This is an educational program on stress, recovery, and sustainable performance. It is not clinical treatment, and it is not a replacement for care from a licensed professional." },
       { question: "Who is it designed for?", answer: "Professionals, caregivers, and leaders who are functioning well by every external measure and depleted by every internal one." },
       { question: "Do I keep access?", answer: "Yes. Enrollment includes lifetime access to the videos, audio, and workbook, along with any future revisions." },
-      { question: "Can my organization license this?", answer: "Yes. Institutional licensing is handled separately — use the Education page's licensing enquiry to start that conversation." },
+      { question: "Can my organization license this?", answer: "Yes. Institutional licensing is handled separately. Start that conversation through the booking page on the LLB Group site, livinglifebalancedllb.com." },
     ],
   },
   {

@@ -64,7 +64,8 @@ const CheckoutSuccess = () => {
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
                   If the email does not arrive within a few minutes, check your
-                  spam folder, or write to info@llbgroup.com and we will help.
+                  spam folder, or reach us through livinglifebalancedllb.com/book
+                  and we will help.
                 </p>
                 <Button variant="hero-outline" asChild>
                   <Link to="/signin">Sign In</Link>
@@ -74,7 +75,7 @@ const CheckoutSuccess = () => {
 
             <p className="mt-12 pt-8 border-t border-border text-xs text-muted-foreground leading-relaxed">
               A receipt has been sent by our payment processor. For questions
-              about your enrollment, contact info@llbgroup.com.
+              about your enrollment, reach us through livinglifebalancedllb.com/book.
             </p>
           </div>
         </div>
