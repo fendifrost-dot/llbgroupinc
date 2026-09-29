@@ -11,6 +11,7 @@ import {
 import { EnrollButton } from "@/components/course/EnrollButton";
 import { CourseCard } from "@/components/course/CourseCard";
 import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
+import { CourseShowcase } from "@/components/course/CourseShowcase";
 import {
   BUNDLE,
   COURSES,
@@ -47,7 +48,9 @@ const CourseSales = () => {
   const eyebrow = isBundle ? BUNDLE.eyebrow : content!.eyebrow;
   const priceCents = product?.price_cents ?? (isBundle ? BUNDLE.priceCents : content!.priceCents);
   const productSlug = isBundle ? BUNDLE.productSlug : content!.productSlug;
-  const trailerUrl = publicStorageUrl(course?.trailer_url);
+  // The database trailer wins once the backend is live; until then the
+  // catalog can point at a file shipped in public/.
+  const trailerUrl = publicStorageUrl(course?.trailer_url) ?? content?.trailerSrc ?? null;
 
   return (
     <Layout>
@@ -92,29 +95,24 @@ const CourseSales = () => {
         </div>
       </section>
 
-      {/* 2. Trailer — public, no autoplay */}
+      {/* 2. Trailer and program overview. Never a placeholder. */}
       {!isBundle && (
         <section className="py-20 lg:py-28">
           <div className="section-container">
-            <div className="max-w-4xl mx-auto">
-              {trailerUrl ? (
-                <video
-                  controls
-                  preload="metadata"
-                  playsInline
-                  className="w-full rounded-sm border border-border bg-card"
-                  aria-label={`${title} program overview`}
-                >
-                  <source src={trailerUrl} type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
-              ) : (
-                <div className="aspect-video w-full rounded-sm border border-border bg-card flex items-center justify-center">
-                  <p className="text-sm text-muted-foreground">
-                    Program overview coming shortly.
-                  </p>
-                </div>
-              )}
+            <div className="max-w-5xl mx-auto">
+              <CourseShowcase
+                title={title}
+                subtitle={subtitle}
+                modules={curriculum}
+                trailerSrc={trailerUrl}
+                cta={
+                  <EnrollButton
+                    productSlug={productSlug}
+                    productId={product?.id}
+                    courseSlug={slug}
+                  />
+                }
+              />
             </div>
           </div>
         </section>

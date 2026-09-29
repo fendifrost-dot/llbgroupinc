@@ -79,9 +79,20 @@ Once the records are in: Lovable → Project → Settings → Domains →
 
 `ALONZO BUSINESS/LLB/Video/LLB_C1_TRAILER_v4.mp4`
 
-Once the backend is on, it goes in the public `course-public` bucket as
-`trailers/LLB_C1_TRAILER_v1.mp4`. Alternatively, keep the v4 name and update
-`trailer_path` on the course row to match.
+**To show it now, without the backend:** add the file to the repo at
+`public/media/trailers/LLB_C1_TRAILER_v4.mp4`. The Balanced Living Blueprint
+sales page already points there and starts playing it on the next publish.
+Keep the file under 100 MB, which is GitHub's limit for a single file.
+
+Until a trailer exists, every course page shows a program overview in its
+place: the course title, what's included, and all six module titles, with an
+Enroll button. There is no "coming soon" placeholder. Justice Advocacy (C2)
+and Faith Over Fear (C3) have no trailer yet.
+
+Once the backend is on, trailers can instead live in the public
+`course-public` bucket (`trailers/LLB_C{n}_TRAILER_v1.mp4`, or update
+`trailer_url` on the course row to match the file name). The database value
+takes priority over the file in the repo.
 
 ---
 

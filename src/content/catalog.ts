@@ -33,6 +33,8 @@ export interface CatalogEntry {
   outcomes: string[];
   modules: CatalogModuleContent[];
   faq: { question: string; answer: string }[];
+  /** Trailer shipped as a static file in public/, used until the backend serves one. */
+  trailerSrc?: string;
 }
 
 export const INCLUDED = [
@@ -52,6 +54,7 @@ export const COURSES: CatalogEntry[] = [
   {
     slug: "balanced-living-blueprint",
     productSlug: "balanced-living-blueprint",
+    trailerSrc: "/media/trailers/LLB_C1_TRAILER_v4.mp4",
     type: "course",
     eyebrow: "Wellness Education",
     title: "Balanced Living Blueprint",
