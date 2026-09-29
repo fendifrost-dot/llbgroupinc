@@ -15,7 +15,7 @@ publish. No code change is needed, so **only add image files**.
 
 Warm ivory `#E8DDCF`, blackened plum `#24151C`, antique brass `#B58A4A`.
 Headings in Cinzel (uppercase, semibold), body in Montserrat. Elegant and
-restrained. Match the mood of `public/images/hero-leaders.jpg`.
+restrained. Match the mood of the final program covers in `public/images/courses/`.
 
 ## Files
 
