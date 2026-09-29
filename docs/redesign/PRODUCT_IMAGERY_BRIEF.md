@@ -4,8 +4,9 @@
 > `public/images/courses/{balanced-living-blueprint,justice-advocacy,faith-based-transformation}.jpg`
 > (portrait 2:3), `public/images/courses/llb-complete.jpg` (16:9) and
 > `public/images/ebook/living-life-balanced.jpg` (portrait 2:3). The
-> sizes in the table below are superseded. The workbook spreads and the
-> trailer poster are still open.
+> sizes in the table below are superseded. The three workbook spreads are also in
+> place (`public/images/courses/<slug>-workbook.jpg`). Only the trailer
+> poster is still open; take it from a frame of the real trailer.
 
 The site already has a slot for each image below. A slot stays hidden until
 its file exists at the exact path, then the image appears on the next
