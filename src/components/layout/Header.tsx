@@ -25,7 +25,7 @@ export function Header() {
       <nav className="section-container flex items-center justify-between py-4 lg:py-5">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <span className="font-serif text-2xl font-semibold tracking-tight text-foreground">
+          <span className="font-serif text-2xl font-semibold tracking-[0.04em] text-foreground">
             LLB
           </span>
           <span className="hidden sm:inline text-xs text-muted-foreground tracking-widest uppercase">

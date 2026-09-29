@@ -56,7 +56,7 @@ export function LeadMagnetForm({
 
   return (
     <div className="p-8 bg-card border border-border rounded-sm">
-      <h3 className="font-serif text-xl font-bold text-foreground mb-3">{heading}</h3>
+      <h3 className="font-serif text-xl font-semibold text-foreground mb-3">{heading}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed mb-6">{body}</p>
 
       {downloadUrl ? (

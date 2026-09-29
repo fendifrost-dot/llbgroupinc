@@ -19,7 +19,7 @@ export function RequireAuth({ children }: { children: ReactNode }) {
       <Layout>
         <section className="py-32">
           <div className="section-container max-w-xl">
-            <h1 className="font-serif text-3xl font-bold text-foreground mb-4">
+            <h1 className="font-serif text-3xl font-semibold text-foreground mb-4">
               Not Yet Available
             </h1>
             <p className="text-muted-foreground leading-relaxed">

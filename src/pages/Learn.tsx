@@ -72,7 +72,7 @@ const Learn = () => {
             <p className="text-sm text-muted-foreground">Loading your programs…</p>
           ) : ownedCourses.length === 0 && !ownsEbook ? (
             <div className="max-w-2xl">
-              <h2 className="font-serif text-2xl lg:text-3xl font-bold text-foreground mb-4">
+              <h2 className="font-serif text-2xl lg:text-3xl font-semibold text-foreground mb-4">
                 No Programs Yet
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
@@ -107,7 +107,7 @@ const Learn = () => {
                   >
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                       <div className="flex-1">
-                        <h3 className="font-serif text-xl font-bold text-foreground mb-2">
+                        <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
                           {course.title}
                         </h3>
                         {course.subtitle && (
@@ -139,7 +139,7 @@ const Learn = () => {
               {ownsEbook && (
                 <div className="p-8 bg-card border border-border rounded-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   <div>
-                    <h3 className="font-serif text-xl font-bold text-foreground mb-2">
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
                       Living Life Balanced
                     </h3>
                     <p className="text-sm text-muted-foreground">

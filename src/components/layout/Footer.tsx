@@ -21,13 +21,13 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
+    <footer className="band-dark border-t border-border/20">
       <div className="section-container py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block">
-              <span className="font-serif text-2xl font-semibold tracking-tight text-foreground">
+              <span className="font-serif text-2xl font-semibold tracking-[0.04em] text-foreground">
                 LLB
               </span>
               <span className="ml-2 text-xs text-muted-foreground tracking-widest uppercase">

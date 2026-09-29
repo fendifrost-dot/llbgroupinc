@@ -28,7 +28,7 @@ export function PillarsSection() {
       <div className="section-container">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 lg:mb-20">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-6">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-foreground mb-6">
             What LLB Group Does
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -47,7 +47,7 @@ export function PillarsSection() {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Title */}
-              <h3 className="font-serif text-2xl lg:text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+              <h3 className="font-serif text-2xl lg:text-3xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                 {pillar.title}
               </h3>
               

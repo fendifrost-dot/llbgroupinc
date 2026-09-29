@@ -11,7 +11,7 @@ export function CTASection() {
           <div className="absolute top-0 left-12 right-12 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
           
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-6">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-foreground mb-6">
               Partner With LLB Group
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto">

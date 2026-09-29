@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,60 +7,62 @@
 
 @layer base {
   :root {
-    /* Dark palette: near-black #0b0b0b */
-    --background: 0 0% 4.3%;
-    --foreground: 0 0% 98%;
+    /* Sampled from livinglifebalancedllb.com on 29 Sep 2026.
+       Warm ivory ground, blackened plum ink, antique brass accent. */
+    --background: 33.6 35.2% 86.1%;        /* #E8DDCF warm ivory */
+    --foreground: 332 26.3% 11.2%;       /* #24151C blackened plum */
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;               /* white, 1px border, no shadow */
+    --card-foreground: 332 26.3% 11.2%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 332 26.3% 11.2%;
 
-    /* Antique brass accent #B58A4A - used sparingly */
+    /* Antique brass #B58A4A */
     --primary: 36 42% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary-foreground: 332 26.3% 11.2%;   /* plum text on brass, as Ken does */
 
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 85%;
+    --secondary: 33 45% 92%;         /* #F3EBE1 lighter ivory band */
+    --secondary-foreground: 332 26.3% 11.2%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 33 45% 92%;
+    --muted-foreground: 0 0% 32%;    /* #525252, readable on ivory */
 
-    --accent: 0 0% 14%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 351 53% 19%;           /* #4B171F oxblood */
+    --accent-foreground: 33.6 35.2% 86.1%;
 
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 62% 42%;
+    --destructive-foreground: 33.6 35.2% 86.1%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 16%;
+    --border: 33 30% 77%;            /* #D4C6B4 card hairline */
+    --input: 33 30% 77%;
     --ring: 36 42% 50%;
 
-    --radius: 0.25rem;
+    --radius: 0rem;                  /* Ken's build is square throughout */
 
     /* Typography */
-    --font-serif: 'Cinzel', Georgia, serif;
-    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --font-serif: 'Cinzel', 'Palatino Linotype', Palatino, serif;
+    --font-sans: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
 
-    /* Spacing scale */
+    /* Dark band, used for hero and footer only */
+    --band: 332 26.3% 11.2%;             /* #24151C */
+    --band-foreground: 33.6 35.2% 86.1%;
+
     --section-padding: clamp(4rem, 10vw, 8rem);
 
-    /* Gradients */
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 4.3%) 0%, hsl(0 0% 6%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 10%) 0%, hsl(0 0% 7%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(33.6 35.2% 86.1%) 0%, hsl(33 45% 92%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(33 45% 97%) 100%);
 
-    /* Shadows */
-    --shadow-elegant: 0 20px 60px -20px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 40px hsl(36 42% 50% / 0.1);
+    --shadow-elegant: none;
+    --shadow-glow: none;
 
-    --sidebar-background: 0 0% 8%;
-    --sidebar-foreground: 0 0% 85%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 332 26.3% 11.2%;
     --sidebar-primary: 36 42% 50%;
-    --sidebar-primary-foreground: 0 0% 4%;
-    --sidebar-accent: 0 0% 14%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 16%;
+    --sidebar-primary-foreground: 332 26.3% 11.2%;
+    --sidebar-accent: 33 45% 92%;
+    --sidebar-accent-foreground: 332 26.3% 11.2%;
+    --sidebar-border: 33 30% 77%;
     --sidebar-ring: 36 42% 50%;
   }
 
@@ -103,12 +105,30 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    font-weight: 700;
-    @apply tracking-tight;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;   /* his ratio: 3.11px on 77.76px, 1.44 on 36, 0.96 on 24 */
   }
 }
 
 @layer components {
+  /* Dark plum band. Ken uses this for the hero and the footer only,
+     against an otherwise warm-ivory page. */
+  .band-dark {
+    background-color: hsl(var(--band));
+    color: hsl(var(--band-foreground));
+  }
+  .band-dark h1, .band-dark h2, .band-dark h3,
+  .band-dark h4, .band-dark h5, .band-dark h6 {
+    color: hsl(var(--band-foreground));
+  }
+  /* muted-foreground is tuned for ivory; on plum it has to lift */
+  .band-dark .text-muted-foreground { color: hsl(33 22% 74%); }
+  .band-dark .text-foreground { color: hsl(var(--band-foreground)); }
+  .band-dark .border-border { border-color: hsl(33.6 35.2% 86.1% / 0.18); }
+  .band-dark .text-primary { color: hsl(var(--primary)); }
+
+
   .section-container {
     @apply max-w-7xl mx-auto px-6 lg:px-8;
   }
@@ -149,8 +169,9 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(0 0% 70%) 100%);
+    /* On the ivory ground the headline reads as solid plum, with the
+       accent carried by the eyebrow and the CTA rather than the type. */
+    color: hsl(var(--foreground));
   }
 }
 
@@ -173,3 +194,16 @@
     transform: translateY(0);
   }
 }
+
+
+/* --------------------------------------------------------------
+   Contrast corrections, outside @layer so they win over utilities.
+   True brass #B58A4A is only 2.3:1 on the ivory ground, which is
+   unreadable at eyebrow sizes. Brass TEXT on light darkens to
+   #7C5F2B (~5.2:1); buttons keep the exact brass fill, and inside
+   the dark plum band brass returns to its true value.
+   -------------------------------------------------------------- */
+.text-primary { color: hsl(36 48% 33%); }
+.band-dark .text-primary,
+.bg-primary .text-primary { color: hsl(var(--primary)); }
+.band-dark .text-foreground { color: hsl(var(--band-foreground)); }

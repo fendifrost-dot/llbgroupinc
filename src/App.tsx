@@ -22,6 +22,8 @@ import Learn from "./pages/Learn";
 import CoursePlayer from "./pages/CoursePlayer";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import CheckoutCancelled from "./pages/CheckoutCancelled";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -76,6 +78,10 @@ const App = () => (
                 </RequireAuth>
               }
             />
+
+            {/* Legal - linked from the footer on every page */}
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

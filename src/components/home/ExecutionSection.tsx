@@ -10,7 +10,7 @@ export function ExecutionSection() {
     <section className="py-20 lg:py-32">
       <div className="section-container">
         <div className="max-w-2xl mb-16">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground mb-6">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-foreground mb-6">
             Execution in Practice
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">

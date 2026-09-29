@@ -21,9 +21,27 @@ const Shop = () => {
   const ebookProduct = products?.find((product) => product.slug === EBOOK.productSlug);
   const { hash } = useLocation();
 
-  // The header's E-Book link lands here as /shop#ebook.
+  // The header's E-Book link lands here as /shop#ebook. On a client-side
+  // navigation the section is not laid out yet when this first runs, and the
+  // header is fixed, so scrollIntoView alone either no-ops or hides the
+  // heading behind the nav. Retry across a few frames, then offset.
   useEffect(() => {
-    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
+    if (!hash) return;
+    const id = hash.slice(1);
+    let frames = 0;
+    let raf = 0;
+    const HEADER_OFFSET = 96;
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+        window.scrollTo({ top, behavior: "smooth" });
+        return;
+      }
+      if (frames++ < 60) raf = requestAnimationFrame(tryScroll);
+    };
+    raf = requestAnimationFrame(tryScroll);
+    return () => cancelAnimationFrame(raf);
   }, [hash]);
 
   return (
@@ -38,7 +56,7 @@ const Shop = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">
               Self-Paced Programs
             </h2>
             <p className="text-muted-foreground leading-relaxed mt-4">
@@ -71,7 +89,7 @@ const Shop = () => {
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Complete Curriculum
               </p>
-              <h3 className="font-serif text-2xl font-bold text-foreground mb-3">
+              <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">
                 {BUNDLE.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-8">
@@ -93,7 +111,7 @@ const Shop = () => {
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">
                 Publication
               </p>
-              <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
+              <h3 className="font-serif text-2xl font-semibold text-foreground mb-1">
                 {EBOOK.title}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">{EBOOK.subtitle}</p>
@@ -124,7 +142,7 @@ const Shop = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground mb-6">
               Institutional Deployment
             </h2>
             <p className="text-muted-foreground leading-relaxed">

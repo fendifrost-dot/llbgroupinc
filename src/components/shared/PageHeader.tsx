@@ -6,7 +6,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ overline, title, description }: PageHeaderProps) {
   return (
-    <section className="py-20 lg:py-28 bg-card border-b border-border">
+    <section className="py-20 lg:py-28 band-dark border-b border-border/20">
       <div className="section-container">
         <div className="max-w-3xl">
           {overline && (
@@ -14,7 +14,7 @@ export function PageHeader({ overline, title, description }: PageHeaderProps) {
               {overline}
             </p>
           )}
-          <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-foreground">
+          <h1 className="fade-in-up stagger-1 font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-[0.04em] text-foreground">
             {title}
           </h1>
           {description && (

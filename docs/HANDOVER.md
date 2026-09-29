@@ -11,12 +11,18 @@ The course platform is merged into `main` and published by Lovable
 (Lovable's sync commit `cb7b126`, "Synced and published to main").
 Live preview: https://llbgroupinc.lovable.app
 
+The design matches livinglifebalancedllb.com: a warm ivory background
+(`#E8DDCF`), blackened plum text (`#24151C`), and antique brass buttons
+(`#B58A4A`). Headings are Cinzel 600 in uppercase and body text is
+Montserrat. A dark plum band is used for page headers and the footer.
+
 | Area | What's there |
 |---|---|
 | Corporate site | `/`, `/about`, `/consulting`, `/solutions`, `/events`, `/education`, `/media`, `/shop`, `/book` |
 | Course storefront | `/courses` (catalog) and `/courses/<slug>` (one sales page per course) |
 | Student area | `/signin`, `/account`, `/learn`, `/learn/<course>` (gated player) |
 | Checkout pages | `/checkout/success`, `/checkout/cancelled` |
+| Legal | `/privacy`, `/terms` (marked "pending legal review", see §4) |
 | Backend code | Database schema, row-level security, private storage buckets and catalog seed (`supabase/migrations/`), plus four edge functions: checkout, Stripe webhook, signed media URLs, lead magnet (`supabase/functions/`) |
 
 The backend isn't switched on yet (see §4). Until it is, the site runs in a
@@ -101,7 +107,9 @@ The full step-by-step is in `docs/COURSE_PLATFORM_SETUP.md`. In order:
    Stripe account decision in §5.
 
 Also needed before taking real payments:
-- `/privacy` and `/terms` are linked from the footer but have no pages.
+- `/privacy` and `/terms` exist and describe current practice, but they
+  show a "pending legal review" notice. Counsel must review them, and the
+  refund terms must be written. Don't remove the notice until then.
 - A refund doesn't remove the buyer's course access automatically. It has to
   be removed by hand.
 - The course copy (outcomes, FAQs, module summaries) is draft wording. It
@@ -130,12 +138,15 @@ block steps 3 and 8 above and the lead capture follow-up.
 
 ## 6. Open items on our side
 
-- **Live-site check pending.** Before publishing, the brand refresh and all
-  nine key routes were checked in a local browser against the production
-  build. Every route renders, headings compute to Cinzel 700, the background
-  is `#0b0b0b`, the nav leads with Courses and E-Book, Enroll shows
-  "enrollment is not open yet", and the console is clean. The same check on
-  the live Lovable URL still has to be run from a machine that can reach it.
+- **Live-site check pending.** All 20 routes were checked in a local
+  browser against the production build, and every one renders with no
+  console errors. The body is `rgb(232, 221, 207)` with `rgb(36, 21, 28)`
+  text. h1 is Cinzel 600, uppercase, 2.88px letter-spacing. The primary
+  buttons are brass `rgb(181, 138, 74)` with plum text. The E-Book link
+  lands on the e-book card, and Enroll says "Enrollment is not open yet.
+  Please check back shortly." The same check on the live URL has to be run
+  after **Publish → Publish changes** in Lovable, because syncing from
+  GitHub doesn't publish.
 - **Lovable security scan.** Lovable flags the scan as stale on the current
   commit, and it has to be re-run from the Lovable dashboard. For now, a
   dependency audit (`npm audit --omit=dev`) reports 12 known

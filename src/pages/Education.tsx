@@ -80,7 +80,7 @@ const Education = () => {
         <div className="section-container">
           {programs.map((category) => (
             <div key={category.type} className="mb-16 last:mb-0">
-              <h2 className="font-serif text-2xl lg:text-3xl font-bold text-foreground mb-8">
+              <h2 className="font-serif text-2xl lg:text-3xl font-semibold text-foreground mb-8">
                 {category.type}
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -89,7 +89,7 @@ const Education = () => {
                     key={item.title}
                     className="p-8 bg-card border border-border rounded-sm"
                   >
-                    <h3 className="font-serif text-xl font-bold text-foreground mb-4">
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-4">
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed mb-6">
@@ -117,7 +117,7 @@ const Education = () => {
       <section className="py-20 lg:py-28 bg-card border-y border-border">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">
               Self-Paced Programs
             </h2>
             <p className="text-muted-foreground leading-relaxed mt-4">
@@ -156,7 +156,7 @@ const Education = () => {
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
+              <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground mb-6">
                 Institutional Licensing
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
@@ -177,7 +177,7 @@ const Education = () => {
               </Button>
             </div>
             <div className="p-8 bg-background border border-border rounded-sm">
-              <h3 className="font-serif text-xl font-bold text-foreground mb-4">
+              <h3 className="font-serif text-xl font-semibold text-foreground mb-4">
                 Licensing Includes
               </h3>
               <ul className="space-y-3">
@@ -207,7 +207,7 @@ const Education = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground mb-6">
               Program Inquiries
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">

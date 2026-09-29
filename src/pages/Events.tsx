@@ -79,7 +79,7 @@ const Events = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">
               Engagement Types
             </h2>
           </div>
@@ -90,7 +90,7 @@ const Events = () => {
                 key={type.title}
                 className="p-8 bg-card border border-border rounded-sm"
               >
-                <h3 className="font-serif text-xl font-bold text-foreground mb-3">
+                <h3 className="font-serif text-xl font-semibold text-foreground mb-3">
                   {type.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -106,7 +106,7 @@ const Events = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">
               Speaking Topics
             </h2>
           </div>
@@ -117,7 +117,7 @@ const Events = () => {
                 key={topic.title}
                 className="p-6 bg-background border border-border rounded-sm"
               >
-                <h3 className="font-serif text-lg font-bold text-foreground mb-3">
+                <h3 className="font-serif text-lg font-semibold text-foreground mb-3">
                   {topic.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -133,7 +133,7 @@ const Events = () => {
       <section className="py-20 lg:py-28">
         <div className="section-container">
           <div className="max-w-2xl mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">
               Scheduled Appearances
             </h2>
             <p className="text-muted-foreground leading-relaxed mt-4">
@@ -156,7 +156,7 @@ const Events = () => {
                     })}
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-foreground">
+                    <h3 className="font-serif text-lg font-semibold text-foreground">
                       {event.title}
                     </h3>
                     <p className="text-sm text-muted-foreground">
@@ -177,7 +177,7 @@ const Events = () => {
       <section className="py-20 lg:py-28 bg-card">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground mb-6">
               Booking Inquiries
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">

@@ -95,7 +95,7 @@ const CoursePlayer = () => {
       <Layout>
         <section className="py-32">
           <div className="section-container max-w-xl">
-            <h1 className="font-serif text-3xl font-bold text-foreground mb-4">
+            <h1 className="font-serif text-3xl font-semibold text-foreground mb-4">
               Program Not Found
             </h1>
             <Button variant="hero-outline" asChild>
@@ -113,7 +113,7 @@ const CoursePlayer = () => {
         <section className="py-32">
           <div className="section-container max-w-xl">
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">Enrollment Required</p>
-            <h1 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground mb-4">
               {course.title}
             </h1>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -252,7 +252,7 @@ const CoursePlayer = () => {
                       Module {String(activeIndex + 1).padStart(2, "0")} ·{" "}
                       {formatDuration(activeModule.duration_seconds)}
                     </p>
-                    <h1 className="font-serif text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                    <h1 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground mb-4">
                       {activeModule.title}
                     </h1>
                     {activeModule.summary && (
