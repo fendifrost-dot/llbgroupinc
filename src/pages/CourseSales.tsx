@@ -23,7 +23,7 @@ import {
   PRICES_APPROVED,
 } from "@/content/catalog";
 import { useCourse, useCurriculum, useProduct } from "@/hooks/useCatalog";
-import { publicStorageUrl } from "@/integrations/supabase/client";
+import { publicStorageUrl } from "@/lib/supabase-app";
 import { EBOOK_MOCKUP, courseCover, courseWorkbook, trailerPoster } from "@/content/media";
 import { OptionalImage } from "@/components/shared/OptionalImage";
 import { useImageAvailable } from "@/hooks/useImageAvailable";

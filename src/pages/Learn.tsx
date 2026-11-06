@@ -8,18 +8,18 @@ import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/hooks/useAuth";
 import { useCourses, useProducts } from "@/hooks/useCatalog";
 import { requestMediaUrl, useEntitlements, useProgress } from "@/hooks/useEntitlements";
-import { supabase } from "@/integrations/supabase/client";
+import { db, isBackendConfigured } from "@/lib/supabase-app";
 import { useQuery } from "@tanstack/react-query";
-import type { CatalogModule } from "@/integrations/supabase/types";
+import type { CatalogModule } from "@/lib/course-types";
 
 /** Module rows for every course the student owns, used for the progress bars. */
 function useAllModules(courseIds: string[]) {
   return useQuery({
     queryKey: ["catalog", "modules-for", [...courseIds].sort().join(",")],
-    enabled: courseIds.length > 0 && Boolean(supabase),
+    enabled: courseIds.length > 0 && Boolean(isBackendConfigured),
     queryFn: async (): Promise<CatalogModule[]> => {
-      if (!supabase) return [];
-      const { data, error } = await supabase
+      if (!isBackendConfigured) return [];
+      const { data, error } = await db
         .from("catalog_modules")
         .select("*")
         .in("course_id", courseIds);

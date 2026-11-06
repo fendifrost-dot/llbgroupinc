@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import type { CatalogCourse, CatalogModule, CatalogProduct } from "@/integrations/supabase/types";
+import { db, isBackendConfigured } from "@/lib/supabase-app";
+import type { CatalogCourse, CatalogModule, CatalogProduct } from "@/lib/course-types";
 import { BUNDLE, COURSES, EBOOK, type CatalogEntry } from "@/content/catalog";
 
 /**
@@ -47,8 +47,8 @@ export function useProducts() {
   return useQuery({
     queryKey: ["catalog", "products"],
     queryFn: async (): Promise<CatalogProduct[]> => {
-      if (!supabase) return FALLBACK_PRODUCTS;
-      const { data, error } = await supabase
+      if (!isBackendConfigured) return FALLBACK_PRODUCTS;
+      const { data, error } = await db
         .from("catalog_products")
         .select("*")
         .order("sort", { ascending: true });
@@ -69,8 +69,8 @@ export function useCourse(slug: string | undefined) {
     queryKey: ["catalog", "course", slug],
     enabled: Boolean(slug),
     queryFn: async (): Promise<CatalogCourse | null> => {
-      if (!supabase || !slug) return null;
-      const { data, error } = await supabase
+      if (!isBackendConfigured || !slug) return null;
+      const { data, error } = await db
         .from("catalog_courses")
         .select("*")
         .eq("slug", slug)
@@ -86,8 +86,8 @@ export function useCourses() {
   return useQuery({
     queryKey: ["catalog", "courses"],
     queryFn: async (): Promise<CatalogCourse[]> => {
-      if (!supabase) return [];
-      const { data, error } = await supabase.from("catalog_courses").select("*");
+      if (!isBackendConfigured) return [];
+      const { data, error } = await db.from("catalog_courses").select("*");
       if (error) return [];
       return (data as CatalogCourse[]) ?? [];
     },
@@ -100,8 +100,8 @@ export function useModules(courseId: string | undefined) {
     queryKey: ["catalog", "modules", courseId],
     enabled: Boolean(courseId),
     queryFn: async (): Promise<CatalogModule[]> => {
-      if (!supabase || !courseId) return [];
-      const { data, error } = await supabase
+      if (!isBackendConfigured || !courseId) return [];
+      const { data, error } = await db
         .from("catalog_modules")
         .select("*")
         .eq("course_id", courseId)

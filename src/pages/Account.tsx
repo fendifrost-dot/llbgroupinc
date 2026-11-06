@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
-import { requireSupabase } from "@/integrations/supabase/client";
+import { requireSupabase } from "@/lib/supabase-app";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { useProducts } from "@/hooks/useCatalog";
 import { formatPrice } from "@/content/catalog";

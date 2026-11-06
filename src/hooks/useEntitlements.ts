@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { callFunction, supabase } from "@/integrations/supabase/client";
-import type { Entitlement, MediaKind, ProgressRow } from "@/integrations/supabase/types";
+import { callFunction, db, isBackendConfigured } from "@/lib/supabase-app";
+import type { Entitlement, MediaKind, ProgressRow } from "@/lib/course-types";
 import { useAuth } from "@/hooks/useAuth";
 
 /**
@@ -17,10 +17,10 @@ export function useEntitlements() {
   const { user } = useAuth();
   return useQuery({
     queryKey: ["entitlements", user?.id],
-    enabled: Boolean(user && supabase),
+    enabled: Boolean(user && isBackendConfigured),
     queryFn: async (): Promise<Entitlement[]> => {
-      if (!supabase || !user) return [];
-      const { data, error } = await supabase
+      if (!isBackendConfigured || !user) return [];
+      const { data, error } = await db
         .from("entitlements")
         .select("id, user_id, product_id, source_purchase, created_at");
       if (error) throw error;
@@ -43,10 +43,10 @@ export function useProgress() {
   const { user } = useAuth();
   return useQuery({
     queryKey: ["progress", user?.id],
-    enabled: Boolean(user && supabase),
+    enabled: Boolean(user && isBackendConfigured),
     queryFn: async (): Promise<ProgressRow[]> => {
-      if (!supabase || !user) return [];
-      const { data, error } = await supabase
+      if (!isBackendConfigured || !user) return [];
+      const { data, error } = await db
         .from("progress")
         .select("user_id, module_id, completed_at");
       if (error) throw error;
@@ -61,13 +61,13 @@ export function useToggleProgress() {
 
   return useMutation({
     mutationFn: async ({ moduleId, completed }: { moduleId: string; completed: boolean }) => {
-      if (!supabase || !user) throw new Error("Not signed in");
+      if (!isBackendConfigured || !user) throw new Error("Not signed in");
       if (completed) {
         // ignoreDuplicates => ON CONFLICT DO NOTHING, which needs only INSERT.
         // A DO UPDATE upsert would require an UPDATE grant and an UPDATE
         // policy that progress deliberately does not have — and re-marking a
         // module complete is a no-op anyway.
-        const { error } = await supabase
+        const { error } = await db
           .from("progress")
           .upsert(
             { user_id: user.id, module_id: moduleId },
@@ -75,7 +75,7 @@ export function useToggleProgress() {
           );
         if (error) throw error;
       } else {
-        const { error } = await supabase
+        const { error } = await db
           .from("progress")
           .delete()
           .eq("user_id", user.id)
@@ -107,7 +107,7 @@ export function useMediaUrl(request: MediaRequest | null) {
   const { user } = useAuth();
   return useQuery({
     queryKey: ["media-url", request?.kind, request?.moduleId ?? request?.courseSlug, user?.id],
-    enabled: Boolean(request && user && supabase),
+    enabled: Boolean(request && user && isBackendConfigured),
     // Signed URLs live 30 minutes; refetch comfortably inside that window.
     staleTime: 20 * 60 * 1000,
     retry: false,

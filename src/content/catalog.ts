@@ -12,7 +12,7 @@
  * §0.3: warmer than the corporate pages, still dignified. No hype, no emojis.
  */
 
-import type { ProductType } from "@/integrations/supabase/types";
+import type { ProductType } from "@/lib/course-types";
 
 export interface CatalogModuleContent {
   sort: number;

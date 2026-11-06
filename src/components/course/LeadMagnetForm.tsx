@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { callFunction, isBackendConfigured } from "@/integrations/supabase/client";
+import { callFunction, isBackendConfigured } from "@/lib/supabase-app";
 
 interface LeadMagnetFormProps {
   /** Recorded on the lead row so Fendi can see which surface converted. */

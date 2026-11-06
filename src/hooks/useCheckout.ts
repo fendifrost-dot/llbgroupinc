@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { callFunction, isBackendConfigured } from "@/integrations/supabase/client";
+import { callFunction, isBackendConfigured } from "@/lib/supabase-app";
 import { PRICES_APPROVED } from "@/content/catalog";
 
 /**
