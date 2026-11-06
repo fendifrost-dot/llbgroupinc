@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 
 /**
- * Handoff §4.3. Entitlements are granted by the webhook, not here — this page
- * only reports and invalidates the cached entitlement list so a signed-in
- * buyer sees their new program without a hard refresh.
+ * Stripe Embedded Checkout returns here with ?session_id=... Entitlements are
+ * granted by payments-webhook, not here; this page only reports and refetches
+ * the cached entitlement list so a signed-in buyer sees their new program
+ * without a hard refresh.
  */
 const CheckoutSuccess = () => {
   const { user } = useAuth();
@@ -18,13 +19,17 @@ const CheckoutSuccess = () => {
 
   useEffect(() => {
     if (!user) return;
-    // Stripe redirects the buyer back at roughly the same moment it delivers
-    // the webhook, so refetch once immediately and once after a short delay.
+    // Stripe returns the buyer at roughly the same moment it delivers the
+    // webhook that grants access, so refetch every two seconds for a while.
     const invalidate = () =>
       queryClient.invalidateQueries({ queryKey: ["entitlements", user.id] });
     invalidate();
-    const timer = window.setTimeout(invalidate, 4000);
-    return () => window.clearTimeout(timer);
+    const interval = window.setInterval(invalidate, 2000);
+    const stop = window.setTimeout(() => window.clearInterval(interval), 30000);
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(stop);
+    };
   }, [user, queryClient]);
 
   return (

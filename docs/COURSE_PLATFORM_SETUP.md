@@ -4,8 +4,11 @@ Everything in this repo is code. Nothing here is live yet. This document lists
 the steps that must happen **outside** the repo — in Lovable, in Supabase, and
 in Stripe — and who has to do them.
 
-Stripe stays in **TEST MODE** throughout. No live keys are needed to complete
-sections 1–5, and no live keys should be entered until section 7.
+Stripe is **Lovable Payments** (Lovable's managed Stripe account) in **test
+mode**. There is no Stripe secret key to enter anywhere; sections 3, 4, 5 and
+7 below describe the original own-keys plan and are superseded by the
+"Lovable Payments" notes inside each. Go-live happens in Lovable's Payments
+tab (section 7).
 
 ---
 
@@ -13,8 +16,8 @@ sections 1–5, and no live keys should be entered until section 7.
 
 | Piece | Status |
 |---|---|
-| Schema, RLS, storage buckets, seed | Written as migrations, **not yet applied** |
-| Edge functions | Written, **not yet deployed** |
+| Schema, RLS, storage buckets, seed | **Applied 6 Nov 2026** through Lovable's SQL access |
+| Edge functions | Rewritten for Lovable Payments 6 Nov 2026; Lovable deploys them from the repo |
 | Storefront, player, auth UI | Built and building cleanly |
 | Lovable Cloud (Supabase) backend | **Enabled 8 Oct 2026** (ref `wqxmggowtlapqeaomdxg`), schema still empty |
 | Stripe products / prices | **Created 6 Nov 2026 in Lovable's built-in Payments account (test mode)**, no images, not connected to the site. See `CLAUDE_AGENT_HANDOFF.md` §0. |
@@ -61,9 +64,14 @@ trip it: there are no `SECURITY DEFINER` views (the catalog views use
 
 ---
 
-## 3. Create the Stripe products (Fendi — Stripe dashboard, TEST mode)
+## 3. Stripe products (done by Lovable Payments, 6 Nov 2026)
 
-In **test mode**, create one product and one one-time price per row:
+**Lovable Payments note:** the products and prices below already exist in
+the test environment with lookup keys `<slug with underscores>_onetime`,
+and `products.stripe_price_id` holds those keys. Nothing to paste. The SQL
+below is kept for a rebuild.
+
+In **test mode**, one product and one one-time price per row:
 
 | Product slug | Product | Price |
 |---|---|---|
@@ -90,9 +98,10 @@ URLs on the published origin:
 | LLB Complete Bundle | `https://llbgroupinc.lovable.app/images/courses/llb-complete.jpg` |
 | Living Life Balanced (e-book) | `https://llbgroupinc.lovable.app/images/ebook/living-life-balanced.jpg` |
 
-When `create-checkout` falls back to an inline price (no `stripe_price_id`
-yet) it sends the same cover itself, so the checkout page is never
-image-less on that path.
+`create-checkout` sets the image on the Stripe product automatically the
+first time a product is bought in an environment, using the cover on the
+origin that served the page, so no manual step is needed once the site is
+published.
 
 Then paste the test price ids in:
 
@@ -114,13 +123,16 @@ decision; section 7 does.
 
 ---
 
-## 4. Set the secrets (Fendi — Lovable / Supabase edge function secrets)
+## 4. Secrets
+
+**Lovable Payments note:** Lovable sets `STRIPE_SANDBOX_API_KEY`,
+`PAYMENTS_SANDBOX_WEBHOOK_SECRET` and `LOVABLE_API_KEY` itself, and adds
+`STRIPE_LIVE_API_KEY` and `PAYMENTS_LIVE_WEBHOOK_SECRET` at go-live. The
+only secret set by hand is:
 
 | Secret | Value | Notes |
 |---|---|---|
-| `STRIPE_SECRET_KEY` | `sk_test_...` | **Test key.** Never in the repo, never client-side. |
-| `STRIPE_WEBHOOK_SECRET` | `whsec_...` | From the webhook endpoint created in section 5. |
-| `SITE_URL` | `https://llbgroupinc.com` (or the Lovable preview URL) | Used for the password-set link in the invite email. |
+| `SITE_URL` | `https://llbgroupinc.lovable.app`, later `https://learn.livinglifebalancedllb.com` | Used for the password-set link in the invite email. |
 
 `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are
 injected automatically. The service role key is used only inside edge
@@ -130,15 +142,13 @@ functions and must never reach the browser.
 
 ## 5. Deploy the functions and register the webhook (Fendi)
 
-1. Redeploy edge functions from Lovable. Four functions:
-   `create-checkout`, `stripe-webhook`, `get-media-url`, `lead-magnet`.
-   `supabase/config.toml` already sets `verify_jwt` correctly for each.
-2. In Stripe (test mode) → Developers → Webhooks → add endpoint:
-   `https://<project-ref>.supabase.co/functions/v1/stripe-webhook`
-3. Subscribe to: `checkout.session.completed`,
-   `checkout.session.async_payment_succeeded`,
-   `checkout.session.async_payment_failed`, `charge.refunded`.
-4. Copy the signing secret into `STRIPE_WEBHOOK_SECRET` and redeploy.
+**Lovable Payments note:** Lovable deploys the four functions
+(`create-checkout`, `payments-webhook`, `get-media-url`, `lead-magnet`) from
+the repo on sync, and it already registered the webhook endpoint
+`https://wqxmggowtlapqeaomdxg.supabase.co/functions/v1/payments-webhook?env=sandbox`
+in Stripe with the checkout and subscription events. `charge.refunded` is
+not in the default set; ask Lovable to add it if refund status should
+reach the `purchases` table. Nothing else to do here.
 
 ---
 
@@ -161,25 +171,31 @@ erroring.
 
 ## 7. Going live (Fendi only — do this last)
 
-1. Confirm final prices with Alonzo.
-2. Decide the Stripe account (the parked question in section 3).
-3. Create the same products/prices in Stripe **live** mode.
-4. Replace `STRIPE_SECRET_KEY` with the live key, create a live webhook
-   endpoint, and replace `STRIPE_WEBHOOK_SECRET` with its signing secret.
-5. Update `stripe_price_id` on the five product rows to the live price ids.
-6. Redeploy edge functions.
+In Lovable, **Payments tab → Live**:
 
-No application code changes at any point in this step. Purchases carry a
-`livemode` flag so test and live rows are distinguishable.
+1. Claim the Stripe account (create a Stripe login or link an existing one).
+2. Activate it in Stripe: business details, payout bank account, two-step
+   login. When Stripe asks what to copy, copy everything including the
+   Lovable app.
+3. Lovable then creates the live keys and the `?env=live` webhook, stores
+   the live secrets and writes `.env.production` with the `pk_live_` token.
+4. Publish. Products and prices sync to live by lookup key.
+
+No application code changes. Purchases carry a `livemode` flag so test and
+live rows are distinguishable. Check that the product images carried over
+to live; if not, the first live purchase of each product sets them again.
 
 ---
 
 ## Acceptance test script (test mode)
 
-Use Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC.
+Use Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC, in
+the **Lovable preview** (the published site has no payments token until
+go-live). Checkout opens in a dialog on the page; closing it is the cancel
+path.
 
 1. **Signed-out purchase.** Open `/courses/balanced-living-blueprint` → Enroll
-   Now → pay. Expect: redirect to `/checkout/success` with the "check your
+   Now → pay. Expect: return to `/checkout/success` with the "check your
    email" copy; an invite email arrives; a `purchases` row with `status='paid'`
    and one `entitlements` row.
 2. **Bundle fan-out.** Buy `llb-complete`. Expect **four** entitlement rows —
@@ -188,6 +204,7 @@ Use Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC.
    attach to the existing user via `client_reference_id`, with no second account.
 4. **Idempotency.** Resend the `checkout.session.completed` event from the
    Stripe dashboard. Expect no duplicate purchase and no duplicate entitlement.
+   Also check the Stripe product now has the cover image set.
 5. **Gating.** Signed out, open `/learn` → redirected to `/signin`. Signed in
    without an entitlement, open `/learn/justice-advocacy` → "Enrollment
    Required", and the video element never receives a source.

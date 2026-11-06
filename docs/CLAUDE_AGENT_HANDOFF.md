@@ -43,34 +43,57 @@ to `src/content/catalog.ts` (`7e6e320`) and wrote `VITE_PAYMENTS_CLIENT_TOKEN`
 (a Stripe publishable key, `pk_test_...`) into `.env.development`. Nothing in
 the app reads that token yet.
 
-**The site is not connected to any of it.** `useCheckout` calls the
-`create-checkout` edge function, which needs `STRIPE_SECRET_KEY` and the
-`products` table; neither exists. `PRICES_APPROVED` was turned on on 6 Nov
-after the prices were approved, so prices now show and the Enroll buttons
-call `create-checkout`. The lead-magnet form
-now reaches a deployed-but-tableless backend and fails with a toast, because
-`isBackendConfigured` is true. Decide one of two paths before any Stripe
-work:
+**Checkout is wired to Lovable Payments (6 Nov, evening).** The site now
+uses Lovable's managed Stripe account through its connector gateway; the
+repo holds no Stripe secret key and never will. The moving parts:
 
-1. **Keep the repo's checkout** (edge functions, webhook, entitlements, all
-   written and reviewed). Needs a Stripe account whose **secret key** you
-   hold. Lovable's managed account may not expose one; if it does not, this
-   path means a directly owned Stripe account (the §4.6 "account holder"
-   decision). Then: apply the migrations, set the secrets, deploy, register
-   the webhook, paste the price ids, run the acceptance script.
-2. **Switch to Lovable Payments.** Embedded checkout and webhooks are managed
-   by Lovable, but granting course access still has to be wired from
-   Lovable's purchase records into this app's `entitlements`, which means
-   new code that cannot be written without Lovable's Payments documentation
-   (`docs.lovable.dev` is blocked from this environment).
+| Piece | Where |
+|---|---|
+| Gateway client and webhook verification | `supabase/functions/_shared/stripe.ts` |
+| Checkout session (Embedded Checkout, `managed_payments` tax path) | `supabase/functions/create-checkout/index.ts` |
+| Purchase + entitlement writer (Stripe posts to `/functions/v1/payments-webhook?env=sandbox`, and `?env=live` after go-live) | `supabase/functions/payments-webhook/index.ts` |
+| Browser: publishable key, environment, Stripe.js | `src/lib/stripe.ts` |
+| Browser: checkout dialog, opened by `EnrollButton` through `useCheckout` | `src/components/course/CheckoutDialog.tsx` |
+| Product to price mapping | `products.stripe_price_id` holds the Payments **lookup key** (`<slug with underscores>_onetime`), same in test and live |
+
+The old `stripe-webhook` function (own secret key, redirect checkout) is
+deleted. Secrets are set by Lovable: `STRIPE_SANDBOX_API_KEY`,
+`PAYMENTS_SANDBOX_WEBHOOK_SECRET`, `LOVABLE_API_KEY`, and the `_LIVE_`
+pair at go-live. `SITE_URL` is still ours to set (the invite email's link).
+`supabase/config.toml` turns off the gateway JWT check for all four
+functions; each one authenticates its caller itself.
+
+**Database: migrations applied, catalog seeded (6 Nov).** All five
+migrations ran through Lovable's SQL access in order: nine tables, three
+views, three buckets, five products with lookup keys, three courses,
+eighteen modules, four bundle items, and the three helper functions.
+`supabase/migrations/` is now the record of what is live, not a to-do.
+
+**Guest checkout is kept.** A signed-in buyer is attached to a Stripe
+Customer tagged with their user id; a guest is resolved by email in the
+webhook, which invites them (set-password email) or creates the account.
+
+**Environments.** The browser picks `sandbox` or `live` from the prefix of
+`VITE_PAYMENTS_CLIENT_TOKEN`. Lovable writes the `pk_test_` key to
+`.env.development` (the preview) and the `pk_live_` key to
+`.env.production` at go-live. Until go-live the **published site has no
+token**, so Enroll shows "Checkout is not available on this site yet";
+test purchases are made in the Lovable preview. Go-live is done in Lovable's
+Payments tab (claim the Stripe account, activate it, publish); no code
+changes.
+
+**Not done yet, in order:** (1) the acceptance test in
+`docs/COURSE_PLATFORM_SETUP.md`, which needs a browser on the preview;
+(2) Stripe go-live in the Payments tab; (3) `SITE_URL`; (4) course media
+uploads; (5) the membership product has no page and its subscription events
+are logged and ignored by the webhook.
 
 **Product images in Stripe.** The site's price layouts already show every
-cover. `create-checkout` now passes the cover URL to Stripe Checkout when it
-builds an inline price (`images` on `product_data`). For the Lovable
-Payments products, images are set through Lovable's payments tools only;
-the covers must first be reachable on the published site, e.g.
-`https://llbgroupinc.lovable.app/images/courses/balanced-living-blueprint.jpg`
-(or the learn domain once live).
+cover. Lovable's payments tools cannot set a product image, so
+`create-checkout` sets it on the Stripe product itself the first time a
+product is bought in an environment (`products.update` with the cover URL on
+the serving origin). The cover must be public over https, which the
+published site provides.
 
 **SEO/GEO.** `src/seo/` holds the route metadata, JSON-LD, sitemap, robots
 and llms.txt builders; `plugins/seo-pages.ts` writes a static HTML shell per

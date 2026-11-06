@@ -4,6 +4,10 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
 import { MAIN_SITE_BOOK } from "@/content/site";
 
+/**
+ * Embedded Checkout has no cancel redirect (closing the dialog is the cancel
+ * path), so this page is only reached by a direct link. Kept for that.
+ */
 const CheckoutCancelled = () => (
   <Layout>
     <PageHeader

@@ -1,43 +1,38 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { callFunction, isBackendConfigured } from "@/lib/supabase-app";
+import { isBackendConfigured } from "@/lib/supabase-app";
+import { isCheckoutConfigured } from "@/lib/stripe";
 import { PRICES_APPROVED } from "@/content/catalog";
+import { MAIN_SITE_BOOK } from "@/content/site";
 
 /**
- * Starts a Stripe Checkout session and hands the browser to Stripe.
- *
- * The client sends a product slug and nothing else — no price, no price id.
- * create-checkout reprices from the products table, so this call cannot be
- * tampered into a discount.
+ * Opens Stripe Embedded Checkout for a product (CheckoutDialog). The client
+ * names a product slug and nothing else: create-checkout reprices from the
+ * products table, so this cannot be tampered into a discount.
  */
 export function useCheckout() {
-  const [pendingSlug, setPendingSlug] = useState<string | null>(null);
+  const [checkoutSlug, setCheckoutSlug] = useState<string | null>(null);
 
-  async function startCheckout(productSlug: string) {
-    // Unapproved prices never reach checkout. create-checkout enforces the
-    // same rule server-side for live Stripe keys.
+  function startCheckout(productSlug: string) {
     if (!isBackendConfigured || !PRICES_APPROVED) {
       toast.error("Enrollment is not open yet. Please check back shortly.");
       return;
     }
-
-    setPendingSlug(productSlug);
-    try {
-      const { url } = await callFunction<{ url: string }>("create-checkout", {
-        productSlug,
-        successUrl: "/checkout/success",
-        cancelUrl: "/checkout/cancelled",
-      });
-      if (!url) throw new Error("No checkout URL returned");
-      window.location.href = url;
-    } catch (error) {
-      console.error("checkout failed", error);
+    if (!isCheckoutConfigured) {
+      // A build without VITE_PAYMENTS_CLIENT_TOKEN: the published site before
+      // Stripe go-live in Lovable.
       toast.error(
-        "We could not open checkout. Please try again, or reach us through livinglifebalancedllb.com/book.",
+        `Checkout is not available on this site yet. Please reach us through ${MAIN_SITE_BOOK.replace("https://", "")}.`,
       );
-      setPendingSlug(null);
+      return;
     }
+    setCheckoutSlug(productSlug);
   }
 
-  return { startCheckout, pendingSlug, isPending: (slug: string) => pendingSlug === slug };
+  return {
+    startCheckout,
+    checkoutSlug,
+    closeCheckout: () => setCheckoutSlug(null),
+    isPending: (slug: string) => checkoutSlug === slug,
+  };
 }
