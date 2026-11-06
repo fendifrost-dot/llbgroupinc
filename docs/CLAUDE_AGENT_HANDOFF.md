@@ -76,18 +76,29 @@ webhook, which invites them (set-password email) or creates the account.
 
 **Environments.** The browser picks `sandbox` or `live` from the prefix of
 `VITE_PAYMENTS_CLIENT_TOKEN`. Lovable writes the `pk_test_` key to
-`.env.development` (the preview) and the `pk_live_` key to
-`.env.production` at go-live. Until go-live the **published site has no
-token**, so Enroll shows "Checkout is not available on this site yet";
-test purchases are made in the Lovable preview. Go-live is done in Lovable's
-Payments tab (claim the Stripe account, activate it, publish); no code
-changes.
+`.env.development` and the `pk_live_` key to `.env.production` at go-live.
+**Verified 6 Nov on the published site:** the course page renders with
+prices, Enroll opens the Stripe form, and the dialog says "Test mode: no
+real card is charged", so the published build currently carries the test
+token. Anyone can complete a test purchase there with card 4242 4242 4242
+4242 and receive a real entitlement; nothing is charged. Go-live is done in
+Lovable's Payments tab (claim the Stripe account, activate it, publish); no
+code changes. A build with no token at all shows "Checkout is not available
+on this site yet".
 
-**Not done yet, in order:** (1) the acceptance test in
-`docs/COURSE_PLATFORM_SETUP.md`, which needs a browser on the preview;
-(2) Stripe go-live in the Payments tab; (3) `SITE_URL`; (4) course media
-uploads; (5) the membership product has no page and its subscription events
-are logged and ignored by the webhook.
+**Verified through Lovable's agent (6 Nov):** all four functions deployed;
+`create-checkout` returned a client secret for all five products; all five
+Stripe products now carry their cover image; `charge.refunded` was added to
+the webhook; `/sitemap.xml`, `/robots.txt` and `/llms.txt` are served; the
+published course page shows prices and opens the Stripe form.
+
+**Not done yet, in order:** (1) the full acceptance test in
+`docs/COURSE_PLATFORM_SETUP.md` (a paid test purchase through to an
+entitlement, which needs a browser and a test card); (2) `SITE_URL` as an
+edge-function secret, set in Lovable (secrets cannot be set from here);
+(3) Stripe go-live in the Payments tab; (4) course media uploads; (5) the
+membership product has no page and its subscription events are logged and
+ignored by the webhook.
 
 **Product images in Stripe.** The site's price layouts already show every
 cover. Lovable's payments tools cannot set a product image, so
