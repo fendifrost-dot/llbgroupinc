@@ -1,14 +1,10 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Fallback for the dev server. The production build regenerates this file
+# with the correct Sitemap URL (plugins/seo-pages.ts, src/seo/static.ts).
 User-agent: *
 Allow: /
+Disallow: /account
+Disallow: /learn
+Disallow: /checkout/
+Disallow: /signin
+
+Sitemap: https://llbgroupinc.lovable.app/sitemap.xml

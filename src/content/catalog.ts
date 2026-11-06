@@ -169,6 +169,29 @@ export const BUNDLE = {
   savingsCents: 20000 * 3 + 1999 - 55000,
 };
 
+/** FAQ for the bundle page. Lives here so structured data and the page share it. */
+export const BUNDLE_FAQ = [
+  {
+    question: "Can I buy the programs individually instead?",
+    answer:
+      "Yes. Each program is available on its own. The bundle exists for people who want the full curriculum, and it costs less than the four purchases separately.",
+  },
+  {
+    question: "Do I have to take them in order?",
+    answer:
+      "No. The three programs are independent. Many participants start with Balanced Living Blueprint, but nothing requires it.",
+  },
+  {
+    question: "Is the e-book included?",
+    answer: "Yes. The bundle includes the Living Life Balanced e-book as a PDF download.",
+  },
+  {
+    question: "How long do I have access?",
+    answer:
+      "Lifetime access to everything in the bundle, including any future revisions to the material.",
+  },
+];
+
 export const EBOOK = {
   slug: "ebook-7-principles",
   productSlug: "ebook-7-principles",
@@ -185,11 +208,12 @@ export function findCourseContent(slug: string): CatalogEntry | undefined {
 }
 
 /**
- * The prices in this file and in the seed migration are placeholders that
- * have not been approved. Until Alonzo signs them off, no price is shown
- * anywhere on the site. Flip this to true once final prices are confirmed.
+ * Prices were approved on 6 Nov 2026 ($200 per course, $550 bundle, $19.99
+ * e-book) and match the seed migration and the Stripe catalog. With this on,
+ * every price shows on the site and checkout opens. Set it back to false to
+ * hide prices and close checkout without touching anything else.
  */
-export const PRICES_APPROVED = false;
+export const PRICES_APPROVED = true;
 
 export function formatPrice(cents: number): string {
   return `$${(cents / 100).toFixed(cents % 100 === 0 ? 0 : 2)}`;

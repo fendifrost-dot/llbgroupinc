@@ -7,6 +7,80 @@ first, then `docs/HANDOVER.md` (the client-facing handover) and
 
 ---
 
+## 0. Status update, 6 Nov 2026 (read before §3 and §4)
+
+Lovable has now done three things that §3 and §4 below still describe as
+pending. Those sections are kept for history; this section is current.
+
+**Backend is on.** Lovable Cloud was enabled on 8 Oct (project ref
+`wqxmggowtlapqeaomdxg`, in `supabase/config.toml`). The `public` schema is
+still **empty**: none of the five migrations in `supabase/migrations/` has
+been applied, so there are no `products`, `courses`, `purchases` or
+`entitlements` tables, no storage buckets, and the four edge functions have
+nothing to read. Enabling Cloud regenerated `src/integrations/supabase/
+client.ts` and `types.ts`; the hand-written helpers now live in
+`src/lib/supabase-app.ts` and `src/lib/course-types.ts`. The generated client
+throws at import time when `VITE_SUPABASE_URL` is missing, so a **local
+build needs a `.env.local`** with the two `VITE_SUPABASE_*` values (Lovable
+injects them in its own builds).
+
+**Stripe is Lovable's built-in Payments, not the repo's own keys.** On
+8 Oct Lovable enabled its managed Stripe account ("Lovable Payments",
+test mode, tax handling on). On 6 Nov it created these products and prices
+in that account:
+
+| Payments product id | Price id | Amount |
+|---|---|---|
+| `balanced_living_blueprint` | `balanced_living_blueprint_onetime` | $200.00 |
+| `justice_advocacy` | `justice_advocacy_onetime` | $200.00 |
+| `faith_based_transformation` | `faith_based_transformation_onetime` | $200.00 |
+| `llb_complete` | `llb_complete_onetime` | $550.00 |
+| `ebook_7_principles` | `ebook_7_principles_onetime` | $19.99 |
+| `llb_membership` (not on the site) | `llb_membership_monthly`, `llb_membership_yearly` | $39/month, $390/year |
+
+None of these products has an image. Lovable also committed the new prices
+to `src/content/catalog.ts` (`7e6e320`) and wrote `VITE_PAYMENTS_CLIENT_TOKEN`
+(a Stripe publishable key, `pk_test_...`) into `.env.development`. Nothing in
+the app reads that token yet.
+
+**The site is not connected to any of it.** `useCheckout` calls the
+`create-checkout` edge function, which needs `STRIPE_SECRET_KEY` and the
+`products` table; neither exists. `PRICES_APPROVED` was turned on on 6 Nov
+after the prices were approved, so prices now show and the Enroll buttons
+call `create-checkout`. The lead-magnet form
+now reaches a deployed-but-tableless backend and fails with a toast, because
+`isBackendConfigured` is true. Decide one of two paths before any Stripe
+work:
+
+1. **Keep the repo's checkout** (edge functions, webhook, entitlements, all
+   written and reviewed). Needs a Stripe account whose **secret key** you
+   hold. Lovable's managed account may not expose one; if it does not, this
+   path means a directly owned Stripe account (the §4.6 "account holder"
+   decision). Then: apply the migrations, set the secrets, deploy, register
+   the webhook, paste the price ids, run the acceptance script.
+2. **Switch to Lovable Payments.** Embedded checkout and webhooks are managed
+   by Lovable, but granting course access still has to be wired from
+   Lovable's purchase records into this app's `entitlements`, which means
+   new code that cannot be written without Lovable's Payments documentation
+   (`docs.lovable.dev` is blocked from this environment).
+
+**Product images in Stripe.** The site's price layouts already show every
+cover. `create-checkout` now passes the cover URL to Stripe Checkout when it
+builds an inline price (`images` on `product_data`). For the Lovable
+Payments products, images are set through Lovable's payments tools only;
+the covers must first be reachable on the published site, e.g.
+`https://llbgroupinc.lovable.app/images/courses/balanced-living-blueprint.jpg`
+(or the learn domain once live).
+
+**SEO/GEO.** `src/seo/` holds the route metadata, JSON-LD, sitemap, robots
+and llms.txt builders; `plugins/seo-pages.ts` writes a static HTML shell per
+public route at build time; `<Seo />` (mounted in `Layout`) keeps the head in
+step at runtime. The canonical origin at runtime is `window.location.origin`;
+the build uses `VITE_SITE_URL` or falls back to the lovable.app origin. Set
+`VITE_SITE_URL=https://learn.livinglifebalancedllb.com` in Lovable's
+environment at the domain switch. Course `offers` appear in JSON-LD only while
+`PRICES_APPROVED` is true.
+
 ## 1. What this project is, and isn't
 
 **It is the learn platform only**: course storefront, e-book, student
@@ -180,7 +254,9 @@ says student accounts are being prepared.
 ## 6. Verifying changes
 
 ```bash
-npm ci && npm run build        # ~1790 modules, must be clean
+npm ci && npm run build        # ~1790 modules, must be clean; the build also prints a [seo] line
+# A local build needs VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY
+# (any syntactically valid values) or the generated Supabase client throws.
 npx tsc --noEmit -p tsconfig.app.json
 npx eslint src                 # 2 pre-existing errors in ui/command.tsx and ui/textarea.tsx are known
 ```
@@ -188,8 +264,10 @@ npx eslint src                 # 2 pre-existing errors in ui/command.tsx and ui/
 For UI changes, serve the build and check it in headless Chromium:
 - `npx vite preview --host 127.0.0.1 --port 4173 --strictPort`. It needs
   `--host 127.0.0.1`, because IPv6 `::` fails in the cloud container.
-- `playwright-core` with `executablePath: '/opt/pw-browsers/chromium'`.
-  Don't run `playwright install`.
+- Playwright is preinstalled at `/opt/node-tools/node_modules/playwright`
+  (import it by that path). Don't run `playwright install`.
+- Full-page screenshots show lazy images below the fold as blank boxes;
+  scroll the page once before capturing, or check `naturalWidth` instead.
 - Check: every route renders; the console is clean (Google Fonts are
   blocked in the sandbox, so ignore font errors, and the page falls back
   to a serif font); every image in `main` has `naturalWidth > 0`; no `$`
