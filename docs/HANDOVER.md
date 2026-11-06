@@ -54,8 +54,8 @@ per program, $550 for the bundle, $19.99 for the e-book. Payments run
 through Lovable Payments (Lovable's managed Stripe account) in test mode;
 checkout opens in a dialog on the page. The backend is on and the course
 database is in place. Until Stripe go-live (§4 step 8) the published site
-shows "Checkout is not available on this site yet"; test purchases work in
-the Lovable preview. `PRICES_APPROVED` in `src/content/catalog.ts` hides
+runs in test mode: the checkout form says so, test card 4242 4242 4242 4242
+completes a purchase, and no real card is charged. `PRICES_APPROVED` in `src/content/catalog.ts` hides
 prices and closes checkout again if ever needed.
 
 ---

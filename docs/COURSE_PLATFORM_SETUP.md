@@ -189,8 +189,8 @@ to live; if not, the first live purchase of each product sets them again.
 
 ## Acceptance test script (test mode)
 
-Use Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC, in
-the **Lovable preview** (the published site has no payments token until
+Use Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC, on
+the published site or the Lovable preview (both are in test mode until
 go-live). Checkout opens in a dialog on the page; closing it is the cancel
 path.
 
