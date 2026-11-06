@@ -203,7 +203,9 @@ const CoursePlayer = () => {
               <label htmlFor="module-select" className="block text-sm text-foreground mb-2">
                 Module
               </label>
-              <Select value={activeModuleId ?? undefined} onValueChange={setActiveModuleId}>
+              {/* Always controlled: an empty string shows the placeholder until the
+                  autoresume effect picks a module. */}
+              <Select value={activeModuleId ?? ""} onValueChange={setActiveModuleId}>
                 <SelectTrigger id="module-select" className="bg-card border-border">
                   <SelectValue placeholder="Select a module" />
                 </SelectTrigger>
