@@ -49,19 +49,14 @@ They now return "page not found".
 **Imagery.** Final covers for the three programs, the bundle graphic and
 the e-book art are in `public/images/courses/` and `public/images/ebook/`.
 
-**Prices are hidden and checkout is blocked.** No price appears anywhere on
-the site until the figures are approved (§5), and the Enroll and Buy buttons
-say "Enrollment is not open yet." There are two settings, and both must be
-turned on after sign-off:
-1. `PRICES_APPROVED` in `src/content/catalog.ts`, which shows prices and
-   opens checkout on the site.
-2. The `PRICES_APPROVED` edge function secret, set to `true`. Until it is,
-   `create-checkout` refuses to charge anyone on a live Stripe key. Test
-   keys still work for the acceptance tests.
-
-The backend isn't switched on yet (§4). Until it is, every page still
-renders. The Enroll button shows "enrollment is not open yet", and `/learn`
-says student accounts are being prepared.
+**Prices and checkout (6 Nov 2026).** Prices are approved and shown: $200
+per program, $550 for the bundle, $19.99 for the e-book. Payments run
+through Lovable Payments (Lovable's managed Stripe account) in test mode;
+checkout opens in a dialog on the page. The backend is on and the course
+database is in place. Until Stripe go-live (§4 step 8) the published site
+shows "Checkout is not available on this site yet"; test purchases work in
+the Lovable preview. `PRICES_APPROVED` in `src/content/catalog.ts` hides
+prices and closes checkout again if ever needed.
 
 ---
 
@@ -148,22 +143,20 @@ takes priority over the file in the repo.
 
 The full step-by-step is in `docs/COURSE_PLATFORM_SETUP.md`. In order:
 
-1. **Turn on the backend.** Enable Lovable Cloud on the project. This
-   creates the database and connects the site to it.
-2. **Apply the five database migrations**, in filename order, in the SQL
-   editor. Then run Lovable's security scan and fix anything it flags.
-3. **Stripe products.** Create the five products and prices in Stripe
-   **test** mode and link their price IDs to the database. This depends on
-   the pricing decision in §5.
-4. **Secrets.** Set `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` and
-   `SITE_URL` as edge function secrets.
-5. **Deploy and connect Stripe.** Deploy the four edge functions and
-   register the Stripe webhook.
+1. ~~Turn on the backend.~~ Done 8 Oct.
+2. ~~Apply the five database migrations.~~ Done 6 Nov. Run Lovable's
+   security scan and fix anything it flags.
+3. ~~Stripe products.~~ Created in Lovable Payments 6 Nov.
+4. **Secrets.** Set `SITE_URL` as an edge function secret (the rest are set
+   by Lovable Payments).
+5. ~~Deploy and connect Stripe.~~ Lovable deploys the functions from the
+   repo and registered the webhook.
 6. **Upload course media** (video, audio, workbooks, e-book) as the video
    pipeline delivers it.
-7. **Run the acceptance test script** at the end of the setup doc.
-8. **Go live:** switch to live Stripe keys and prices. This depends on the
-   Stripe account decision in §5.
+7. **Run the acceptance test script** at the end of the setup doc, in the
+   Lovable preview.
+8. **Go live:** Payments tab → Live in Lovable: claim and activate the
+   Stripe account, then publish.
 
 Also needed before taking real payments:
 - `/privacy` and `/terms` exist and describe current practice, but they
@@ -185,9 +178,9 @@ block steps 3 and 8 above and the lead capture follow-up.
 1. **Approved pricing.** The prices now in the catalog and in the Stripe test
    account are $200 per course, $550 for the bundle and $19.99 for the
    e-book, approved 6 Nov 2026 and now shown on the site.
-2. **Stripe account holder.** Decide whose Stripe account the money goes to:
-   LLB Group, Inc. or another holder. Live keys, live products and the live
-   webhook all come from that account.
+2. **Stripe account holder.** The Lovable Payments account must be claimed
+   and activated by whoever receives the money (LLB Group, Inc. or another
+   holder) at go-live.
 3. **HubSpot vs GoHighLevel.** Decide which CRM receives leads and buyers.
    Until this is decided, leads from the chapter-one download form are
    stored in the database and exported by hand. No CRM connection has been
@@ -200,7 +193,7 @@ block steps 3 and 8 above and the lead capture follow-up.
    project's `/privacy` and `/terms`, limited to accounts, purchases and
    course access, or link to the main site's pages instead.
 6. **Where the e-book sells.** The 31 Aug plan puts e-books on Shopify.
-   This project can also sell it through Stripe. Pick one; the other path
+   This project sells it through Stripe today. Pick one; the other path
    comes out.
 
 ---

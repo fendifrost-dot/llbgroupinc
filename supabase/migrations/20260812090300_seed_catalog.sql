@@ -2,8 +2,10 @@
 -- Handoff §2. Prices mirror src/content/catalog.ts and the Lovable Payments
 -- catalog as of 6 Nov 2026 ($200 per course, $550 bundle, $19.99 e-book).
 -- Keep the three in step: the database is authoritative once it is applied.
--- stripe_price_id is intentionally NULL: Fendi creates the Stripe products and
--- pastes the price ids in (see docs/COURSE_PLATFORM_SETUP.md §3).
+-- stripe_price_id holds the Lovable Payments LOOKUP KEY for the product's
+-- one-time price (the same key in test and live), not a price_... id. The
+-- keys were created by Lovable on 6 Nov 2026; create-checkout resolves them
+-- through the gateway at purchase time.
 -- Media paths follow the video pipeline's LLB_C{n}_M{m}_v{v} naming convention
 -- and point at objects that do not exist yet — the player degrades gracefully
 -- until the assets land.
@@ -11,33 +13,34 @@
 -- ---------------------------------------------------------------------------
 -- Products
 -- ---------------------------------------------------------------------------
-insert into public.products (slug, title, subtitle, type, price_cents, sort) values
+insert into public.products (slug, title, subtitle, type, price_cents, stripe_price_id, sort) values
   ('balanced-living-blueprint',
    'Balanced Living Blueprint',
    'Overcoming Stress, Burnout & Self-Doubt',
-   'course', 20000, 1),
+   'course', 20000, 'balanced_living_blueprint_onetime', 1),
   ('justice-advocacy',
    'Justice Advocacy',
    'From Struggle to Strategy',
-   'course', 20000, 2),
+   'course', 20000, 'justice_advocacy_onetime', 2),
   ('faith-based-transformation',
    'Faith Over Fear',
    'Faith-Based Transformation',
-   'course', 20000, 3),
+   'course', 20000, 'faith_based_transformation_onetime', 3),
   ('llb-complete',
    'LLB Complete Bundle',
    'All three programs plus the e-book',
-   'bundle', 55000, 4),
+   'bundle', 55000, 'llb_complete_onetime', 4),
   ('ebook-7-principles',
    'Living Life Balanced',
    '7 Principles to Restore Faith, Purpose, and Wellness',
-   'download', 1999, 5)
+   'download', 1999, 'ebook_7_principles_onetime', 5)
 on conflict (slug) do update
-  set title       = excluded.title,
-      subtitle    = excluded.subtitle,
-      type        = excluded.type,
-      price_cents = excluded.price_cents,
-      sort        = excluded.sort;
+  set title           = excluded.title,
+      subtitle        = excluded.subtitle,
+      type            = excluded.type,
+      price_cents     = excluded.price_cents,
+      stripe_price_id = excluded.stripe_price_id,
+      sort            = excluded.sort;
 
 -- Bundle composition: all three courses + the e-book.
 insert into public.bundle_items (bundle_product_id, child_product_id)

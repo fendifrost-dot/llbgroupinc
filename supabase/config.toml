@@ -1,1 +1,17 @@
 project_id = "wqxmggowtlapqeaomdxg"
+
+# Every function checks its own caller: create-checkout and lead-magnet accept
+# signed-out visitors, get-media-url verifies the user's token itself, and
+# payments-webhook verifies Stripe's signature. Supabase's gateway JWT check
+# would reject the publishable-key and webhook calls, so it is off for all four.
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.payments-webhook]
+verify_jwt = false
+
+[functions.lead-magnet]
+verify_jwt = false
+
+[functions.get-media-url]
+verify_jwt = false

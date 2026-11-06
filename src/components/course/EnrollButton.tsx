@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CheckoutDialog } from "@/components/course/CheckoutDialog";
 import { useCheckout } from "@/hooks/useCheckout";
 import { useHasEntitlement } from "@/hooks/useEntitlements";
 import { useAuth } from "@/hooks/useAuth";
@@ -16,9 +17,9 @@ interface EnrollButtonProps {
 }
 
 /**
- * One button, three states: already own it, ready to buy, or purchase in
- * flight. The owned state is a rendering nicety — access itself is enforced by
- * RLS and the media edge function, not here.
+ * One button, three states: already own it, ready to buy, or checkout open.
+ * The owned state is a rendering nicety; access itself is enforced by RLS
+ * and the media edge function, not here.
  */
 export function EnrollButton({
   productSlug,
@@ -30,7 +31,7 @@ export function EnrollButton({
 }: EnrollButtonProps) {
   const { user } = useAuth();
   const { hasEntitlement } = useHasEntitlement(productId);
-  const { startCheckout, isPending } = useCheckout();
+  const { startCheckout, checkoutSlug, closeCheckout, isPending } = useCheckout();
 
   if (user && hasEntitlement) {
     return (
@@ -44,13 +45,24 @@ export function EnrollButton({
   }
 
   return (
-    <Button
-      variant={variant}
-      className={className}
-      disabled={isPending(productSlug)}
-      onClick={() => startCheckout(productSlug)}
-    >
-      {isPending(productSlug) ? "Opening checkout…" : label}
-    </Button>
+    <>
+      <Button
+        variant={variant}
+        className={className}
+        disabled={isPending(productSlug)}
+        onClick={() => startCheckout(productSlug)}
+      >
+        {isPending(productSlug) ? "Opening checkout…" : label}
+      </Button>
+      {checkoutSlug === productSlug && (
+        <CheckoutDialog
+          productSlug={productSlug}
+          open
+          onOpenChange={(open) => {
+            if (!open) closeCheckout();
+          }}
+        />
+      )}
+    </>
   );
 }
