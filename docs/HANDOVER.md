@@ -184,8 +184,7 @@ block steps 3 and 8 above and the lead capture follow-up.
 
 1. **Approved pricing.** The prices now in the catalog and in the Stripe test
    account are $200 per course, $550 for the bundle and $19.99 for the
-   e-book (set 6 Nov 2026). They stay hidden on the site until Alonzo
-   confirms every figure.
+   e-book, approved 6 Nov 2026 and now shown on the site.
 2. **Stripe account holder.** Decide whose Stripe account the money goes to:
    LLB Group, Inc. or another holder. Live keys, live products and the live
    webhook all come from that account.

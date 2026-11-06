@@ -45,8 +45,9 @@ the app reads that token yet.
 
 **The site is not connected to any of it.** `useCheckout` calls the
 `create-checkout` edge function, which needs `STRIPE_SECRET_KEY` and the
-`products` table; neither exists. `PRICES_APPROVED` is still `false`, so
-buyers see "Enrollment is not open yet" and no price. The lead-magnet form
+`products` table; neither exists. `PRICES_APPROVED` was turned on on 6 Nov
+after the prices were approved, so prices now show and the Enroll buttons
+call `create-checkout`. The lead-magnet form
 now reaches a deployed-but-tableless backend and fails with a toast, because
 `isBackendConfigured` is true. Decide one of two paths before any Stripe
 work:
@@ -77,8 +78,8 @@ public route at build time; `<Seo />` (mounted in `Layout`) keeps the head in
 step at runtime. The canonical origin at runtime is `window.location.origin`;
 the build uses `VITE_SITE_URL` or falls back to the lovable.app origin. Set
 `VITE_SITE_URL=https://learn.livinglifebalancedllb.com` in Lovable's
-environment at the domain switch. Course `offers` only appear in JSON-LD once
-`PRICES_APPROVED` is true, so no price is published anywhere before sign-off.
+environment at the domain switch. Course `offers` appear in JSON-LD only while
+`PRICES_APPROVED` is true.
 
 ## 1. What this project is, and isn't
 

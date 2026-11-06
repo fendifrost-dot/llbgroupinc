@@ -74,8 +74,8 @@ In **test mode**, create one product and one one-time price per row:
 | `ebook-7-principles` | Living Life Balanced (e-book) | $19.99 |
 
 > These are the figures Fendi gave Lovable on 6 Nov 2026 and they match
-> `src/content/catalog.ts` and the seed migration. `PRICES_APPROVED` stays
-> off until Alonzo signs them off. They live in the `products` table and can
+> `src/content/catalog.ts` and the seed migration. They were approved the same
+> day and `PRICES_APPROVED` is on. They live in the `products` table and can
 > be changed there without a code change.
 
 **Give every Stripe product an image.** Stripe Checkout shows the product

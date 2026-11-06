@@ -208,11 +208,12 @@ export function findCourseContent(slug: string): CatalogEntry | undefined {
 }
 
 /**
- * The prices in this file and in the seed migration are placeholders that
- * have not been approved. Until Alonzo signs them off, no price is shown
- * anywhere on the site. Flip this to true once final prices are confirmed.
+ * Prices were approved on 6 Nov 2026 ($200 per course, $550 bundle, $19.99
+ * e-book) and match the seed migration and the Stripe catalog. With this on,
+ * every price shows on the site and checkout opens. Set it back to false to
+ * hide prices and close checkout without touching anything else.
  */
-export const PRICES_APPROVED = false;
+export const PRICES_APPROVED = true;
 
 export function formatPrice(cents: number): string {
   return `$${(cents / 100).toFixed(cents % 100 === 0 ? 0 : 2)}`;
