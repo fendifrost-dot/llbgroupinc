@@ -16,8 +16,8 @@ sections 1–5, and no live keys should be entered until section 7.
 | Schema, RLS, storage buckets, seed | Written as migrations, **not yet applied** |
 | Edge functions | Written, **not yet deployed** |
 | Storefront, player, auth UI | Built and building cleanly |
-| Lovable Cloud (Supabase) backend | **Not enabled on this project yet** |
-| Stripe products / prices | **Not created yet** |
+| Lovable Cloud (Supabase) backend | **Enabled 8 Oct 2026** (ref `wqxmggowtlapqeaomdxg`), schema still empty |
+| Stripe products / prices | **Created 6 Nov 2026 in Lovable's built-in Payments account (test mode)**, no images, not connected to the site. See `CLAUDE_AGENT_HANDOFF.md` §0. |
 | Course media (video, audio, workbooks, e-book) | **Not delivered yet** — separate video pipeline |
 
 Until Lovable Cloud is enabled, the site runs in a degraded-but-safe mode: the
@@ -67,15 +67,32 @@ In **test mode**, create one product and one one-time price per row:
 
 | Product slug | Product | Price |
 |---|---|---|
-| `balanced-living-blueprint` | Balanced Living Blueprint | $127.00 |
-| `justice-advocacy` | Justice Advocacy | $127.00 |
-| `faith-based-transformation` | Faith Over Fear | $127.00 |
-| `llb-complete` | LLB Complete Bundle | $267.00 |
-| `ebook-7-principles` | Living Life Balanced (e-book) | $19.00 |
+| `balanced-living-blueprint` | Balanced Living Blueprint | $200.00 |
+| `justice-advocacy` | Justice Advocacy | $200.00 |
+| `faith-based-transformation` | Faith Over Fear | $200.00 |
+| `llb-complete` | LLB Complete Bundle | $550.00 |
+| `ebook-7-principles` | Living Life Balanced (e-book) | $19.99 |
 
-> **Prices are the handoff's placeholders. Confirm them with Alonzo before
-> launch.** They live in the `products` table and can be changed there without
-> a code change.
+> These are the figures Fendi gave Lovable on 6 Nov 2026 and they match
+> `src/content/catalog.ts` and the seed migration. `PRICES_APPROVED` stays
+> off until Alonzo signs them off. They live in the `products` table and can
+> be changed there without a code change.
+
+**Give every Stripe product an image.** Stripe Checkout shows the product
+image beside the price. Use the covers the site already serves, as absolute
+URLs on the published origin:
+
+| Product | Image URL (replace the origin with the learn domain once live) |
+|---|---|
+| Balanced Living Blueprint | `https://llbgroupinc.lovable.app/images/courses/balanced-living-blueprint.jpg` |
+| Justice Advocacy | `https://llbgroupinc.lovable.app/images/courses/justice-advocacy.jpg` |
+| Faith Over Fear | `https://llbgroupinc.lovable.app/images/courses/faith-based-transformation.jpg` |
+| LLB Complete Bundle | `https://llbgroupinc.lovable.app/images/courses/llb-complete.jpg` |
+| Living Life Balanced (e-book) | `https://llbgroupinc.lovable.app/images/ebook/living-life-balanced.jpg` |
+
+When `create-checkout` falls back to an inline price (no `stripe_price_id`
+yet) it sends the same cover itself, so the checkout page is never
+image-less on that path.
 
 Then paste the test price ids in:
 

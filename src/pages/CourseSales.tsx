@@ -14,6 +14,7 @@ import { LeadMagnetForm } from "@/components/course/LeadMagnetForm";
 import { CourseShowcase } from "@/components/course/CourseShowcase";
 import {
   BUNDLE,
+  BUNDLE_FAQ,
   COURSES,
   INCLUDED,
   INSTRUCTOR,
@@ -374,27 +375,5 @@ const CourseSales = () => {
     </Layout>
   );
 };
-
-const BUNDLE_FAQ = [
-  {
-    question: "Can I buy the programs individually instead?",
-    answer:
-      "Yes. Each program is available on its own. The bundle exists for people who want the full curriculum, and it costs less than the four purchases separately.",
-  },
-  {
-    question: "Do I have to take them in order?",
-    answer:
-      "No. The three programs are independent. Many participants start with Balanced Living Blueprint, but nothing requires it.",
-  },
-  {
-    question: "Is the e-book included?",
-    answer: "Yes. The bundle includes the Living Life Balanced e-book as a PDF download.",
-  },
-  {
-    question: "How long do I have access?",
-    answer:
-      "Lifetime access to everything in the bundle, including any future revisions to the material.",
-  },
-];
 
 export default CourseSales;

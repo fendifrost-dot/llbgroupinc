@@ -81,6 +81,17 @@ Deno.serve(async (req) => {
 
     // Prefer a real Stripe price id once Fendi has created them; fall back to
     // inline price_data so test-mode checkout works before that happens.
+    //
+    // Stripe Checkout shows the product image beside the price, so the inline
+    // product carries the same cover the site uses. Stripe fetches the image
+    // itself, so it has to be an absolute, public URL on the serving origin.
+    // When a stripe_price_id is used instead, the image comes from the Stripe
+    // product, which must be set in the Stripe dashboard.
+    const coverPath = product.type === "download"
+      ? "/images/ebook/living-life-balanced.jpg"
+      : `/images/courses/${product.slug}.jpg`;
+    const images = origin.startsWith("https://") ? [`${origin}${coverPath}`] : [];
+
     const lineItem = product.stripe_price_id
       ? { price: product.stripe_price_id, quantity: 1 }
       : {
@@ -91,6 +102,7 @@ Deno.serve(async (req) => {
           product_data: {
             name: product.title,
             description: product.subtitle ?? undefined,
+            images,
           },
         },
       };

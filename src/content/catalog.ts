@@ -169,6 +169,29 @@ export const BUNDLE = {
   savingsCents: 20000 * 3 + 1999 - 55000,
 };
 
+/** FAQ for the bundle page. Lives here so structured data and the page share it. */
+export const BUNDLE_FAQ = [
+  {
+    question: "Can I buy the programs individually instead?",
+    answer:
+      "Yes. Each program is available on its own. The bundle exists for people who want the full curriculum, and it costs less than the four purchases separately.",
+  },
+  {
+    question: "Do I have to take them in order?",
+    answer:
+      "No. The three programs are independent. Many participants start with Balanced Living Blueprint, but nothing requires it.",
+  },
+  {
+    question: "Is the e-book included?",
+    answer: "Yes. The bundle includes the Living Life Balanced e-book as a PDF download.",
+  },
+  {
+    question: "How long do I have access?",
+    answer:
+      "Lifetime access to everything in the bundle, including any future revisions to the material.",
+  },
+];
+
 export const EBOOK = {
   slug: "ebook-7-principles",
   productSlug: "ebook-7-principles",
