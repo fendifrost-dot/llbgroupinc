@@ -61,7 +61,7 @@ export const COURSES: CatalogEntry[] = [
     subtitle: "Overcoming Stress, Burnout & Self-Doubt",
     description:
       "A six-module program for high achievers and caregivers carrying more than they let on. Understand the root of burnout, rebuild the mindset underneath it, and leave with a written plan for a sustainable life.",
-    priceCents: 12700,
+    priceCents: 20000,
     outcomes: [
       "Identify what is actually driving your burnout, rather than managing its symptoms",
       "Interrupt the second thought — the one you can still choose",
@@ -95,7 +95,7 @@ export const COURSES: CatalogEntry[] = [
     subtitle: "From Struggle to Strategy",
     description:
       "A six-module program for returning citizens, grassroots leaders, and advocates. Turn lived experience into credibility, and credibility into policy change — with a campaign plan and templates you can use immediately.",
-    priceCents: 12700,
+    priceCents: 20000,
     outcomes: [
       "Tell your story as a credential rather than a confession",
       "Read how justice systems are actually structured, and where leverage exists",
@@ -129,7 +129,7 @@ export const COURSES: CatalogEntry[] = [
     subtitle: "Faith-Based Transformation",
     description:
       "A six-module, explicitly Christian program on rediscovering God-given identity, silencing fear and self-doubt, and building a faith-driven life plan that outlasts the season you are in.",
-    priceCents: 12700,
+    priceCents: 20000,
     outcomes: [
       "Build on a foundation that does not move with your circumstances",
       "Silence the voice that says you are disqualified",
@@ -165,8 +165,8 @@ export const BUNDLE = {
   subtitle: "All three programs plus the e-book",
   description:
     "The full curriculum: Balanced Living Blueprint, Justice Advocacy, and Faith Over Fear, together with the Living Life Balanced e-book. Eighteen lessons, three workbooks, lifetime access.",
-  priceCents: 26700,
-  savingsCents: 12700 * 3 + 1900 - 26700,
+  priceCents: 55000,
+  savingsCents: 20000 * 3 + 1999 - 55000,
 };
 
 export const EBOOK = {
@@ -177,7 +177,7 @@ export const EBOOK = {
   subtitle: "7 Principles to Restore Faith, Purpose, and Wellness",
   description:
     "The written foundation the programs are built on — seven principles for restoring balance across faith, purpose, and wellness. Delivered as a PDF download.",
-  priceCents: 1900,
+  priceCents: 1999,
 };
 
 export function findCourseContent(slug: string): CatalogEntry | undefined {
