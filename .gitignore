@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Local environment (Lovable injects these at build time in the cloud)
-.env
+# Local overrides. .env itself is committed: it holds only the public client
+# values (project URL and publishable key), see the comment inside it.
 .env.local
 .env.*.local
