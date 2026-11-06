@@ -20,9 +20,10 @@ been applied, so there are no `products`, `courses`, `purchases` or
 nothing to read. Enabling Cloud regenerated `src/integrations/supabase/
 client.ts` and `types.ts`; the hand-written helpers now live in
 `src/lib/supabase-app.ts` and `src/lib/course-types.ts`. The generated client
-throws at import time when `VITE_SUPABASE_URL` is missing, so a **local
-build needs a `.env.local`** with the two `VITE_SUPABASE_*` values (Lovable
-injects them in its own builds).
+throws at import time when `VITE_SUPABASE_URL` is missing, and a publish
+built outside Lovable's sandbox crashed on exactly that on 6 Nov, so the
+public client values (project URL, publishable key) are now **committed in
+`.env`**. They are not secrets; they ship in every browser bundle.
 
 **Stripe is Lovable's built-in Payments, not the repo's own keys.** On
 8 Oct Lovable enabled its managed Stripe account ("Lovable Payments",
