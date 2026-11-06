@@ -92,13 +92,25 @@ Stripe products now carry their cover image; `charge.refunded` was added to
 the webhook; `/sitemap.xml`, `/robots.txt` and `/llms.txt` are served; the
 published course page shows prices and opens the Stripe form.
 
-**Not done yet, in order:** (1) the full acceptance test in
-`docs/COURSE_PLATFORM_SETUP.md` (a paid test purchase through to an
-entitlement, which needs a browser and a test card); (2) `SITE_URL` as an
-edge-function secret, set in Lovable (secrets cannot be set from here);
-(3) Stripe go-live in the Payments tab; (4) course media uploads; (5) the
-membership product has no page and its subscription events are logged and
-ignored by the webhook.
+**Post-purchase test (6 Nov, evening, by the user on the learn domain):** a
+signed-out test purchase completed, the invite email arrived, the link
+landed on `/account` (so `SITE_URL` is set and correct), the purchase and
+entitlement rows were written, and `/learn` showed the program. What it
+surfaced was fixed the same evening: the account page now has a focused
+"finish creating your account" state for invite and reset links
+(`src/lib/authLanding.ts` records the link type before supabase-js strips
+the hash; saving a password writes `password_set` into user metadata and
+goes to `/learn`), enrollment cards link into the player or download the
+e-book, and checkout plus the success page explain that the account is
+created from the checkout email. The success copy assumes Supabase's
+default invite template (subject "You have been invited", button "Accept
+the invite"); adjust it if the template is customised.
+
+**Not done yet, in order:** (1) course media: storage holds no objects, so
+every lesson says it is being prepared; upload with
+`scripts/upload-media.mjs` (setup doc §6); (2) Stripe go-live in the
+Payments tab; (3) the membership product has no page and its subscription
+events are logged and ignored by the webhook.
 
 **Product images in Stripe.** The site's price layouts already show every
 cover. Lovable's payments tools cannot set a product image, so

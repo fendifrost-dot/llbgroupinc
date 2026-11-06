@@ -63,14 +63,17 @@ const CheckoutSuccess = () => {
                   Check Your Email
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  We have created an account for the address you used at
-                  checkout, and sent you a link to set your password. Follow it
-                  to open your program.
+                  We have created your account with the email address you used
+                  at checkout and sent you an invitation. It arrives within a
+                  few minutes with the subject line "You have been invited".
+                  Open it and choose "Accept the invite": that brings you back
+                  here to set your password, and then your program opens.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
-                  If the email does not arrive within a few minutes, check your
-                  spam folder, or reach us through livinglifebalancedllb.com/book
-                  and we will help.
+                  Already have an account with that address? Then there is no new
+                  email; sign in and your program is waiting in My Learning. If
+                  nothing arrives, check your spam folder, or reach us through
+                  livinglifebalancedllb.com/book and we will help.
                 </p>
                 <Button variant="hero-outline" asChild>
                   <Link to="/signin">Sign In</Link>

@@ -7,7 +7,10 @@
  * charges test cards and only the published site, after go-live, charges real
  * ones. The prefix also tells create-checkout which environment to use.
  */
-import { loadStripe, type Stripe } from "@stripe/stripe-js";
+// The "pure" entry does not inject Stripe.js at import time, so the script
+// is only loaded when checkout actually opens.
+import { loadStripe } from "@stripe/stripe-js/pure";
+import type { Stripe } from "@stripe/stripe-js";
 
 export type StripeEnv = "sandbox" | "live";
 

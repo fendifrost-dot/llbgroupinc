@@ -11,6 +11,7 @@ import { callFunction } from "@/lib/supabase-app";
 import { getStripe, paymentsEnvironment } from "@/lib/stripe";
 import { BUNDLE, COURSES, EBOOK, formatPrice } from "@/content/catalog";
 import { MAIN_SITE_BOOK } from "@/content/site";
+import { useAuth } from "@/hooks/useAuth";
 
 interface CheckoutDialogProps {
   productSlug: string;
@@ -34,6 +35,7 @@ function productFor(slug: string) {
 export function CheckoutDialog({ productSlug, open, onOpenChange }: CheckoutDialogProps) {
   const product = productFor(productSlug);
   const environment = paymentsEnvironment();
+  const { user } = useAuth();
   const [loadError, setLoadError] = useState<string | null>(null);
 
   // Stripe.js is loaded once per page. If it cannot load (offline, blocked),
@@ -68,6 +70,11 @@ export function CheckoutDialog({ productSlug, open, onOpenChange }: CheckoutDial
           <DialogTitle className="font-serif text-xl">Enroll in {product.title}</DialogTitle>
           <DialogDescription>
             One-time payment of {formatPrice(product.priceCents)}. Lifetime access.
+            <span className="block mt-2 text-foreground/80">
+              {user?.email
+                ? `Enrolling as ${user.email}. Your program unlocks in My Learning as soon as payment clears.`
+                : "No account yet? None needed. We will create one with the email you enter at checkout and send you a link to set your password."}
+            </span>
             {environment === "sandbox" && (
               <span className="block mt-1 text-xs uppercase tracking-widest text-primary">
                 Test mode: no real card is charged

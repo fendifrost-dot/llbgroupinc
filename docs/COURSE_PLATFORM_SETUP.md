@@ -154,6 +154,35 @@ reach the `purchases` table. Nothing else to do here.
 
 ## 6. Upload media (Fendi, once the video pipeline delivers)
 
+**Use the uploader, not the storage UI.** `scripts/upload-media.mjs` reads
+every target path from the `modules` and `courses` tables, matches the
+delivered files by the pipeline's names, uploads them to the private
+buckets, updates a row's path when a newer version is delivered, and then
+proves every stored path resolves to an object, the same way `get-media-url`
+does. Nothing is hard-coded per file, so a new course, module or version
+works unchanged once its rows exist.
+
+```bash
+# from the repo root, after npm install; the key is in Lovable Cloud's backend settings
+SUPABASE_SERVICE_ROLE_KEY=... npm run media:upload -- --source "/path/to/delivered/files" --dry-run
+SUPABASE_SERVICE_ROLE_KEY=... npm run media:upload -- --source "/path/to/delivered/files"
+# check only (no files needed)
+SUPABASE_SERVICE_ROLE_KEY=... npm run media:verify
+# also exercise get-media-url as a real student who owns the programs
+SUPABASE_SERVICE_ROLE_KEY=... npm run media:verify -- --verify-as "student@example.com:password"
+```
+
+It scans the folder recursively, so the pipeline's export folder can be
+passed as is. Recognised names: `LLB_C{n}_M{m}_v{v}.mp4|.mp3`,
+`LLB_C{n}_WORKBOOK_v{v}.pdf`, `LLB_C{n}_TRAILER_v{v}.mp4` and its
+`-poster.jpg`, `LLB_EBOOK_7_PRINCIPLES_v{v}.pdf`,
+`LLB_EBOOK_CHAPTER_1_v{v}.pdf`. Anything else is listed as unmatched and
+left alone. Files whose size already matches the stored object are
+skipped (`--force` re-uploads). The e-book and the chapter-one sample are
+stored under the fixed keys the edge functions read, whatever version the
+file name carries. Exit code 2 means at least one stored path still has no
+object. Never commit the service role key.
+
 Buckets and expected paths — the seed already points at these:
 
 | Bucket | Public? | Contents |
@@ -162,10 +191,11 @@ Buckets and expected paths — the seed already points at these:
 | `course-media` | **No** | `c{n}/LLB_C{n}_M{m}_v{v}.mp4` and `.mp3` |
 | `course-docs` | **No** | `workbooks/LLB_C{n}_WORKBOOK_v1.pdf`, `ebook/LLB_EBOOK_7_PRINCIPLES_v1.pdf`, `samples/LLB_EBOOK_CHAPTER_1_v1.pdf` |
 
-If a version other than `v1` ships, update `video_path` / `audio_path` /
-`workbook_path` in the `modules` and `courses` tables to match. Until an
-object exists, the player says the lesson is being prepared rather than
-erroring.
+If a version other than `v1` ships, the uploader updates `video_path` /
+`audio_path` / `workbook_path` / `trailer_url` itself after the upload
+succeeds. Until an object exists, the player says the lesson is being
+prepared rather than erroring, and `get-media-url` answers
+`{"url": null, "code": "no_asset"}`.
 
 ---
 
